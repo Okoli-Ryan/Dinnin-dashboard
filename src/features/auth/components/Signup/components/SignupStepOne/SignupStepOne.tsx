@@ -1,12 +1,11 @@
 import { Form, Space } from 'antd';
 import React from 'react';
 
-import { Button, TextInput } from '../../../../../components';
-import { useSignupContext } from '../../context/SignupContext';
+import { Button, TextInput } from '../../../../../../components';
 import useSignupStepOne from './useSignupStepOne';
 
 export default function SignupStepOne() {
-	const { form, onSubmit, isSlugAvailable, loading, siteOriginName, formValues } = useSignupStepOne();
+	const { form, onSubmit, isSlugAvailable, loading, siteOriginName } = useSignupStepOne();
 
 	return (
 		<>

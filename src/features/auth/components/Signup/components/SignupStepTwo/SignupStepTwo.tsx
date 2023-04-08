@@ -1,7 +1,7 @@
 import { Form, Space } from 'antd';
 import React from 'react';
 
-import { Button, TextInput } from '../../../../../components';
+import { Button, TextInput } from '../../../../../../components';
 import useSignupStepTwo from './useSignupStepTwo';
 
 export default function SignupStepTwo() {

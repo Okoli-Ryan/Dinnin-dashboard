@@ -1,11 +1,11 @@
-import { FormInstance, useForm } from "antd/es/form/Form";
-import React, { useState } from "react";
+import { FormInstance, useForm } from 'antd/es/form/Form';
+import React, { useState } from 'react';
 
-import { useSignupContext } from "../../context/SignupContext";
+import { useSignupContext } from '../../context/SignupContext';
 
 export default function useSignupStepTwo() {
 	const [loading, setLoading] = useState(false);
-	const { previousStep, changeFormValues, form } = useSignupContext();
+	const { previousStep, form } = useSignupContext();
 
 	const validateConfirmPassword = ({ getFieldValue }: { getFieldValue: FormInstance<any>["getFieldValue"] }) => ({
 		validator(_: any, value: string) {
