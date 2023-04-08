@@ -1,8 +1,9 @@
-import { Steps, theme } from 'antd';
-import { createContext, useContext, useState } from 'react';
+import { Form, Steps, theme } from "antd";
+import { FormInstance, useForm } from "antd/es/form/Form";
+import { createContext, useContext, useState } from "react";
 
-import { Button } from '../../../../components';
-import { SignupStepOne, SignupStepTwo } from '../components';
+import { Button } from "../../../../components";
+import { SignupStepOne, SignupStepTwo } from "../components";
 
 const SignupContext = createContext({} as ISignupContext);
 
@@ -23,6 +24,7 @@ const items = SignupSteps.map((item) => ({ key: item.title, title: item.title })
 
 export function SignupProvider() {
 	const [formValues, setFormValues] = useState({});
+	const [form] = useForm();
 	const [currentStep, setCurrentStep] = useState(0);
 
 	function nextStep() {
@@ -38,33 +40,20 @@ export function SignupProvider() {
 	}
 
 	return (
-		<SignupContext.Provider value={{ nextStep, previousStep, currentStep, changeFormValues, formValues }}>
-			<>
-				<Steps current={currentStep} items={items} />
+		<SignupContext.Provider value={{ nextStep, previousStep, currentStep, changeFormValues, formValues, form }}>
+		<Steps current={currentStep} items={items} />
+			<Form layout="vertical" initialValues={form.getFieldsValue()} form={form}>
 				{SignupSteps[currentStep].content}
-				{/* <div className="mt-6">
-					{currentStep === 0 && (
-						<Button type="primary" onClick={nextStep}>
-							Next
-						</Button>
-					)}
-
-					{currentStep > 0 && (
-						<Button style={{ margin: "0 8px" }} onClick={previousStep}>
-							Previous
-						</Button>
-					)}
-				</div> */}
-			</>
+			</Form>
 		</SignupContext.Provider>
 	);
 }
 
-
 interface ISignupContext {
-    nextStep: () => void,
-    previousStep: () => void,
-    currentStep: number,
-    changeFormValues: (e: Object) => void,
-    formValues: Object
+	nextStep: () => void;
+	previousStep: () => void;
+	currentStep: number;
+	changeFormValues: (e: Object) => void;
+	formValues: Object;
+	form: FormInstance<any>;
 }

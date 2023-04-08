@@ -3,7 +3,7 @@ import React from 'react';
 
 import BackgroundImage from '../../assets/images/BackgroundImage.jpg';
 import { Button } from '../../components';
-import Login from './Login';
+import Login from "./components/Login";
 import Signup from './Signup';
 import useAuthScreen from './useAuthScreen';
 

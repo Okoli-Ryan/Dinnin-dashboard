@@ -1,8 +1,8 @@
-import { Form } from 'antd';
+import { Form } from "antd";
 
-import { Button, TextInput } from '../../../components';
-import { withFadeIn } from '../../../hoc';
-import useLogin from './useLogin';
+import { Button, TextInput } from "../../../../components";
+import { withFadeIn } from "../../../../hoc";
+import useLogin from "./useLogin";
 
 function Login() {
 	const { form } = useLogin();

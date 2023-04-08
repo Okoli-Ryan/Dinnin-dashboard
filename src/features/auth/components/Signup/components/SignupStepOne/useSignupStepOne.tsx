@@ -7,19 +7,18 @@ import { useSignupContext } from '../../context/SignupContext';
 const siteOriginName = window.location.origin + "/";
 
 export default function useSignupStepOne() {
-	const [form] = Form.useForm();
-    const [loading, setLoading] = useState(false)
-    const {changeFormValues, nextStep, formValues } = useSignupContext()
+	
+    const [loading, setLoading] = useState(false);
+	const { changeFormValues, nextStep, formValues, form } = useSignupContext();
     
 
 	async function onSubmit() {
         try {
-            setLoading(true)
-            const values = form.getFieldsValue()
-
-            changeFormValues(values)
-            nextStep()
-        } catch (error) {
+			setLoading(true);
+			await form.validateFields();
+			// changeFormValues(values)
+			nextStep();
+		} catch (error) {
             
         }
         finally{

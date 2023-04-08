@@ -9,7 +9,7 @@ export default function SignupStepOne() {
 	const { form, onSubmit, isSlugAvailable, loading, siteOriginName, formValues } = useSignupStepOne();
 
 	return (
-		<Form layout="vertical" form={form} onFinish={onSubmit} noValidate initialValues={formValues}>
+		<>
 			<TextInput
 				name="name"
 				label="Restaurant name"
@@ -29,15 +29,15 @@ export default function SignupStepOne() {
 			/>
 			<TextInput name="address" rules={[{ required: true }]} />
 
-			<Space>
+			<div className="grid grid-cols-2 gap-2">
 				<TextInput name="city" rules={[{ required: true }]} />
 				<TextInput name="state" rules={[{ required: true }]} />
-			</Space>
+			</div>
 
 			<TextInput name="country" rules={[{ required: true }]} />
-			<Button.Outline type="primary" htmlType="submit" loading={loading || form.isFieldsValidating(["slug"])}>
+			<Button.Outline onClick={onSubmit} type="primary" loading={loading || form.isFieldsValidating(["slug"])}>
 				Next
 			</Button.Outline>
-		</Form>
+		</>
 	);
 }
