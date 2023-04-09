@@ -1,11 +1,11 @@
-import { FormInstance, useForm } from 'antd/es/form/Form';
-import React, { useState } from 'react';
-
-import { useSignupContext } from '../../context/SignupContext';
+import { FormInstance, useForm } from "antd/es/form/Form";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function useSignupStepTwo() {
 	const [loading, setLoading] = useState(false);
-	const { previousStep, form } = useSignupContext();
+	const navigate = useNavigate();
+	const [form] = useForm();
 
 	const validateConfirmPassword = ({ getFieldValue }: { getFieldValue: FormInstance<any>["getFieldValue"] }) => ({
 		validator(_: any, value: string) {
@@ -15,6 +15,10 @@ export default function useSignupStepTwo() {
 			return Promise.reject(new Error("The two passwords that you entered do not match!"));
 		},
 	});
+
+	function navigateToLogin() {
+		navigate("/login");
+	}
 
 	async function onSubmit() {
 		try {
@@ -26,5 +30,5 @@ export default function useSignupStepTwo() {
 		}
 	}
 
-	return { form, onSubmit, previousStep, loading, validateConfirmPassword };
+	return { form, onSubmit, loading, validateConfirmPassword, navigateToLogin };
 }

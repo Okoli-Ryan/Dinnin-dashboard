@@ -2,6 +2,8 @@ import { Form, Input } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import React, { ComponentProps, InputHTMLAttributes } from 'react';
 
+import PhoneInput from "./PhoneInput";
+
 interface ITextInput extends ComponentProps<typeof Form["Item"]> {
     name: NamePath
 	inputProps?: ComponentProps<typeof Input>;
@@ -10,20 +12,23 @@ interface ITextInput extends ComponentProps<typeof Form["Item"]> {
 	containerClassName?: InputHTMLAttributes<HTMLParagraphElement>["className"];
 }
 
-interface IPasswordInput extends ITextInput {}
 
 function TextInput({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextInput) {
 	return (
-		<Form.Item label={label || name}  name={name} {...props}>
-			<Input className={`!rounded-none ${className}`} placeholder={(placeholder || label || name) as string} {...inputProps} />
+		<Form.Item label={label || name} name={name} {...props}>
+			<Input className={`placeholder:capitalize !rounded-none ${className}`} placeholder={(placeholder || label || name) as string} {...inputProps} />
 		</Form.Item>
 	);
 }
 
 function PasswordInput({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextInput) {
 	return (
-		<Form.Item label={label || name}  name={name} {...props}>
-			<Input.Password className={`!rounded-none ${className}`} placeholder={(placeholder || label || name) as string} {...inputProps} />
+		<Form.Item label={label || name} name={name} {...props}>
+			<Input.Password
+				className={`placeholder:capitalize !rounded-none ${className}`}
+				placeholder={(placeholder || label || name) as string}
+				{...inputProps}
+			/>
 		</Form.Item>
 	);
 }

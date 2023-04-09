@@ -1,18 +1,15 @@
-import { useState } from 'react';
-
-import { useSignupContext } from '../../context/SignupContext';
+import { useForm } from "antd/es/form/Form";
+import React, { useState } from "react";
 
 const siteOriginName = window.location.origin + "/";
 
-export default function useSignupStepOne() {
+export default function useCreateRestaurant() {
+	const [form] = useForm();
 	const [loading, setLoading] = useState(false);
-	const { nextStep, form } = useSignupContext();
 
 	async function onSubmit() {
 		try {
 			setLoading(true);
-			await form.validateFields();
-			nextStep();
 		} catch (error) {
 		} finally {
 			setLoading(false);
@@ -20,7 +17,6 @@ export default function useSignupStepOne() {
 	}
 
 	const isSlugAvailable = async (rule: any, value: string) => {
-		console.log("vla");
 		if (value) {
 			try {
 				await new Promise<void>((resolve, reject) => {
@@ -45,4 +41,6 @@ export default function useSignupStepOne() {
 		loading,
 		isSlugAvailable,
 	};
+
+	return { form };
 }
