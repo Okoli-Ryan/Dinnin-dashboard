@@ -1,18 +1,22 @@
 import { Form, Space } from "antd";
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 import { Button, TextInput } from "../../components";
 import { withFadeIn } from "../../hoc";
 import useCreateRestaurant from "./useCreateRestaurant";
 
 function CreateRestaurant() {
-	// const { form, onSubmit, previousStep, validateConfirmPassword, loading } = useSignupStepTwo();
-	const { form, isSlugAvailable, siteOriginName, onSubmit, loading } = useCreateRestaurant();
+	const { form, checkIfSlugExists, siteOriginName, onSubmit, admin, loading } = useCreateRestaurant();
+
+	if (!admin) {
+		return <Navigate replace to="/login" />;
+	}
 
 	return (
 		<>
-			<h3 className="text-center font-bold text-3xl">Create your restaurant</h3>
-			<div className="flex flex-col gap-4 mt-4  justify-center">
+			<h3 className="text-3xl font-bold text-center">Create your restaurant</h3>
+			<div className="flex flex-col justify-center gap-4 mt-4">
 				<Form layout="vertical" form={form} onFinish={onSubmit}>
 					<TextInput
 						name="name"
@@ -25,7 +29,7 @@ function CreateRestaurant() {
 						label="Restaurant slug"
 						rules={[
 							{ required: true, message: "Please add a restaurant slug" },
-							{ validator: isSlugAvailable, validateTrigger: [] },
+							{ validator: checkIfSlugExists, validateTrigger: "onBlur" },
 						]}
 						inputProps={{
 							addonBefore: siteOriginName,

@@ -2,6 +2,7 @@ import Login from '../features/auth/components/Login';
 import Signup from '../features/auth/components/Signup';
 import VerificationScreen from '../features/auth/components/VerificationScreen';
 import CreateRestaurant from "../features/createRestaurant";
+import Dashboard from "../features/dashboard";
 import { IAppRoute } from './utils';
 
 export const AuthenticationRoutes: Array<IAppRoute> = [
@@ -17,8 +18,18 @@ export const AuthenticationRoutes: Array<IAppRoute> = [
 		Component: <CreateRestaurant />,
 		path: "/create",
 	},
+];
+
+export const CommonRoutes: Array<IAppRoute> = [
 	{
 		Component: <VerificationScreen />,
-		path: "/verify",
+		path: "/verify/:id/:code",
+	},
+];
+
+export const DashboardRoutes: Array<IAppRoute> = [
+	{
+		Component: <Dashboard />,
+		path: "/",
 	},
 ];

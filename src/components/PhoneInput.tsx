@@ -1,28 +1,38 @@
 //@ts-nocheck
 
+import { Form } from "antd";
 import React from "react";
 import PhoneInputComponent from "react-phone-input-2";
 
-export default function PhoneInput({ value, onChange, name, label, isRequired }: IPhoneInput) {
+export default function PhoneInput({ value, onChange, name, label, isRequired, onChangeValue = (e) => {} }: IPhoneInput) {
 	return (
-		<section className="flex flex-col gap-2 mb-6">
-			<label htmlFor={name}>{label || name || "Phone Number"}</label>
+		<Form.Item name={name} label={label || "Phone Number"} required={isRequired}>
 			<PhoneInputComponent
-				id={name}
-				country={"us"}
 				value={value}
+				country="ng"
 				inputProps={{ required: isRequired }}
-				onChange={onChange}
+				onChange={(number: string, e: OnChangeValueProps) => {
+					onChange(`+${number}`);
+					onChangeValue(e);
+				}}
 				inputClass="!w-full !rounded-none hover:!border-primary focus:!border-primary duration-50 transition-color"
 			/>
-		</section>
+		</Form.Item>
 	);
 }
 
 interface IPhoneInput {
-	onChange?: (e: string) => void;
-	value?: string;
-	name?: string;
+	onChange: (e: string) => void;
+	onChangeValue?: (e: OnChangeValueProps) => void;
+	value: string;
+	name: string;
 	label?: string;
 	isRequired?: boolean;
+}
+
+interface OnChangeValueProps {
+	countryCode: string;
+	dialCode: string;
+	format: string;
+	name: string;
 }

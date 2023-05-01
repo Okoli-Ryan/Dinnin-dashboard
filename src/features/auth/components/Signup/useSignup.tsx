@@ -1,13 +1,21 @@
+import { Form } from "antd";
 import { FormInstance, useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-export default function useSignupStepTwo() {
+import { useCreateAdminMutation } from "../../../../services/Admin.api";
+import { IAuthScreenOutletContext } from "../../AuthScreen";
+
+export default function useSignup() {
 	const [loading, setLoading] = useState(false);
-	const navigate = useNavigate();
-	const [form] = useForm();
 
-	const validateConfirmPassword = ({ getFieldValue }: { getFieldValue: FormInstance<any>["getFieldValue"] }) => ({
+	const [form] = useForm();
+	const navigate = useNavigate();
+	const [createAdmin] = useCreateAdminMutation();
+	const { setShowVerificationNote } = useOutletContext<IAuthScreenOutletContext>();
+	Form.useWatch("phoneNumber", { form, preserve: true });
+
+	const validateConfirmPassword = ({ getFieldValue }: IValidateConfirmPasswordProps) => ({
 		validator(_: any, value: string) {
 			if (!value || getFieldValue("password") === value) {
 				return Promise.resolve();
@@ -22,13 +30,21 @@ export default function useSignupStepTwo() {
 
 	async function onSubmit() {
 		try {
+			const values = form.getFieldsValue();
 			setLoading(true);
 			await form.validateFields();
+			await createAdmin(values);
+			setShowVerificationNote(true);
 		} catch (error) {
+			console.log(error);
 		} finally {
 			setLoading(false);
 		}
 	}
 
 	return { form, onSubmit, loading, validateConfirmPassword, navigateToLogin };
+}
+
+interface IValidateConfirmPasswordProps {
+	getFieldValue: FormInstance<any>["getFieldValue"];
 }
