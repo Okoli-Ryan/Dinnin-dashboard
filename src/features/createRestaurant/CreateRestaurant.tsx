@@ -7,11 +7,13 @@ import { withFadeIn } from "../../hoc";
 import useCreateRestaurant from "./useCreateRestaurant";
 
 function CreateRestaurant() {
-	const { form, checkIfSlugExists, siteOriginName, onSubmit, admin, loading } = useCreateRestaurant();
+	const { form, checkIfSlugExists, siteOriginName, onSubmit, isSlugValid, isSlugValidating, admin, isLoading } = useCreateRestaurant();
 
 	if (!admin) {
 		return <Navigate replace to="/login" />;
 	}
+
+	if (admin?.restaurant) return <Navigate replace to="/" />;
 
 	return (
 		<>
@@ -19,7 +21,7 @@ function CreateRestaurant() {
 			<div className="flex flex-col justify-center gap-4 mt-4">
 				<Form layout="vertical" form={form} onFinish={onSubmit}>
 					<TextInput
-						name="name"
+						name="restaurantName"
 						label="Restaurant name"
 						placeholder="HappyTimes Dine-in"
 						rules={[{ required: true, message: "Please set a restaurant name" }]}
@@ -27,10 +29,8 @@ function CreateRestaurant() {
 					<TextInput
 						name="slug"
 						label="Restaurant slug"
-						rules={[
-							{ required: true, message: "Please add a restaurant slug" },
-							{ validator: checkIfSlugExists, validateTrigger: "onBlur" },
-						]}
+						validateTrigger={["onBlur"]}
+						rules={[{ required: true, message: "Please add a restaurant slug" }, { validator: checkIfSlugExists }]}
 						inputProps={{
 							addonBefore: siteOriginName,
 						}}
@@ -43,7 +43,7 @@ function CreateRestaurant() {
 					</div>
 
 					<TextInput name="country" rules={[{ required: true }]} />
-					<Button block htmlType="submit" type="primary" loading={loading || form.isFieldsValidating(["slug"])}>
+					<Button block htmlType="submit" disabled={!isSlugValid} type="primary" loading={isSlugValidating || isLoading}>
 						Get Started
 					</Button>
 				</Form>

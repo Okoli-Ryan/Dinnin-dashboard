@@ -23,7 +23,10 @@ export default function useLogin() {
 
 			if (response.admin.restaurant === null) {
 				navigate("/create");
+				return;
 			}
+
+			navigate("/");
 		} catch (error: any) {
 			const errorResponse = new ErrorResponse(error);
 

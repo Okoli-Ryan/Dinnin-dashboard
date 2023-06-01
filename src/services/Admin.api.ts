@@ -8,14 +8,19 @@ import { commonFetchBaseQuery } from "./common";
 
 export const AdminApi = createApi({
 	reducerPath: "AdminApi",
+	tagTypes: ["Admin"],
 	...commonFetchBaseQuery("admin"),
 	endpoints: (build) => ({
 		createAdmin: build.mutation<Admin, Partial<Admin>>({
 			query: (body) => ({
-				url: "/admin",
+				url: "/",
 				method: "POST",
 				body,
 			}),
+			transformErrorResponse(baseQueryReturnValue, meta, arg) {
+				console.log({ baseQueryReturnValue });
+				return baseQueryReturnValue;
+			},
 		}),
 
 		login: build.mutation<IAdminLoginResponse, IAdminLoginRequest>({

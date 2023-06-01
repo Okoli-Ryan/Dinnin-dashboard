@@ -2,7 +2,8 @@ import { useForm } from 'antd/es/form/Form';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { RestaurantApi, useDoesSlugExistMutation } from '../../services/Restaurant.api';
+import { reportErrorMessage } from "../../core/Utils";
+import { RestaurantApi, useCreateRestaurantMutation, useLazyDoesSlugExistQuery } from "../../services/Restaurant.api";
 import { useAppDispatch, useAppSelector } from '../../store';
 
 const siteOriginName = window.location.origin + "/";
@@ -11,15 +12,21 @@ export default function useCreateRestaurant() {
 	const [form] = useForm();
 	const dispatch = useAppDispatch();
 	const admin = useAppSelector((state) => state.admin);
-	const [doesSlugExist] = useDoesSlugExistMutation();
-	const [loading, setLoading] = useState(false);
+	const [doesSlugExist, { isLoading: isSlugValidating }] = useLazyDoesSlugExistQuery();
+	const [isSlugValid, setIsSlugValid] = useState(false);
+	const [createRestaurant, { isLoading }] = useCreateRestaurantMutation();
 
 	async function onSubmit() {
 		try {
-			setLoading(true);
+			const values = form.getFieldsValue();
+
+			const payload = { ...values, contactPhoneNumber: admin?.phoneNumber, contactEmail: admin?.emailAddress };
+
+			await createRestaurant(payload).unwrap();
 		} catch (error) {
+			console.log(error);
+			reportErrorMessage(error);
 		} finally {
-			setLoading(false);
 		}
 	}
 
@@ -28,11 +35,14 @@ export default function useCreateRestaurant() {
 
 		try {
 			const response = await doesSlugExist(value).unwrap();
+			console.log({ response });
+			setIsSlugValid(!response);
 
 			if (response) throw new Error("Slug already exists");
 
 			return;
 		} catch (error: any) {
+			reportErrorMessage(null, "Slug already exists");
 			throw new Error(error.message);
 		}
 	};
@@ -42,8 +52,10 @@ export default function useCreateRestaurant() {
 		onSubmit,
 		admin,
 		siteOriginName,
-		loading,
+		isLoading,
 		checkIfSlugExists,
+		isSlugValid,
+		isSlugValidating,
 		doesSlugExist,
 	};
 }

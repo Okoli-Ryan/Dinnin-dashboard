@@ -1,8 +1,9 @@
-import { Form } from "antd";
+import { Form, message } from "antd";
 import { FormInstance, useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
+import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
 import { useCreateAdminMutation } from "../../../../services/Admin.api";
 import { IAuthScreenOutletContext } from "../../AuthScreen";
 
@@ -33,10 +34,13 @@ export default function useSignup() {
 			const values = form.getFieldsValue();
 			setLoading(true);
 			await form.validateFields();
-			await createAdmin(values);
+			await createAdmin(values).unwrap();
+
 			setShowVerificationNote(true);
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			const errorResponse = new ErrorResponse(error);
+
+			message.error(errorResponse.message);
 		} finally {
 			setLoading(false);
 		}

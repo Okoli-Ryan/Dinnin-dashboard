@@ -1,12 +1,21 @@
 import { AnimatePresence } from 'framer-motion';
 import { useState } from "react";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Navigate, Outlet, useOutletContext } from "react-router-dom";
 
 import BackgroundImage from '../../assets/images/BackgroundImage.jpg';
+import { useAppSelector } from "../../store";
 import VerificationNotice from "./components/VerificationNotice/VerificationNotice";
 
 export default function AuthScreen() {
 	const [showVerificationNote, setShowVerificationNote] = useState(false);
+	const admin = useAppSelector((state) => state.admin);
+
+	if (window.location.pathname === "/") {
+		// Redirect to "/login"
+		return <Navigate replace to="/login" />;
+	}
+
+	if (admin?.restaurant) return <Navigate replace to="/" />;
 
 	return (
 		<AnimatePresence mode="wait">
