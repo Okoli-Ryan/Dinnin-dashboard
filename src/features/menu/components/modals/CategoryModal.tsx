@@ -1,7 +1,7 @@
 import { Form, Modal } from "antd";
 import React from "react";
 
-import { TextInput } from "../../../components";
+import { TextInput } from "../../../../components";
 
 interface ICategoryModal {
 	onSuccess?: () => void;

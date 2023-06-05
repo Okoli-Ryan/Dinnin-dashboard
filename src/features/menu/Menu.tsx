@@ -7,7 +7,7 @@ import { Button } from "../../components";
 import PageWrapper from "../../components/PageWrapper";
 import CategoryCard from "./components/CategoryCard";
 import { DUMMY_categoryList } from "./components/CategoryCard.dummy";
-import CategoryModal from "./components/CategoryModal";
+import CategoryModal from "./components/modals/CategoryModal";
 import useMenu from "./useMenu";
 
 export default function Menu() {
