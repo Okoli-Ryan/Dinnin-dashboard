@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 export default {
 	content: ["./src/**/*.{html,js,ts,tsx}"],
@@ -7,13 +7,12 @@ export default {
 		extend: {
 			colors: {
 				primary: "#F2003C",
+				secondary: "#001529",
 			},
-            fontFamily: {
+			fontFamily: {
 				sans: ["Satoshi", ...defaultTheme.fontFamily.sans],
 			},
 		},
 	},
-	plugins: [
-        require('@tailwindcss/typography'),
-      ],
+	plugins: [require("@tailwindcss/typography")],
 };

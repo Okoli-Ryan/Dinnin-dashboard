@@ -11,6 +11,10 @@
     @apply !font-sans
 }
 
+.ant-btn-primary {
+    @apply bg-primary
+}
+
 @layer base {
     html {
       font-family: Satoshi, system-ui, sans-serif;

@@ -4,9 +4,7 @@ import React, { ComponentProps } from 'react';
 interface IButton extends ComponentProps<typeof Btn>{}
 
 function Button({className, ...props}: IButton) {
-  return (
-    <Btn size="large" type="primary" className={`!bg-primary hover:!bg-primary/80 !rounded-none ${className}` } {...props}/>
-    )
+  return <Btn size="large" type="primary" className={`${className} !bg-primary hover:!bg-primary/80 rounded-none `} {...props} />;
 }
 
 function ButtonText ({className, ...props}: IButton) {

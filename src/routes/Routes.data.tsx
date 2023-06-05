@@ -3,6 +3,9 @@ import Signup from '../features/auth/components/Signup';
 import VerificationScreen from '../features/auth/components/VerificationScreen';
 import CreateRestaurant from "../features/createRestaurant";
 import Dashboard from "../features/dashboard";
+import Menu from "../features/menu";
+import Orders from "../features/orders";
+import Profile from "../features/profile";
 import { IAppRoute } from './utils';
 
 export const AuthenticationRoutes: Array<IAppRoute> = [
@@ -29,7 +32,15 @@ export const CommonRoutes: Array<IAppRoute> = [
 
 export const DashboardRoutes: Array<IAppRoute> = [
 	{
-		Component: <Dashboard />,
-		path: "/",
+		Component: <Orders />,
+		path: "/orders",
+	},
+	{
+		Component: <Profile />,
+		path: "/profile",
+	},
+	{
+		Component: <Menu />,
+		path: "/menu",
 	},
 ];

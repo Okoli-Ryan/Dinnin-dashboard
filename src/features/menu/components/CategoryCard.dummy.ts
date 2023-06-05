@@ -1,0 +1,48 @@
+import { IMenuCategory, IMenuItem } from "../../../models";
+
+export const DUMMY_menuList: Partial<IMenuItem>[] = [
+	{
+		id: "1",
+		menuItemName: "Item 1",
+		price: 300,
+		description: "Some details about Item 1",
+		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
+	},
+	{
+		id: "2",
+		menuItemName: "Item 2",
+		price: 250,
+		description: "Some details about Item 2",
+		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
+	},
+	{
+		id: "3",
+		menuItemName: "Item 3",
+		price: 400,
+		description: "Some details about Item 3",
+		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
+	},
+];
+
+export const DUMMY_categoryList: Partial<IMenuCategory>[] = [
+	{
+		categoryName: "Most Popular",
+		id: "1",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Most Asked For",
+		id: "2",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Starters",
+		id: "3",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Drinks",
+		id: "4",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+];

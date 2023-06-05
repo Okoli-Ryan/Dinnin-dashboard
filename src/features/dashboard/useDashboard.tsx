@@ -1,10 +1,16 @@
-import React from "react";
+import { MenuProps } from "antd";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../store";
 
 export default function useDashboard() {
-	const admin = useAppSelector((state) => state.admin);
+	// const admin = useAppSelector((state) => state.admin);
+	const navigate = useNavigate();
 
-	return { restaurant: admin?.restaurant };
+	const onSelectRoute: MenuProps["onClick"] = (e) => {
+		navigate(e.key);
+	};
+
+	return { onSelectRoute };
 }
