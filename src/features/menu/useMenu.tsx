@@ -1,8 +1,8 @@
 import update from "immutability-helper";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { IMenuCategory } from "../../models";
-import { DUMMY_categoryList } from "./components/CategoryCard.dummy";
+import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
 
 export default function useMenu() {
 	const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -17,6 +17,10 @@ export default function useMenu() {
 				],
 			})
 		);
+	}, []);
+
+	useEffect(() => {
+		moveCard(0, 0);
 	}, []);
 
 	return { showCategoryModal, setShowCategoryModal, categoryList, moveCard };

@@ -1,4 +1,4 @@
-import { IMenuCategory, IMenuItem } from "../../../models";
+import { IMenuCategory, IMenuItem } from "../../../../models";
 
 export const DUMMY_menuList: Partial<IMenuItem>[] = [
 	{
@@ -43,6 +43,26 @@ export const DUMMY_categoryList: Partial<IMenuCategory>[] = [
 	{
 		categoryName: "Drinks",
 		id: "4",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Most Popular",
+		id: "5",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Most Asked For",
+		id: "6",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Starters",
+		id: "7",
+		menuItems: DUMMY_menuList as IMenuItem[],
+	},
+	{
+		categoryName: "Drinks",
+		id: "8",
 		menuItems: DUMMY_menuList as IMenuItem[],
 	},
 ];
