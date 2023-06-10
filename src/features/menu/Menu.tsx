@@ -18,7 +18,7 @@ export default function Menu() {
 	const { showCategoryModal, setShowCategoryModal, categoryList, moveCard } = useMenu();
 
 	return (
-		<PageWrapper title="Menu" subtitle="Manage the restaurant menu">
+		<PageWrapper title="Menu" subtitle="Sort and Manage your restaurant menu">
 			<CategoryModal isOpen={showCategoryModal} onCancel={() => setShowCategoryModal(false)} />
 			<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 w-max" onClick={() => setShowCategoryModal(true)}>
 				Add Category

@@ -2,7 +2,7 @@ import { Form, Space } from "antd";
 import React from "react";
 
 import { Button, TextInput } from "../../../../components";
-import PhoneInput from "../../../../components/PhoneInput";
+import PhoneInput from "../../../../components/formComponents/PhoneInput";
 import { withFadeIn } from "../../../../hoc";
 import useSignupStepTwo from "./useSignup";
 

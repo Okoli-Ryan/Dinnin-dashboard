@@ -2,8 +2,8 @@ import { Form } from "antd";
 import React from "react";
 
 import { Button, TextInput } from "../../components";
+import PhoneInput from "../../components/formComponents/PhoneInput";
 import PageWrapper from "../../components/PageWrapper";
-import PhoneInput from "../../components/PhoneInput";
 import useProfile from "./useProfile";
 
 export default function Profile() {
