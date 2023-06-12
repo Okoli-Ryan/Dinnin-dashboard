@@ -44,3 +44,21 @@ export const getToken = () => {
 export const saveToken = (value: string) => {
 	localStorage.setItem(JWT_TOKEN, value);
 };
+
+export const ParseFormData = (data: Record<string, any>) => {
+	const formData = new FormData();
+
+	for (const key in data) {
+		let fieldData: any = data[key];
+
+		if (Array.isArray(fieldData)) {
+			fieldData.forEach((element) => {
+				formData.append(key, element);
+			});
+			continue;
+		}
+		formData.append(key, fieldData);
+	}
+
+	return formData;
+};

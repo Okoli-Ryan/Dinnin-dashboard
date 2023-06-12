@@ -19,6 +19,11 @@
     @apply !rounded-none !h-[30.8px]
 }
 
+.ant-upload-select {
+    width: 4rem;
+    height: 4rem
+}
+
 @layer base {
     html {
       font-family: Satoshi, system-ui, sans-serif;

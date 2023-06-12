@@ -1,8 +1,10 @@
+import { useForm } from "antd/es/form/Form";
 import React from "react";
 
 import { useMenuItemContext } from "../../../context/MenuItemContext";
 
 export default function useMenuItemModal() {
+	const [form] = useForm();
 	const { currentMenuItem, setCurrentMenuItem } = useMenuItemContext();
 	const isModalOpen = !!currentMenuItem;
 
@@ -10,5 +12,9 @@ export default function useMenuItemModal() {
 		setCurrentMenuItem(null);
 	}
 
-	return { isModalOpen, currentMenuItem, onClose };
+	function onFinish() {
+		console.log(form.getFieldsValue());
+	}
+
+	return { isModalOpen, currentMenuItem, onClose, form, onFinish };
 }

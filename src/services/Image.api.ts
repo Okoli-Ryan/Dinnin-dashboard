@@ -10,11 +10,10 @@ export const ImageApi = createApi({
 		baseUrl: `${BASE_URL}/image`,
 		prepareHeaders(headers, api) {
 			headers.set("x-api-key", API_KEY);
-			headers.set("Content-Type", "multipart/form-data");
 		},
 	}),
 	endpoints: (build) => ({
-		upload: build.query<string, FormData>({
+		upload: build.query<{ url: string }, FormData>({
 			query: (file) => ({
 				url: "/",
 				method: "POST",
@@ -23,26 +22,5 @@ export const ImageApi = createApi({
 		}),
 	}),
 });
-
-export const uploadImage = async (formData: FormData) => {
-	try {
-		const response = await fetch(`${BASE_URL}/Image`, {
-			method: "POST",
-			body: formData,
-			headers: {
-				"Content-Type": "multipart/form-data",
-				"x-api-key": API_KEY,
-			},
-		});
-
-		if (!response.ok) {
-			throw new Error("Upload failed");
-		}
-
-		return await response.json();
-	} catch (error) {
-		throw new Error("Upload failed");
-	}
-};
 
 export const { useLazyUploadQuery } = ImageApi;
