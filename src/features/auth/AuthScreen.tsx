@@ -8,23 +8,23 @@ import VerificationNotice from "./components/VerificationNotice/VerificationNoti
 
 export default function AuthScreen() {
 	const [showVerificationNote, setShowVerificationNote] = useState(false);
-	const admin = useAppSelector((state) => state.admin);
+	const restaurant = useAppSelector((state) => state.restaurant);
 
 	if (window.location.pathname === "/") {
 		// Redirect to "/login"
 		return <Navigate replace to="/login" />;
 	}
 
-	if (admin?.restaurant) return <Navigate replace to="/" />;
+	if (restaurant) return <Navigate replace to="/" />;
 
 	return (
 		<AnimatePresence mode="wait">
-			<div className="flex h-screen justify-center items-center bg-gray-50">
-				<div className="grid grid-cols-5 h-full w-full overflow-hidden">
+			<div className="flex items-center justify-center h-screen bg-gray-50">
+				<div className="grid w-full h-full grid-cols-5 overflow-hidden">
 					<div
-						className="flex flex-col flex-1 h-screen col-span-3 bg-cover bg-center bg-no-repeat"
+						className="flex flex-col flex-1 h-screen col-span-3 bg-center bg-no-repeat bg-cover"
 						style={{ backgroundImage: `url(${BackgroundImage})` }}></div>
-					<div className="col-span-2 h-full flex  justify-center flex-col p-4 max-w-sm w-full mx-auto">
+					<div className="flex flex-col justify-center w-full h-full max-w-sm col-span-2 p-4 mx-auto">
 						{showVerificationNote ? <VerificationNotice /> : <Outlet context={{ setShowVerificationNote }} />}
 					</div>
 				</div>

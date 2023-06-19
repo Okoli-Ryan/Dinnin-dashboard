@@ -2,9 +2,9 @@ import { message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useNavigate } from "react-router-dom";
 
+import { useLoginMutation } from "../../../../api/Admin.api";
 import { IError } from "../../../../interfaces/IError";
 import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
-import { useLoginMutation } from "../../../../services/Admin.api";
 import { AuthScreenOutletContext } from "../../AuthScreen";
 
 export default function useLogin() {

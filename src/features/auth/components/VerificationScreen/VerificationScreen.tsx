@@ -20,7 +20,6 @@ export default function VerificationScreen() {
 		);
 
 	if (isError) {
-		console.log(error);
 		return <div className="flex items-center justify-center w-full h-screen text-2xl font-bold">{error.message}</div>;
 	}
 

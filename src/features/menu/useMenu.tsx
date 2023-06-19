@@ -1,27 +1,36 @@
 import update from "immutability-helper";
 import React, { useCallback, useEffect, useState } from "react";
 
+import { useFetchMenuCategoriesQuery } from "../../api/MenuCategory.api";
+import { reportErrorMessage } from "../../core/Utils";
 import { IMenuCategory } from "../../models";
 import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
 
 export default function useMenu() {
+	const { data = [], isLoading, error, isError } = useFetchMenuCategoriesQuery();
 	const [showCategoryModal, setShowCategoryModal] = useState(false);
 	const [categoryList, setCategoryList] = useState(DUMMY_categoryList);
+
+	// if (isError) throw error;
 
 	const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
 		setCategoryList((prevCards: Partial<IMenuCategory>[]) =>
 			update(prevCards, {
 				$splice: [
 					[dragIndex, 1],
-					[hoverIndex, 0, prevCards[dragIndex] as Partial<IMenuCategory>],
+					[hoverIndex, 0, prevCards[dragIndex] as IMenuCategory],
 				],
 			})
 		);
 	}, []);
 
+	function addCategory(category: IMenuCategory) {
+		setCategoryList((prev) => [...prev, category]);
+	}
+
 	useEffect(() => {
 		moveCard(0, 0);
 	}, []);
 
-	return { showCategoryModal, setShowCategoryModal, categoryList, moveCard };
+	return { showCategoryModal, setShowCategoryModal, categoryList, moveCard, addCategory, isLoading };
 }

@@ -12,7 +12,7 @@ export type MenuItem = Required<MenuProps>["items"][number];
 
 export const dashboardMenuItems = [
 	getItem("Orders", "orders", <MdRestaurantMenu />),
-	getItem("Profile", "profile", <FaUserAlt />),
 	getItem("Menu", "menu", <MdMenuBook />),
+	getItem("Profile", "profile", <FaUserAlt />),
 	// getItem("User", "2", <AiFillAppstore />, [getItem("Tom"), getItem("Bill"), getItem("Alex")]),
 ];

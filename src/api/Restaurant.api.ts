@@ -19,7 +19,14 @@ export const RestaurantApi = createApi({
 				body,
 			}),
 		}),
+		updateRestaurant: build.mutation<Restaurant, Partial<Restaurant>>({
+			query: (body) => ({
+				url: "/",
+				method: "PATCH",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useLazyDoesSlugExistQuery, useCreateRestaurantMutation } = RestaurantApi;
+export const { useLazyDoesSlugExistQuery, useCreateRestaurantMutation, useUpdateRestaurantMutation } = RestaurantApi;

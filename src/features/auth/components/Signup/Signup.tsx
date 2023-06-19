@@ -27,12 +27,7 @@ function Signup() {
 							rules={[{ required: true, message: "Please add the last name of the restaurant owner" }]}
 						/>
 					</div>
-					<PhoneInput
-						name="phoneNumber"
-						isRequired
-						value={form.getFieldValue("phoneNumber")}
-						onChange={(e) => form.setFieldsValue({ phoneNumber: e })}
-					/>
+					<PhoneInput name="phoneNumber" isRequired />
 					<TextInput name="emailAddress" label="Email address" rules={[{ type: "email" }, { required: true }]} />
 					<TextInput.Password name="password" rules={[{ required: true, message: "Please add a Password" }, { min: 8 }]} />
 					<TextInput.Password

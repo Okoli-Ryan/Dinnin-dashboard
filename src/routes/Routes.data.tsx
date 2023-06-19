@@ -21,6 +21,10 @@ export const AuthenticationRoutes: Array<IAppRoute> = [
 		Component: <CreateRestaurant />,
 		path: "/create",
 	},
+	{
+		Component: <Login />,
+		path: "*",
+	},
 ];
 
 export const CommonRoutes: Array<IAppRoute> = [
@@ -42,5 +46,9 @@ export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Menu />,
 		path: "/menu",
+	},
+	{
+		Component: <Orders />,
+		path: "*",
 	},
 ];

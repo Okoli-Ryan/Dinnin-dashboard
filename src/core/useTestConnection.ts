@@ -1,7 +1,7 @@
 import Pusher from 'pusher-js';
 import React, { useEffect } from 'react';
 
-import { PUSHER_APP_CLUSTER, PUSHER_APP_KEY } from './Constants';
+import { PUSHER_APP_CLUSTER, PUSHER_APP_KEY } from "./Config";
 
 export default function useTestConnection() {
 	useEffect(() => {

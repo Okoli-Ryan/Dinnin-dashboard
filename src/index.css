@@ -24,6 +24,15 @@
     height: 4rem
 }
 
+body{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard-layout {
+    height: calc(100vh - 3rem);
+}
+
 @layer base {
     html {
       font-family: Satoshi, system-ui, sans-serif;

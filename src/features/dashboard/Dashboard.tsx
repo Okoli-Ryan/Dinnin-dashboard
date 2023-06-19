@@ -10,20 +10,22 @@ import useDashboard from "./useDashboard";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Dashboard() {
-	const { onSelectRoute } = useDashboard();
+	const { onSelectRoute, restaurant } = useDashboard();
 
-	// if (!restaurant) return <Navigate to="/login" />;
+	if (!restaurant) return <Navigate to="/login" />;
 
 	return (
 		<Layout style={{ minHeight: "100vh" }}>
-			<Sider>
+			<Sider style={{ height: "100vh", overflow: "auto" }}>
 				<Menu theme="dark" mode="inline" items={dashboardMenuItems} />
 			</Sider>
-			<Layout>
-				<Header>
+			<Layout className="relative flex justify-end">
+				<Header className="absolute w-full top-0">
 					<DashboardHeader />
 				</Header>
-				<Outlet />
+				<div className="dashboard-layout">
+					<Outlet />
+				</div>
 			</Layout>
 		</Layout>
 	);

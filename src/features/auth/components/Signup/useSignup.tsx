@@ -3,8 +3,8 @@ import { FormInstance, useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
+import { useCreateAdminMutation } from "../../../../api/Admin.api";
 import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
-import { useCreateAdminMutation } from "../../../../services/Admin.api";
 import { IAuthScreenOutletContext } from "../../AuthScreen";
 
 export default function useSignup() {

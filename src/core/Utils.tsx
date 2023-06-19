@@ -1,15 +1,22 @@
-import { message } from "antd";
+import { message } from 'antd';
 
-import { SerializedError } from "@reduxjs/toolkit";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
-import { IError, IHttpError } from "../interfaces/IError";
-import { ErrorResponse } from "../models/Error/ErrorResponse";
-import { JWT_TOKEN } from "./Constants";
+import { IError, IHttpError } from '../interfaces/IError';
+import { ErrorResponse } from '../models/Error/ErrorResponse';
+import Config from './Config';
 
 export function ParseError(error?: SerializedError | FetchBaseQueryError): IError<unknown> {
 	if (error && (error as FetchBaseQueryError).status === "FETCH_ERROR") {
-		return new ErrorResponse();
+
+        const response = {
+			status: 500,
+			message: "Network Error",
+			data: null
+		};
+
+		return new ErrorResponse(response);
 	}
 
 	if (error && (error as FetchBaseQueryError).status !== undefined) {
@@ -38,11 +45,11 @@ export const reportErrorMessage = (error: any, customMessage?: string) => {
 };
 
 export const getToken = () => {
-	return localStorage.getItem(JWT_TOKEN);
+	return localStorage.getItem(Config.VITE_JWT_TOKEN);
 };
 
 export const saveToken = (value: string) => {
-	localStorage.setItem(JWT_TOKEN, value);
+	localStorage.setItem(Config.VITE_JWT_TOKEN, value);
 };
 
 export const ParseFormData = (data: Record<string, any>) => {

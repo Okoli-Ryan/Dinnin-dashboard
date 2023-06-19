@@ -3,8 +3,8 @@ import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
 import React, { useState } from "react";
 
+import { useLazyUploadQuery } from "../../../../api/Image.api";
 import { ParseError, ParseFormData, reportErrorMessage } from "../../../../core/Utils";
-import { useLazyUploadQuery } from "../../../../services/Image.api";
 import { getBase64 } from "./UploadImage.utils";
 
 interface IUseUploadImage {
@@ -16,13 +16,13 @@ interface IUseUploadImage {
 export default function useUploadImage({ onSuccess, folderName, name }: IUseUploadImage) {
 	const form = useFormInstance();
 	const [isUploading, setIsUploading] = useState(false);
-	const [imageUrl, setImageUrl] = useState<string>();
+	const [imageUrl, setImageUrl] = useState<string>(form.getFieldValue(name));
 	const [upload] = useLazyUploadQuery();
 
 	const handleChange = async (info: UploadChangeParam<UploadFile<any>>) => {
 		setIsUploading(true);
 		form.setFieldValue(name, undefined);
-		setImageUrl(undefined);
+		setImageUrl("");
 
 		if (!info.file) {
 			message.error("Invalid file uploaded");

@@ -10,9 +10,11 @@ import useMenuItemModal from "./useMenuItemModal";
 export default function MenuItemModal() {
 	const { isModalOpen, currentMenuItem, onClose, form, onFinish } = useMenuItemModal();
 
+	console.log({ currentMenuItem });
+
 	return (
 		<Modal centered open={isModalOpen} onCancel={onClose} title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>} onOk={onFinish}>
-			<Form layout="vertical" onFinish={onFinish} form={form}>
+			<Form layout="vertical" onFinish={onFinish} form={form} initialValues={currentMenuItem!}>
 				<UploadImage folderName="file" name="imageUrl" />
 				<TextInput name="menuItemName" label="Item name" />
 				<div className="grid grid-cols-5 gap-4">

@@ -5,21 +5,24 @@ import withScrolling, { createVerticalStrength } from "react-dnd-scrolling";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { Button } from "../../components";
+import LoadingComponent from "../../components/LoadingComponent";
 import PageWrapper from "../../components/PageWrapper";
+import withErrorBoundaryHandler from "../../hoc/WithErrorBoundaryHandler";
 import CategoryCard from "./components/CategoryCard/CategoryCard";
-import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
-import CategoryModal from "./components/modals/CategoryModal";
+import MenuCategoryModal from "./components/modals/MenuCategoryModal/MenuCategoryModal";
 import MenuItemModal from "./components/modals/MenuItemModal/MenuItemModal";
 import { MenuItemProvider } from "./context/MenuItemProvider";
 import useMenu from "./useMenu";
 
 const ScrollingComponent = withScrolling("div");
-export default function Menu() {
-	const { showCategoryModal, setShowCategoryModal, categoryList, moveCard } = useMenu();
+const Menu = () => {
+	const { showCategoryModal, setShowCategoryModal, categoryList, moveCard, isLoading, addCategory } = useMenu();
+
+	if (isLoading) return <LoadingComponent />;
 
 	return (
 		<PageWrapper title="Menu" subtitle="Sort and Manage your restaurant menu">
-			<CategoryModal isOpen={showCategoryModal} onCancel={() => setShowCategoryModal(false)} />
+			<MenuCategoryModal isOpen={showCategoryModal} onCancel={() => setShowCategoryModal(false)} onSuccess={addCategory} />
 			<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 w-max" onClick={() => setShowCategoryModal(true)}>
 				Add Category
 			</Button>
@@ -37,4 +40,6 @@ export default function Menu() {
 			</MenuItemProvider>
 		</PageWrapper>
 	);
-}
+};
+
+export default withErrorBoundaryHandler(Menu);

@@ -1,26 +1,53 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+//@ts-ignore
+import storage from "redux-persist/lib/storage";
 
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { AdminApi } from "../services/Admin.api";
-import { ImageApi } from "../services/Image.api";
-import { RestaurantApi } from "../services/Restaurant.api";
-import { VerificationApi } from "../services/Verification.api";
+import { AdminApi } from "../api/Admin.api";
+import { ImageApi } from "../api/Image.api";
+import { MenuCategoryApi } from "../api/MenuCategory.api";
+import { RestaurantApi } from "../api/Restaurant.api";
+import { VerificationApi } from "../api/Verification.api";
 import AdminReducer from "./models/Admin.store";
 import RestaurantReducer from "./models/Restaurant.store";
 
-export const store = configureStore({
-	reducer: {
-		admin: AdminReducer,
-		restaurant: RestaurantReducer,
-		[AdminApi.reducerPath]: AdminApi.reducer,
-		[ImageApi.reducerPath]: ImageApi.reducer,
-		[RestaurantApi.reducerPath]: RestaurantApi.reducer,
-		[VerificationApi.reducerPath]: VerificationApi.reducer,
-	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(AdminApi.middleware).concat(RestaurantApi.middleware).concat(VerificationApi.middleware).concat(ImageApi.middleware),
+const rootReducer = combineReducers({
+	admin: AdminReducer,
+	restaurant: RestaurantReducer,
+	[AdminApi.reducerPath]: AdminApi.reducer,
+	[ImageApi.reducerPath]: ImageApi.reducer,
+	[MenuCategoryApi.reducerPath]: MenuCategoryApi.reducer,
+	[RestaurantApi.reducerPath]: RestaurantApi.reducer,
+	[VerificationApi.reducerPath]: VerificationApi.reducer,
 });
+
+const PersistConfig = {
+	key: "root",
+	storage,
+	whitelist: ["admin", "restaurant"],
+};
+
+const persistedReducer = persistReducer(PersistConfig, rootReducer);
+
+export const store = configureStore({
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) => [
+		...getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
+		AdminApi.middleware,
+		RestaurantApi.middleware,
+		VerificationApi.middleware,
+		ImageApi.middleware,
+		MenuCategoryApi.middleware,
+	],
+});
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

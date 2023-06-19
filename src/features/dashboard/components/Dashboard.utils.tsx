@@ -7,6 +7,10 @@ export function getItem(label: React.ReactNode, key?: string, icon?: React.React
 		key,
 		icon,
 		children,
-		label: <NavLink to={`/${key}`}>{label}</NavLink>,
+		label: (
+			<NavLink to={`/${key}`} className="active">
+				{label}
+			</NavLink>
+		),
 	} as MenuItem;
 }

@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { API_KEY, BASE_URL } from "../core/Constants";
-import { IError } from "../interfaces/IError";
-import { Admin } from "../models";
+import { Admin, IAdmin } from "../models";
 import { IAdminLoginRequest, IAdminLoginResponse } from "../models/Admin";
 import { commonFetchBaseQuery } from "./common";
 
@@ -29,9 +27,13 @@ export const AdminApi = createApi({
 				method: "POST",
 				body,
 			}),
-			transformErrorResponse(baseQueryReturnValue, meta, arg) {
-				return baseQueryReturnValue;
-			},
+		}),
+		updateAdmin: build.mutation<IAdmin, Partial<IAdmin>>({
+			query: (body) => ({
+				url: "/",
+				method: "PATCH",
+				body,
+			}),
 		}),
 	}),
 });
@@ -39,5 +41,6 @@ export const AdminApi = createApi({
 export const {
 	useCreateAdminMutation,
 	useLoginMutation,
+	useUpdateAdminMutation,
 	endpoints: { login },
 } = AdminApi;

@@ -1,18 +1,21 @@
 //@ts-nocheck
 
 import { Form } from "antd";
+import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import React from "react";
 import PhoneInputComponent from "react-phone-input-2";
 
-export default function PhoneInput({ value, onChange, name, label, isRequired, onChangeValue = (e) => {} }: IPhoneInput) {
+export default function PhoneInput({ value, name, label, isRequired, onChangeValue = (e) => {} }: IPhoneInput) {
+	const form = useFormInstance();
+
 	return (
 		<Form.Item name={name} label={label || "Phone Number"} required={isRequired}>
 			<PhoneInputComponent
-				value={value}
+				value={form.getFieldValue("contactPhoneNumber")}
 				country="ng"
 				inputProps={{ required: isRequired }}
 				onChange={(number: string, e: OnChangeValueProps) => {
-					onChange(`+${number}`);
+					form.setFieldsValue({ [name]: `+${number}` });
 					onChangeValue(e);
 				}}
 				inputClass="!w-full !rounded-none hover:!border-primary focus:!border-primary duration-50 transition-color"
@@ -22,9 +25,7 @@ export default function PhoneInput({ value, onChange, name, label, isRequired, o
 }
 
 interface IPhoneInput {
-	onChange: (e: string) => void;
 	onChangeValue?: (e: OnChangeValueProps) => void;
-	value: string;
 	name: string;
 	label?: string;
 	isRequired?: boolean;

@@ -2,8 +2,8 @@ import { useForm } from 'antd/es/form/Form';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import { RestaurantApi, useCreateRestaurantMutation, useLazyDoesSlugExistQuery } from "../../api/Restaurant.api";
 import { reportErrorMessage } from "../../core/Utils";
-import { RestaurantApi, useCreateRestaurantMutation, useLazyDoesSlugExistQuery } from "../../services/Restaurant.api";
 import { useAppDispatch, useAppSelector } from '../../store';
 
 const siteOriginName = window.location.origin + "/";
@@ -12,6 +12,7 @@ export default function useCreateRestaurant() {
 	const [form] = useForm();
 	const dispatch = useAppDispatch();
 	const admin = useAppSelector((state) => state.admin);
+    const restaurant = useAppSelector((state) => state.restaurant);
 	const [doesSlugExist, { isLoading: isSlugValidating }] = useLazyDoesSlugExistQuery();
 	const [isSlugValid, setIsSlugValid] = useState(false);
 	const [createRestaurant, { isLoading }] = useCreateRestaurantMutation();
@@ -57,5 +58,6 @@ export default function useCreateRestaurant() {
 		isSlugValid,
 		isSlugValidating,
 		doesSlugExist,
+		restaurant,
 	};
 }

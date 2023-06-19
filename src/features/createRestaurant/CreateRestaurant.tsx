@@ -7,13 +7,13 @@ import { withFadeIn } from "../../hoc";
 import useCreateRestaurant from "./useCreateRestaurant";
 
 function CreateRestaurant() {
-	const { form, checkIfSlugExists, siteOriginName, onSubmit, isSlugValid, isSlugValidating, admin, isLoading } = useCreateRestaurant();
+	const { form, checkIfSlugExists, siteOriginName, onSubmit, isSlugValid, isSlugValidating, admin, isLoading, restaurant } = useCreateRestaurant();
 
 	if (!admin) {
 		return <Navigate replace to="/login" />;
 	}
 
-	if (admin?.restaurant) return <Navigate replace to="/" />;
+	if (restaurant) return <Navigate replace to="/orders" />;
 
 	return (
 		<>

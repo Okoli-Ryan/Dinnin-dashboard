@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import { ParseError } from '../../../../core/Utils';
-import { useVerifyAdminQuery } from '../../../../services/Verification.api';
+import { useVerifyAdminQuery } from "../../../../api/Verification.api";
+import { ParseError } from "../../../../core/Utils";
 
 export default function useVerificationScreen() {
 	const { id, code } = useParams();

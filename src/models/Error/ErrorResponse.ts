@@ -7,10 +7,16 @@ export class ErrorResponse {
 
 	constructor(props?: IError<any> | IHttpError<any>) {
 		if (props) {
+			if ("error" in props) {
+				this.status = props.status;
+				this.message = props.error as string;
+				this.data = null;
+				return;
+			}
 			//IHttpError
 			if (!("message" in props)) {
 				this.status = props.status;
-				this.message = props.data.responseMessage;
+				this.message = props.data?.responseMessage;
 				this.data = props.data.responseData ?? null;
 			} else {
 				this.status = props.status;
