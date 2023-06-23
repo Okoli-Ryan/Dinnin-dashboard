@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IMenuItem } from "../../../../../models";
-import { useMenuItemContext } from "../../../context/MenuItemContext";
+import { useMenuItemContext } from "../../../context/MenuItemProvider/MenuItemContext";
 
 export default function MenuItemCard(menuItem: Partial<IMenuItem>) {
 	const { setCurrentMenuItem } = useMenuItemContext();

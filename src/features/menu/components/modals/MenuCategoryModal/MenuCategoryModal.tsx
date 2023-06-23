@@ -1,18 +1,17 @@
-import { Form, Modal } from "antd";
-import React from "react";
+import { Form, Modal, Switch } from 'antd';
+import React from 'react';
 
-import { TextInput } from "../../../../../components";
-import { IMenuCategory } from "../../../../../models";
-import useMenuCategoryModal from "./useMenuCategoryModal";
+import { IMenuCategory } from '@models';
+
+import { TextInput } from '../../../../../components';
+import useMenuCategoryModal from './useMenuCategoryModal';
 
 export interface IMenuCategoryModal {
 	onSuccess: (e: IMenuCategory) => void;
-	isOpen: boolean;
-	onCancel?: () => void;
 }
 
-export default function MenuCategoryModal({ onSuccess, onCancel, isOpen }: IMenuCategoryModal) {
-	const { addCategory, form, isLoading } = useMenuCategoryModal({ onSuccess });
+export default function MenuCategoryModal({ onSuccess }: IMenuCategoryModal) {
+	const { addCategory, form, isLoading, isOpen, onCancel, currentMenuCategoryDetails } = useMenuCategoryModal({ onSuccess });
 
 	return (
 		<Modal
@@ -22,7 +21,7 @@ export default function MenuCategoryModal({ onSuccess, onCancel, isOpen }: IMenu
 			open={isOpen}
 			onOk={addCategory}
 			onCancel={onCancel}>
-			<Form form={form}>
+			<Form form={form} layout="vertical" initialValues={currentMenuCategoryDetails!}>
 				<TextInput
 					name="categoryName"
 					placeholder="Most Popular, Starters..."
@@ -30,6 +29,7 @@ export default function MenuCategoryModal({ onSuccess, onCancel, isOpen }: IMenu
 					rules={[{ required: true, message: "Please set the name of the category" }]}
 					className="h-12 mt-4 text-lg"
 				/>
+				<Switch checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked />
 			</Form>
 		</Modal>
 	);

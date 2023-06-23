@@ -13,13 +13,19 @@ export default function MenuItemModal() {
 	console.log({ currentMenuItem });
 
 	return (
-		<Modal centered open={isModalOpen} onCancel={onClose} title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>} onOk={onFinish}>
+		<Modal
+			destroyOnClose
+			centered
+			open={isModalOpen}
+			onCancel={onClose}
+			title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>}
+			onOk={onFinish}>
 			<Form layout="vertical" onFinish={onFinish} form={form} initialValues={currentMenuItem!}>
 				<UploadImage folderName="file" name="imageUrl" />
 				<TextInput name="menuItemName" label="Item name" />
 				<div className="grid grid-cols-5 gap-4">
 					<div className="col-span-3">
-						<Select label="Select Category" name="categoryId" valueKey="id" labelKey="categoryName" options={DUMMY_categoryList} />
+						<Select label="Select Category" name="menuCategoryId" valueKey="id" labelKey="categoryName" options={DUMMY_categoryList} />
 					</div>
 					<div className="col-span-2">
 						<TextInput name="price" label="Price" inputProps={{ type: "number" }} className="col-span-1" />

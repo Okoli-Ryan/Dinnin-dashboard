@@ -32,6 +32,19 @@ function TextInput({ label, labelClassName, containerClassName, name, inputProps
 	);
 }
 
+function BorderlessInput({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextInput) {
+	return (
+		<Form.Item label={label} name={name} {...props}>
+			<Input
+				className={`placeholder:capitalize !rounded-none !outline-none !shadow-none  border-0 !border-r-0 !border-b-2 focus:!border-primary active:!border-primary ${className}`}
+				name={name as string}
+				placeholder={(placeholder || label || name) as string}
+				{...inputProps}
+			/>
+		</Form.Item>
+	);
+}
+
 function TextArea({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextArea) {
 	return (
 		<Form.Item label={label} name={name} {...props}>
@@ -61,5 +74,6 @@ function PasswordInput({ label, labelClassName, containerClassName, name, inputP
 
 TextInput.Password = PasswordInput;
 TextInput.TextArea = TextArea;
+TextInput.Borderless = BorderlessInput;
 
 export { TextInput };

@@ -1,6 +1,6 @@
 import { Children, useState } from "react";
 
-import { IMenuItem } from "../../../models";
+import { IMenuItem } from "../../../../models";
 import { MenuItemContext } from "./MenuItemContext";
 
 interface IMenuItemProvider {

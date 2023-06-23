@@ -17,6 +17,20 @@ export const MenuCategoryApi = createApi({
 				body,
 			}),
 		}),
+		updateMenuCategory: build.mutation<IMenuCategory, Partial<IMenuCategory>>({
+			query: (body) => ({
+				url: "/",
+				method: "PATCH",
+				body,
+			}),
+		}),
+		deleteMenuCategory: build.mutation<boolean, Partial<IMenuCategory>>({
+			query: (body) => ({
+				url: "/",
+				method: "DELETE",
+				body,
+			}),
+		}),
 	}),
 });
 

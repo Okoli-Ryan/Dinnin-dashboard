@@ -5,10 +5,11 @@ import { useFetchMenuCategoriesQuery } from "../../api/MenuCategory.api";
 import { reportErrorMessage } from "../../core/Utils";
 import { IMenuCategory } from "../../models";
 import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
+import { useMenuCategoryContext } from "./context/MenuCategoryContext";
 
 export default function useMenu() {
 	const { data = [], isLoading, error, isError } = useFetchMenuCategoriesQuery();
-	const [showCategoryModal, setShowCategoryModal] = useState(false);
+	const { setCurrentMenuCategoryDetails } = useMenuCategoryContext();
 	const [categoryList, setCategoryList] = useState(DUMMY_categoryList);
 
 	// if (isError) throw error;
@@ -28,9 +29,13 @@ export default function useMenu() {
 		setCategoryList((prev) => [...prev, category]);
 	}
 
+	function showMenuCategoryModal() {
+		setCurrentMenuCategoryDetails({});
+	}
+
 	useEffect(() => {
 		moveCard(0, 0);
 	}, []);
 
-	return { showCategoryModal, setShowCategoryModal, categoryList, moveCard, addCategory, isLoading };
+	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal };
 }

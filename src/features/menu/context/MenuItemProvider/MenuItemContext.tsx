@@ -1,6 +1,6 @@
 import { createContext, SetStateAction, useContext } from "react";
 
-import { IMenuItem } from "../../../models";
+import { IMenuItem } from "../../../../models";
 
 interface IMenuItemContext {
 	currentMenuItem: Partial<IMenuItem> | null;

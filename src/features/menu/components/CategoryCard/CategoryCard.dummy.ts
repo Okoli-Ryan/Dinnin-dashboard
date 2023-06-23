@@ -6,6 +6,7 @@ export const DUMMY_menuList: Partial<IMenuItem>[] = [
 		menuItemName: "Item 1",
 		price: 300,
 		description: "Some details about Item 1",
+		menuCategoryId: "1",
 		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
 	},
 	{
@@ -13,6 +14,7 @@ export const DUMMY_menuList: Partial<IMenuItem>[] = [
 		menuItemName: "Item 2",
 		price: 250,
 		description: "Some details about Item 2",
+		menuCategoryId: "1",
 		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
 	},
 	{
@@ -20,6 +22,7 @@ export const DUMMY_menuList: Partial<IMenuItem>[] = [
 		menuItemName: "Item 3",
 		price: 400,
 		description: "Some details about Item 3",
+		menuCategoryId: "3",
 		imageUrl: "https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg",
 	},
 ];

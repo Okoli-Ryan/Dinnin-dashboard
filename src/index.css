@@ -33,6 +33,13 @@ body{
     height: calc(100vh - 3rem);
 }
 
+.child-m-0 > div {
+    margin: 0;
+}
+.ant-switch:not(.ant-switch-checked){
+    background: rgb(163, 163, 163)
+}
+
 @layer base {
     html {
       font-family: Satoshi, system-ui, sans-serif;
