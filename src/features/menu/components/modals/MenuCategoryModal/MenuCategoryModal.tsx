@@ -16,12 +16,13 @@ export default function MenuCategoryModal({ onSuccess }: IMenuCategoryModal) {
 	return (
 		<Modal
 			centered
+			destroyOnClose
 			confirmLoading={isLoading}
 			title={<h4 className="text-xl font-bold text-secondary">Create a Menu Category</h4>}
 			open={isOpen}
 			onOk={addCategory}
 			onCancel={onCancel}>
-			<Form form={form} layout="vertical" initialValues={currentMenuCategoryDetails!}>
+			<Form form={form} layout="vertical" initialValues={currentMenuCategoryDetails!} preserve={false}>
 				<TextInput
 					name="categoryName"
 					placeholder="Most Popular, Starters..."
@@ -29,7 +30,7 @@ export default function MenuCategoryModal({ onSuccess }: IMenuCategoryModal) {
 					rules={[{ required: true, message: "Please set the name of the category" }]}
 					className="h-12 mt-4 text-lg"
 				/>
-				<Switch checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked />
+				{currentMenuCategoryDetails?.categoryName && <Switch checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked />}
 			</Form>
 		</Modal>
 	);

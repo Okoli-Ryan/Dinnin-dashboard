@@ -20,7 +20,7 @@ export default function MenuItemModal() {
 			onCancel={onClose}
 			title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>}
 			onOk={onFinish}>
-			<Form layout="vertical" onFinish={onFinish} form={form} initialValues={currentMenuItem!}>
+			<Form layout="vertical" onFinish={onFinish} form={form} initialValues={currentMenuItem!} preserve={false}>
 				<UploadImage folderName="file" name="imageUrl" />
 				<TextInput name="menuItemName" label="Item name" />
 				<div className="grid grid-cols-5 gap-4">
