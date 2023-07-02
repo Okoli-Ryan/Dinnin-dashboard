@@ -29,6 +29,18 @@ export default function useMenu() {
 		setCategoryList((prev) => [...prev, category]);
 	}
 
+	function editCategory(e: IMenuCategory) {
+		setCategoryList((prev) => {
+			const previousList = [...prev];
+
+			const edittedCategoryIndex = prev.findIndex((category) => category.id === e.id);
+
+			previousList[edittedCategoryIndex] = e;
+
+			return previousList;
+		});
+	}
+
 	function showMenuCategoryModal() {
 		setCurrentMenuCategoryDetails({});
 	}
@@ -37,5 +49,5 @@ export default function useMenu() {
 		moveCard(0, 0);
 	}, []);
 
-	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal };
+	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal, editCategory };
 }

@@ -7,20 +7,24 @@ import { TextInput } from '../../../../../components';
 import useMenuCategoryModal from './useMenuCategoryModal';
 
 export interface IMenuCategoryModal {
-	onSuccess: (e: IMenuCategory) => void;
+	onAddSuccess: (e: IMenuCategory) => void;
+	onEditSuccess: (e: IMenuCategory) => void;
 }
 
-export default function MenuCategoryModal({ onSuccess }: IMenuCategoryModal) {
-	const { addCategory, form, isLoading, isOpen, onCancel, currentMenuCategoryDetails } = useMenuCategoryModal({ onSuccess });
+export default function MenuCategoryModal({ onAddSuccess, onEditSuccess }: IMenuCategoryModal) {
+	const { handleMenuCategoryModal, form, isLoading, isOpen, onCancel, currentMenuCategoryDetails, inEditMode } = useMenuCategoryModal({
+		onAddSuccess,
+		onEditSuccess,
+	});
 
 	return (
 		<Modal
 			centered
 			destroyOnClose
 			confirmLoading={isLoading}
-			title={<h4 className="text-xl font-bold text-secondary">Create a Menu Category</h4>}
+			title={<h4 className="text-xl font-bold text-secondary">{inEditMode ? "Edit" : "Create"} Menu Category</h4>}
 			open={isOpen}
-			onOk={addCategory}
+			onOk={handleMenuCategoryModal}
 			onCancel={onCancel}>
 			<Form form={form} layout="vertical" initialValues={currentMenuCategoryDetails!} preserve={false}>
 				<TextInput

@@ -19,7 +19,7 @@ import useMenu from "./useMenu";
 
 const ScrollingComponent = withScrolling("div");
 const Menu = () => {
-	const { showMenuCategoryModal, categoryList, moveCard, isLoading, addCategory } = useMenu();
+	const { showMenuCategoryModal, categoryList, moveCard, isLoading, addCategory, editCategory } = useMenu();
 
 	if (isLoading) return <LoadingComponent />;
 

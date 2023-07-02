@@ -34,4 +34,4 @@ export const MenuCategoryApi = createApi({
 	}),
 });
 
-export const { useSaveMenuCategoryMutation, useFetchMenuCategoriesQuery } = MenuCategoryApi;
+export const { useSaveMenuCategoryMutation, useFetchMenuCategoriesQuery, useUpdateMenuCategoryMutation, useDeleteMenuCategoryMutation } = MenuCategoryApi;
