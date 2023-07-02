@@ -6,7 +6,7 @@ import { MdOutlineDragIndicator } from "react-icons/md";
 import { Button, TextInput } from "../../../../components";
 import { DndCardContainer } from "../../../../components/DnDCardContainer";
 import { useDeleteMenuCategoryContext } from "../../context/DeleteMenuItemProvider";
-import { useMenuCategoryContext } from "../../context/MenuCategoryContext";
+import { useMenuCategoryContext } from "../../context/MenuCategoryProvider";
 import { useMenuItemContext } from "../../context/MenuItemProvider/MenuItemContext";
 import { DUMMY_categoryList } from "./CategoryCard.dummy";
 import MenuItemCard from "./components/MenuItemCard";
@@ -35,7 +35,10 @@ export default function CategoryCard({ index, moveCard, menuCategory }: ICategor
 					{menuItems?.map((menuItem) => (
 						<MenuItemCard {...menuItem} key={menuItem.id} />
 					))}
-					<Button.Outline className="justify-center" icon={<AiOutlinePlus />} onClick={() => setCurrentMenuItem({})}>
+					<Button.Outline
+						className="justify-center"
+						icon={<AiOutlinePlus />}
+						onClick={() => setCurrentMenuItem({ menuCategoryId: id, inEditMode: false })}>
 						Add item
 					</Button.Outline>
 				</div>

@@ -12,7 +12,7 @@ export interface IMenuCategoryModal {
 }
 
 export default function MenuCategoryModal({ onAddSuccess, onEditSuccess }: IMenuCategoryModal) {
-	const { handleMenuCategoryModal, form, isLoading, isOpen, onCancel, currentMenuCategoryDetails, inEditMode } = useMenuCategoryModal({
+	const { onFinish, form, isLoading, isOpen, onCancel, currentMenuCategoryDetails, inEditMode } = useMenuCategoryModal({
 		onAddSuccess,
 		onEditSuccess,
 	});
@@ -24,7 +24,7 @@ export default function MenuCategoryModal({ onAddSuccess, onEditSuccess }: IMenu
 			confirmLoading={isLoading}
 			title={<h4 className="text-xl font-bold text-secondary">{inEditMode ? "Edit" : "Create"} Menu Category</h4>}
 			open={isOpen}
-			onOk={handleMenuCategoryModal}
+			onOk={onFinish}
 			onCancel={onCancel}>
 			<Form form={form} layout="vertical" initialValues={currentMenuCategoryDetails!} preserve={false}>
 				<TextInput

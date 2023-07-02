@@ -2,9 +2,11 @@ import { createContext, SetStateAction, useContext } from "react";
 
 import { IMenuItem } from "../../../../models";
 
+export type ICurrentMenuItem = (Partial<IMenuItem> & { inEditMode?: boolean }) | null;
+
 interface IMenuItemContext {
-	currentMenuItem: Partial<IMenuItem> | null;
-	setCurrentMenuItem: React.Dispatch<SetStateAction<Partial<IMenuItem> | null>>;
+	currentMenuItem: ICurrentMenuItem | null;
+	setCurrentMenuItem: React.Dispatch<SetStateAction<ICurrentMenuItem>>;
 }
 
 export const MenuItemContext = createContext({} as IMenuItemContext);

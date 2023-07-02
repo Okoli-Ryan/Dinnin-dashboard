@@ -48,6 +48,7 @@ export default function Select<T extends BaseOptionType | DefaultOptionType>({
 					}
 				}}
 				options={optionValues}
+				{...inputProps}
 			/>
 		</Form.Item>
 	);

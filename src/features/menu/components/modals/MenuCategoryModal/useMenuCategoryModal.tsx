@@ -7,7 +7,7 @@ import {
 import { reportErrorMessage } from '../../../../../core/Utils';
 import { IMenuCategory } from '../../../../../models';
 import { useAppSelector } from '../../../../../store';
-import { useMenuCategoryContext } from '../../../context/MenuCategoryContext';
+import { useMenuCategoryContext } from "../../../context/MenuCategoryProvider";
 
 interface IUseMenuCategoryModal {
 	onAddSuccess: (e: IMenuCategory) => void;
@@ -63,7 +63,7 @@ export default function useMenuCategoryModal({ onAddSuccess, onEditSuccess }: IU
 
 	return {
 		form,
-		handleMenuCategoryModal,
+		onFinish: handleMenuCategoryModal,
 		isLoading: isUpdateLoading || isSaveLoading,
 		isOpen: !!currentMenuCategoryDetails,
 		currentMenuCategoryDetails,

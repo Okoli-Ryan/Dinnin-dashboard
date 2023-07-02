@@ -7,7 +7,7 @@ export default function MenuItemCard(menuItem: Partial<IMenuItem>) {
 	const { setCurrentMenuItem } = useMenuItemContext();
 
 	function onSelectMenuItem() {
-		setCurrentMenuItem(menuItem);
+		setCurrentMenuItem({ ...menuItem, inEditMode: true });
 	}
 
 	return (

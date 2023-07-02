@@ -8,6 +8,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { AdminApi } from "../api/Admin.api";
 import { ImageApi } from "../api/Image.api";
 import { MenuCategoryApi } from "../api/MenuCategory.api";
+import { MenuItemApi } from "../api/MenuItem.api";
 import { RestaurantApi } from "../api/Restaurant.api";
 import { VerificationApi } from "../api/Verification.api";
 import AdminReducer from "./models/Admin.store";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
 	[MenuCategoryApi.reducerPath]: MenuCategoryApi.reducer,
 	[RestaurantApi.reducerPath]: RestaurantApi.reducer,
 	[VerificationApi.reducerPath]: VerificationApi.reducer,
+	[MenuItemApi.reducerPath]: MenuItemApi.reducer,
 });
 
 const PersistConfig = {
@@ -44,6 +46,7 @@ export const store = configureStore({
 		VerificationApi.middleware,
 		ImageApi.middleware,
 		MenuCategoryApi.middleware,
+		MenuItemApi.middleware,
 	],
 });
 

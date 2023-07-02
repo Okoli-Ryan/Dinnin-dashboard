@@ -1,16 +1,20 @@
-import { Form, Modal } from "antd";
-import React from "react";
+import { Form, Modal } from 'antd';
+import React from 'react';
 
-import { TextInput } from "../../../../../components";
-import UploadImage from "../../../../../components/formComponents/ImageUpload/components/UploadImage";
-import Select from "../../../../../components/formComponents/Select";
-import { DUMMY_categoryList } from "../../CategoryCard/CategoryCard.dummy";
-import useMenuItemModal from "./useMenuItemModal";
+import { TextInput } from '../../../../../components';
+import UploadImage from '../../../../../components/formComponents/ImageUpload/components/UploadImage';
+import Select from '../../../../../components/formComponents/Select';
+import { IMenuItem } from '../../../../../models/MenuItem';
+import { DUMMY_categoryList } from '../../CategoryCard/CategoryCard.dummy';
+import useMenuItemModal from './useMenuItemModal';
 
-export default function MenuItemModal() {
-	const { isModalOpen, currentMenuItem, onClose, form, onFinish } = useMenuItemModal();
+interface IMenuItemModal {
+	onAddSuccess: (e: IMenuItem) => void;
+	onEditSuccess: (e: IMenuItem, previousCategoryId: string) => void;
+}
 
-	console.log({ currentMenuItem });
+export default function MenuItemModal(props: IMenuItemModal) {
+	const { isModalOpen, currentMenuItem, onClose, form, onFinish, inEditMode } = useMenuItemModal(props);
 
 	return (
 		<Modal
@@ -25,7 +29,14 @@ export default function MenuItemModal() {
 				<TextInput name="menuItemName" label="Item name" />
 				<div className="grid grid-cols-5 gap-4">
 					<div className="col-span-3">
-						<Select label="Select Category" name="menuCategoryId" valueKey="id" labelKey="categoryName" options={DUMMY_categoryList} />
+						<Select
+							inputProps={{ disabled: !inEditMode }}
+							label="Select Category"
+							name="menuCategoryId"
+							valueKey="id"
+							labelKey="categoryName"
+							options={DUMMY_categoryList}
+						/>
 					</div>
 					<div className="col-span-2">
 						<TextInput name="price" label="Price" inputProps={{ type: "number" }} className="col-span-1" />
