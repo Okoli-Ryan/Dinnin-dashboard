@@ -1,17 +1,32 @@
 import { ReactElement, Suspense } from 'react';
 import { Navigate, Route } from "react-router-dom";
 
-export const generateRoutes = ({ path, Component }: IAppRoute, i: any, prefix: string = ""): ReactElement => {
-	return (
-		<Route
-			key={i}
-			path={prefix + path}
-			element={<Suspense fallback={<div>Loading...</div>}>{path === "*" ? <Navigate to={prefix + path} /> : Component}</Suspense>}
-		/>
-	);
+export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): ReactElement => {
+	if ("redirectTo" in route)
+		return (
+			<Route
+				key={i}
+				path={prefix + route.path}
+				element={
+					<Suspense fallback={<div>Loading...</div>}>
+						<Navigate to={route.redirectTo} />
+					</Suspense>
+				}
+			/>
+		);
+
+	return <Route key={i} path={prefix + route.path} element={<Suspense fallback={<div>Loading...</div>}>{route.Component}</Suspense>} />;
 };
 
-export interface IAppRoute {
+export interface IAppRouteBase {
 	path: string;
-	Component: any;
 }
+export interface IRedirectAppRoute extends IAppRouteBase {
+	redirectTo: string;
+}
+
+export interface IRoute extends IAppRouteBase {
+	Component: JSX.Element;
+}
+
+export type IAppRoute = IRedirectAppRoute | IRoute;

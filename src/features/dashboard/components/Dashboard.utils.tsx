@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-import { MenuItem } from "../Dashboard.data";
+import { SideMenuItem } from "../Dashboard.data";
 
-export function getItem(label: React.ReactNode, key?: string, icon?: React.ReactNode, children?: MenuItem[]): MenuItem {
+export function getItem(label: React.ReactNode, key?: string, icon?: React.ReactNode, children?: SideMenuItem[]): SideMenuItem {
 	return {
 		key,
 		icon,
@@ -12,5 +12,5 @@ export function getItem(label: React.ReactNode, key?: string, icon?: React.React
 				{label}
 			</NavLink>
 		),
-	} as MenuItem;
+	} as SideMenuItem;
 }

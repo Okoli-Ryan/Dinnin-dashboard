@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 import { getItem } from "./components/Dashboard.utils";
 
-export type MenuItem = Required<MenuProps>["items"][number];
+export type SideMenuItem = Required<MenuProps>["items"][number];
 
 export const dashboardMenuItems = [
 	getItem("Orders", "orders", <MdRestaurantMenu />),

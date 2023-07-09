@@ -48,7 +48,7 @@ export const DashboardRoutes: Array<IAppRoute> = [
 		path: "/menu",
 	},
 	{
-		Component: <Orders />,
 		path: "*",
+		redirectTo: "/orders",
 	},
 ];

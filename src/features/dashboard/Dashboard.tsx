@@ -10,14 +10,14 @@ import useDashboard from "./useDashboard";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Dashboard() {
-	const { onSelectRoute, restaurant } = useDashboard();
+	const { currentPathName, restaurant } = useDashboard();
 
 	if (!restaurant) return <Navigate to="/login" />;
 
 	return (
 		<Layout style={{ minHeight: "100vh" }}>
 			<Sider style={{ height: "100vh", overflow: "auto" }}>
-				<Menu theme="dark" mode="inline" items={dashboardMenuItems} />
+				<Menu theme="dark" mode="inline" items={dashboardMenuItems} selectedKeys={[currentPathName]} />
 			</Sider>
 			<Layout className="relative flex justify-end">
 				<Header className="absolute w-full top-0">
