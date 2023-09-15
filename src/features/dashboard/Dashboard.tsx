@@ -3,7 +3,6 @@ import React, { memo, useMemo, useState } from "react";
 import { Navigate, NavLink, Outlet } from "react-router-dom";
 
 import { DashboardHeader } from "./components";
-import DashboardContent from "./components/DashboardContent";
 import { dashboardMenuItems } from "./Dashboard.data";
 import useDashboard from "./useDashboard";
 

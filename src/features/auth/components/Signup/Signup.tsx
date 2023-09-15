@@ -29,7 +29,7 @@ function Signup() {
 					</div>
 					<PhoneInput name="phoneNumber" isRequired />
 					<TextInput name="emailAddress" label="Email address" rules={[{ type: "email" }, { required: true }]} />
-					<TextInput.Password name="password" rules={[{ required: true, message: "Please add a Password" }, { min: 8 }]} />
+					<TextInput.Password label="Password" name="password" rules={[{ required: true, message: "Please add a Password" }, { min: 8 }]} />
 					<TextInput.Password
 						label="Confirm Password"
 						dependencies={["password"]}
@@ -37,7 +37,7 @@ function Signup() {
 						rules={[{ required: true, message: "Please add a Password" }, validateConfirmPassword]}
 					/>
 
-					<Button block type="primary" htmlType="submit" loading={loading}>
+					<Button className="w-full" type="primary" htmlType="submit" loading={loading}>
 						Sign up
 					</Button>
 				</Form>

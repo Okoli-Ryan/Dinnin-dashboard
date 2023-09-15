@@ -1,12 +1,12 @@
 import Pusher from 'pusher-js';
 import React, { useEffect } from 'react';
 
-import { PUSHER_APP_CLUSTER, PUSHER_APP_KEY } from "./Config";
+import Config from "./Config";
 
 export default function useTestConnection() {
 	useEffect(() => {
-		const pusher = new Pusher(PUSHER_APP_KEY, {
-			cluster: PUSHER_APP_CLUSTER,
+		const pusher = new Pusher(Config.VITE_PUSHER_APP_KEY, {
+			cluster: Config.VITE_PUSHER_APP_CLUSTER,
 		});
 
 		const channel = pusher.subscribe("Channel");

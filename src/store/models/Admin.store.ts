@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AdminApi } from "../../api/Admin.api";
-import { RestaurantApi } from "../../api/Restaurant.api";
-import { VerificationApi } from "../../api/Verification.api";
-import { saveToken } from "../../core/Utils";
-import { Admin, IAdmin } from "../../models";
+import { AdminApi } from '../../api/Admin.api';
+import { RestaurantApi } from '../../api/Restaurant.api';
+import { VerificationApi } from '../../api/Verification.api';
+import { saveToken } from '../../core/Utils';
+import { Admin, IAdmin } from '../../models';
 
 const initialState = null as Admin | null;
 
