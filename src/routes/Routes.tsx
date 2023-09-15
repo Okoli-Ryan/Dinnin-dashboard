@@ -1,13 +1,11 @@
-import React, { Fragment } from 'react';
-import { Route, Routes as RoutesContainer, useLocation } from 'react-router-dom';
+import { Fragment } from "react";
+import { Route, Routes as RoutesContainer, useLocation } from "react-router-dom";
 
-import AuthScreen from '../features/auth';
+import AuthScreen from "../features/auth";
 import Dashboard from "../features/dashboard";
-import Orders from "../features/orders";
-import Profile from "../features/profile/AdminProfile";
 import { useAppSelector } from "../store";
 import { AuthenticationRoutes, CommonRoutes, DashboardRoutes } from "./Routes.data";
-import { generateRoutes } from './utils';
+import { generateRoutes } from "./utils";
 
 export default function Routes() {
 	const { pathname } = useLocation();

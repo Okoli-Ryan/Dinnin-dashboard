@@ -11,9 +11,9 @@ function Signup() {
 
 	return (
 		<>
-			<h3 className="text-center font-bold text-3xl">Sign up today.</h3>
+			<h3 className="text-3xl font-bold text-center">Sign up today.</h3>
 
-			<div className="flex flex-col gap-4 mt-4  justify-center">
+			<div className="flex flex-col justify-center gap-4 mt-4">
 				<Form layout="vertical" form={form} onFinish={onSubmit}>
 					<div className="grid grid-cols-2 gap-2">
 						<TextInput
@@ -42,7 +42,7 @@ function Signup() {
 					</Button>
 				</Form>
 			</div>
-			<p className="text-center mt-4">
+			<p className="mt-4 text-center">
 				Already have an account? <Button.Text onClick={navigateToLogin}>Log in</Button.Text>
 			</p>
 		</>
