@@ -1,7 +1,8 @@
 import { Form, Modal } from 'antd';
 import React from 'react';
+import { AiOutlinePlus } from "react-icons/ai";
 
-import { TextInput } from '../../../../../components';
+import { Button, TextInput } from "../../../../../components";
 import UploadImage from '../../../../../components/formComponents/ImageUpload/components/UploadImage';
 import Select from '../../../../../components/formComponents/Select';
 import { IMenuItem } from '../../../../../models/MenuItem';
@@ -23,6 +24,16 @@ export default function MenuItemModal(props: IMenuItemModal) {
 			open={isModalOpen}
 			onCancel={onClose}
 			title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>}
+			footer={
+				<div className="flex justify-between gap-4">
+					{inEditMode && (
+						<Button.Outline className="rounded-md" size="middle" onClick={() => {}}>
+							Delete
+						</Button.Outline>
+					)}
+					<Button size="middle">Save</Button>
+				</div>
+			}
 			onOk={onFinish}>
 			<Form layout="vertical" onFinish={onFinish} form={form} initialValues={currentMenuItem!} preserve={false}>
 				<UploadImage folderName="file" name="imageUrl" />
