@@ -1,8 +1,7 @@
-import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import withScrolling, { createVerticalStrength } from "react-dnd-scrolling";
-import { AiOutlinePlus } from "react-icons/ai";
+import withScrolling from "react-dnd-scrolling";
+import { AiOutlinePlus, AiOutlineSortAscending } from "react-icons/ai";
 
 import { Button } from "../../components";
 import LoadingComponent from "../../components/LoadingComponent";
@@ -12,35 +11,69 @@ import CategoryCard from "./components/CategoryCard/CategoryCard";
 import DeleteMenuCategoryModal from "./components/modals/DeleteMenuCategoryModal";
 import MenuCategoryModal from "./components/modals/MenuCategoryModal/MenuCategoryModal";
 import MenuItemModal from "./components/modals/MenuItemModal/MenuItemModal";
+import { DeleteMenuCategoryProvider } from "./context/DeleteMenuCategoryProvider";
 import { DeleteMenuItemProvider } from "./context/DeleteMenuItemProvider";
 import { MenuCategoryProvider } from "./context/MenuCategoryProvider";
-import { MenuItemProvider } from "./context/MenuItemProvider/MenuItemProvider";
+import { MenuItemProvider } from "./context/MenuItemProvider";
 import useMenu from "./useMenu";
 
 const ScrollingComponent = withScrolling("div");
 const Menu = () => {
-	const { showMenuCategoryModal, categoryList, moveCard, isLoading, addCategory, editCategory, addMenuItem, editMenuItem, deleteCategory } = useMenu();
+	const {
+		showMenuCategoryModal,
+		categoryList,
+		moveCard,
+		isLoading,
+		addCategory,
+		editCategory,
+		addMenuItem,
+		editMenuItem,
+		deleteCategory,
+		isDraggable,
+		toggleDraggable,
+		reOrderCategories,
+	} = useMenu();
 
 	if (isLoading) return <LoadingComponent />;
 
 	return (
 		<PageWrapper title="Menu" subtitle="Sort and Manage your restaurant menu">
 			<MenuCategoryModal onAddSuccess={addCategory} onEditSuccess={editCategory} />
-			<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 w-max" onClick={showMenuCategoryModal}>
-				Add Category
-			</Button>
+			<div className="flex gap-4">
+				{!isDraggable && (
+					<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 w-max" onClick={showMenuCategoryModal}>
+						Add Category
+					</Button>
+				)}
+				{categoryList.length > 1 && (
+					<Button.Outline
+						icon={isDraggable ? <AiOutlineSortAscending /> : <AiOutlinePlus />}
+						className="flex items-center gap-4 px-4 w-max"
+						onClick={toggleDraggable}>
+						{isDraggable ? "Save order" : "Reorder items"}
+					</Button.Outline>
+				)}
+			</div>
 			<MenuItemProvider>
-				<DeleteMenuItemProvider>
-					<MenuItemModal onAddSuccess={addMenuItem} onEditSuccess={editMenuItem} menuCategoryList={categoryList} />
-					<DeleteMenuCategoryModal onDelete={deleteCategory} />
-					<DndProvider backend={HTML5Backend}>
-						<ScrollingComponent className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[28rem] overflow-auto mt-4 ">
-							{categoryList.map((categoryItem, index) => (
-								<CategoryCard menuCategory={categoryItem} {...categoryItem} key={categoryItem.id} moveCard={moveCard} index={index} />
-							))}
-						</ScrollingComponent>
-					</DndProvider>
-				</DeleteMenuItemProvider>
+				<DeleteMenuCategoryProvider>
+					<DeleteMenuItemProvider>
+						<DeleteMenuCategoryModal onDelete={deleteCategory} />
+						<DndProvider backend={HTML5Backend}>
+							<ScrollingComponent className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[28rem] overflow-auto mt-4 ">
+								{categoryList.map((categoryItem, index) => (
+									<CategoryCard
+										menuCategory={categoryItem}
+										key={categoryItem.id}
+										moveCard={moveCard}
+										index={index}
+										isDraggable={isDraggable}
+									/>
+								))}
+							</ScrollingComponent>
+						</DndProvider>
+						<MenuItemModal onAddSuccess={addMenuItem} onEditSuccess={editMenuItem} menuCategoryList={categoryList} />
+					</DeleteMenuItemProvider>
+				</DeleteMenuCategoryProvider>
 			</MenuItemProvider>
 		</PageWrapper>
 	);

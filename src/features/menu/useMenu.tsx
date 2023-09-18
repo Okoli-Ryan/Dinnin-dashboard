@@ -7,10 +7,12 @@ import { IMenuCategory, IMenuItem, IRestaurant } from "../../models";
 import { useAppSelector } from "../../store/Store";
 import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
 import { useMenuCategoryContext } from "./context/MenuCategoryProvider";
+import { compareCategory } from "./utils/compareCategory";
 
 export default function useMenu() {
 	const { id } = useAppSelector((state) => state.restaurant) as IRestaurant;
 	const { data = [], isLoading, error, isError, fulfilledTimeStamp } = useFetchMenuCategoriesQuery(id);
+	const [isDraggable, setIsDraggable] = useState(false);
 	const { setCurrentMenuCategoryDetails } = useMenuCategoryContext();
 	const [categoryList, setCategoryList] = useState(data);
 
@@ -103,32 +105,35 @@ export default function useMenu() {
 		setCategoryList(newCategoryList);
 	}
 
-	// function editMenuItem(menuItem: IMenuItem, previousCategoryId: string) {
-	// 	setCategoryList((prevCategoryList) => {
-	// 		return prevCategoryList.map((category) => {
-	// 			if (category.id === previousCategoryId) {
-	// 				// If the user changed the category of the menu item, remove it from the previous category
-	// 				return {
-	// 					...category,
-	// 					menuItems: category.menuItems.filter((item) => item.id !== menuItem.id),
-	// 				};
-	// 			} else if (category.id === menuItem.menuCategoryId) {
-	// 				// If the category matches the new category, add the edited menu item to it
-	// 				return {
-	// 					...category,
-	// 					menuItems: [...(category.menuItems || []), menuItem],
-	// 				};
-	// 			}
-	// 			// Return unchanged categories
-	// 			return category;
-	// 		});
-	// 	});
-	// }
+	function reOrderCategories() {
+		const changedOrder = compareCategory(data, categoryList);
 
-	//Open modal with no initial values
+		console.log(changedOrder);
+	}
+
 	function showMenuCategoryModal() {
 		setCurrentMenuCategoryDetails({});
 	}
 
-	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal, editCategory, addMenuItem, editMenuItem, deleteCategory };
+	function toggleDraggable() {
+		if (isDraggable) {
+			reOrderCategories();
+		}
+		setIsDraggable((prev) => !prev);
+	}
+
+	return {
+		categoryList,
+		moveCard,
+		addCategory,
+		isLoading,
+		showMenuCategoryModal,
+		editCategory,
+		addMenuItem,
+		editMenuItem,
+		deleteCategory,
+		reOrderCategories,
+		isDraggable,
+		toggleDraggable,
+	};
 }

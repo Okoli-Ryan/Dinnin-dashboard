@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { DeleteMenuCategoryContext } from "./DeleteMenuItemContext";
+import { DeleteMenuItemContext } from "./DeleteMenuItemContext";
 
 export const DeleteMenuItemProvider = ({ children }: { children: React.ReactNode }) => {
-	const [deleteCategoryId, setDeleteCategoryId] = useState<string | null>(null);
+	const [deleteItemId, setDeleteItemId] = useState<string | null>(null);
 
-	return <DeleteMenuCategoryContext.Provider value={{ deleteCategoryId, setDeleteCategoryId }}>{children}</DeleteMenuCategoryContext.Provider>;
+	return <DeleteMenuItemContext.Provider value={{ deleteItemId, setDeleteItemId }}>{children}</DeleteMenuItemContext.Provider>;
 };

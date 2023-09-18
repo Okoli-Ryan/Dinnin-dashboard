@@ -1,7 +1,7 @@
 import { useDeleteMenuCategoryMutation } from "@/api/MenuCategory.api";
 import { reportErrorMessage } from "@/core/Utils";
+import { useDeleteMenuCategoryContext } from "@/features/menu/context/DeleteMenuCategoryProvider";
 
-import { useDeleteMenuCategoryContext } from "../../../context/DeleteMenuItemProvider";
 import { IDeleteMenuCategoryModal } from "./DeleteMenuCategoryModal";
 
 export default function useDeleteMenuCategoryModal({ onDelete }: IDeleteMenuCategoryModal) {

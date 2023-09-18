@@ -1,10 +1,15 @@
 import { FC, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-import { IMenuCategory } from "../models";
-
-import type { Identifier, XYCoord } from "dnd-core";
-type IDndCardContainer = { children: React.ReactNode; accept: string; id: string; moveCard: (dragIndex: number, hoverIndex: number) => void; index: number };
+import type { Identifier } from "dnd-core";
+type IDndCardContainer = {
+	children: React.ReactNode;
+	accept: string;
+	id: string;
+	moveCard: (dragIndex: number, hoverIndex: number) => void;
+	index: number;
+	isDraggable?: boolean;
+};
 
 interface DragItem {
 	index: number;
@@ -12,7 +17,7 @@ interface DragItem {
 	type: string;
 }
 
-export const DndCardContainer: FC<IDndCardContainer> = ({ index, moveCard, children, accept, id }) => {
+export const DndCardContainer: FC<IDndCardContainer> = ({ index, moveCard, children, accept, id, isDraggable }) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	const [{ isDragging }, drag] = useDrag({

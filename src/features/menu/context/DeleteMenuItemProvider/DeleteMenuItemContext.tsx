@@ -1,10 +1,10 @@
 import { createContext, SetStateAction, useContext } from "react";
 
-interface IDeleteMenuCategoryContext {
-	deleteCategoryId: string | null;
-	setDeleteCategoryId: React.Dispatch<SetStateAction<string | null>>;
+interface IDeleteMenuItemContext {
+	deleteItemId: string | null;
+	setDeleteItemId: React.Dispatch<SetStateAction<string | null>>;
 }
 
-export const DeleteMenuCategoryContext = createContext({} as IDeleteMenuCategoryContext);
+export const DeleteMenuItemContext = createContext({} as IDeleteMenuItemContext);
 
-export const useDeleteMenuCategoryContext = () => useContext(DeleteMenuCategoryContext);
+export const useDeleteMenuItemContext = () => useContext(DeleteMenuItemContext);

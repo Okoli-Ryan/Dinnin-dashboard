@@ -21,7 +21,7 @@ export const MenuItemApi = createApi({
 				body,
 			}),
 		}),
-		deleteMenuItem: build.mutation<boolean, Partial<IMenuItem>>({
+		deleteMenuItem: build.mutation<boolean, string>({
 			query: (body) => ({
 				url: "/",
 				method: "DELETE",
