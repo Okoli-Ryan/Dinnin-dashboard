@@ -1,10 +1,9 @@
-import { Form, Modal, Switch } from 'antd';
-import React from 'react';
+import { Form, Modal, Switch } from "antd";
 
-import { IMenuCategory } from '@models';
+import { IMenuCategory } from "@/models";
 
-import { TextInput } from '../../../../../components';
-import useMenuCategoryModal from './useMenuCategoryModal';
+import { TextInput } from "../../../../../components";
+import useMenuCategoryModal from "./useMenuCategoryModal";
 
 export interface IMenuCategoryModal {
 	onAddSuccess: (e: IMenuCategory) => void;

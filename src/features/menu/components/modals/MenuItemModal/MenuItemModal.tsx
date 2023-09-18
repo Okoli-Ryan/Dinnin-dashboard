@@ -5,17 +5,19 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Button, TextInput } from "../../../../../components";
 import UploadImage from '../../../../../components/formComponents/ImageUpload/components/UploadImage';
 import Select from '../../../../../components/formComponents/Select';
+import { IMenuCategory } from "../../../../../models/MenuCategory";
 import { IMenuItem } from '../../../../../models/MenuItem';
 import { DUMMY_categoryList } from '../../CategoryCard/CategoryCard.dummy';
 import useMenuItemModal from './useMenuItemModal';
 
 interface IMenuItemModal {
+	menuCategoryList: IMenuCategory[];
 	onAddSuccess: (e: IMenuItem) => void;
 	onEditSuccess: (e: IMenuItem, previousCategoryId: string) => void;
 }
 
 export default function MenuItemModal(props: IMenuItemModal) {
-	const { isModalOpen, currentMenuItem, onClose, form, onFinish, inEditMode } = useMenuItemModal(props);
+	const { isModalOpen, currentMenuItem, onClose, form, onFinish, inEditMode, isLoading } = useMenuItemModal(props);
 
 	return (
 		<Modal
@@ -23,7 +25,7 @@ export default function MenuItemModal(props: IMenuItemModal) {
 			centered
 			open={isModalOpen}
 			onCancel={onClose}
-			title={<h4 className="text-xl font-bold text-secondary">Edit your menu item</h4>}
+			title={<h4 className="text-xl font-bold text-secondary">{inEditMode ? "Edit" : "Create"} menu item</h4>}
 			footer={
 				<div className="flex justify-between gap-4">
 					{inEditMode && (
@@ -31,7 +33,9 @@ export default function MenuItemModal(props: IMenuItemModal) {
 							Delete
 						</Button.Outline>
 					)}
-					<Button size="middle">Save</Button>
+					<Button size="middle" onClick={onFinish} loading={isLoading}>
+						Save
+					</Button>
 				</div>
 			}
 			onOk={onFinish}>
@@ -46,7 +50,7 @@ export default function MenuItemModal(props: IMenuItemModal) {
 							name="menuCategoryId"
 							valueKey="id"
 							labelKey="categoryName"
-							options={DUMMY_categoryList}
+							options={props.menuCategoryList}
 						/>
 					</div>
 					<div className="col-span-2">

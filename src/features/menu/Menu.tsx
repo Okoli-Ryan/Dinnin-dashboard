@@ -19,7 +19,7 @@ import useMenu from "./useMenu";
 
 const ScrollingComponent = withScrolling("div");
 const Menu = () => {
-	const { showMenuCategoryModal, categoryList, moveCard, isLoading, addCategory, editCategory, addMenuItem, editMenuItem } = useMenu();
+	const { showMenuCategoryModal, categoryList, moveCard, isLoading, addCategory, editCategory, addMenuItem, editMenuItem, deleteCategory } = useMenu();
 
 	if (isLoading) return <LoadingComponent />;
 
@@ -31,8 +31,8 @@ const Menu = () => {
 			</Button>
 			<MenuItemProvider>
 				<DeleteMenuItemProvider>
-					<MenuItemModal onAddSuccess={addMenuItem} onEditSuccess={editMenuItem} />
-					<DeleteMenuCategoryModal />
+					<MenuItemModal onAddSuccess={addMenuItem} onEditSuccess={editMenuItem} menuCategoryList={categoryList} />
+					<DeleteMenuCategoryModal onDelete={deleteCategory} />
 					<DndProvider backend={HTML5Backend}>
 						<ScrollingComponent className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[28rem] overflow-auto mt-4 ">
 							{categoryList.map((categoryItem, index) => (

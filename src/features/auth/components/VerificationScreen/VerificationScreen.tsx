@@ -1,11 +1,6 @@
-import { message, notification } from "antd";
-import React from "react";
-
-import { SerializedError } from "@reduxjs/toolkit";
+import Lottie from "@components/Lottie";
 
 import * as LoadingAnim from "../../../../assets/lottieAnimations/FoodLoading.json";
-import Lottie from "../../../../components/Lottie";
-import Spinner from "../../../../components/Spinner";
 import SuccessfulVerification from "./components";
 import useVerificationScreen from "./useVerificationScreen";
 

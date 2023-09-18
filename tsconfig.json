@@ -15,15 +15,17 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
+		"baseUrl": ".",
 		"paths": {
-			"@models": ["./src/models"],
-			"@hoc": ["./src/hoc"],
-			"@components": ["./src/components"],
-			"@assets": ["./src/assets"],
-			"@interfaces": ["./src/interfaces"],
-			"@store": ["./src/store"],
-			"@api": ["./src/api"],
-			"@core": ["./src/core"]
+			"@/*": ["./src/*"],
+			"@models/*": ["./src/models/*"],
+			"@hoc/*": ["./src/hoc/*"],
+			"@components/*": ["./src/components/*"],
+			"@assets/*": ["./src/assets/*"],
+			"@interfaces/*": ["./src/interfaces/*"],
+			"@store/*": ["./src/store/*"],
+			"@api/*": ["./src/api/*"],
+			"@core/*": ["./src/core/*"]
 		}
 	},
 	"include": ["src"],

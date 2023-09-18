@@ -16,8 +16,6 @@ export default function useRestaurantProfile() {
 	async function updateRestaurantProfile() {
 		const payload = { ...form.getFieldsValue(), id: restaurant.id };
 
-		console.log({ payload });
-		return;
 		try {
 			const response = await updateRestaurant(payload).unwrap();
 			console.log({ response });

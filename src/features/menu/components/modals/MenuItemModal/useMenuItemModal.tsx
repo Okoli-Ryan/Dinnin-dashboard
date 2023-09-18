@@ -4,6 +4,7 @@ import React from "react";
 import { useSaveMenuItemMutation, useUpdateMenuItemMutation } from "../../../../../api/MenuItem.api";
 import { reportErrorMessage } from "../../../../../core/Utils";
 import { IMenuItem } from "../../../../../models/MenuItem";
+import { useAppSelector } from "../../../../../store/Store";
 import { useMenuItemContext } from "../../../context/MenuItemProvider/MenuItemContext";
 
 interface IUseMenuItemModal {
@@ -13,16 +14,17 @@ interface IUseMenuItemModal {
 
 export default function useMenuItemModal({ onAddSuccess, onEditSuccess }: IUseMenuItemModal) {
 	const [form] = useForm();
+	const { id: restaurantId } = useAppSelector((state) => state.restaurant)!;
 	const { currentMenuItem, setCurrentMenuItem } = useMenuItemContext();
-	const [saveMenuItem] = useSaveMenuItemMutation();
-	const [updateMenuItem] = useUpdateMenuItemMutation();
+	const [saveMenuItem, { isLoading: isSaveLoading }] = useSaveMenuItemMutation();
+	const [updateMenuItem, { isLoading: isUpdateLoading }] = useUpdateMenuItemMutation();
 	const isModalOpen = !!currentMenuItem;
 
 	const inEditMode = currentMenuItem?.inEditMode;
 
 	async function addMenuItem() {
 		try {
-			const payload = { ...currentMenuItem, ...form.getFieldsValue() };
+			const payload = { ...currentMenuItem, ...form.getFieldsValue(), restaurantId };
 
 			const addedMenuItem = await saveMenuItem(payload).unwrap();
 
@@ -55,5 +57,5 @@ export default function useMenuItemModal({ onAddSuccess, onEditSuccess }: IUseMe
 		setCurrentMenuItem(null);
 	}
 
-	return { isModalOpen, currentMenuItem, onClose, form, inEditMode, onFinish: handleMenuItemModal };
+	return { isModalOpen, currentMenuItem, onClose, form, inEditMode, onFinish: handleMenuItemModal, isLoading: isSaveLoading || isUpdateLoading };
 }

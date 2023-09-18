@@ -42,6 +42,7 @@ export const CommonRoutes: Array<IAppRoute> = [
 export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Orders />,
+		// index: true,
 		path: "/orders",
 	},
 	{

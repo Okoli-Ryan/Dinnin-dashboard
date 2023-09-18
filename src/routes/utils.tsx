@@ -6,7 +6,8 @@ export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): R
 		return (
 			<Route
 				key={i}
-				path={prefix + route.path}
+				index={route.index}
+				path={route.index ? undefined : prefix + route.path}
 				element={
 					<Suspense fallback={<div>Loading...</div>}>
 						<Navigate to={route.redirectTo} />
@@ -15,11 +16,19 @@ export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): R
 			/>
 		);
 
-	return <Route key={i} path={prefix + route.path} element={<Suspense fallback={<div>Loading...</div>}>{route.Component}</Suspense>} />;
+	return (
+		<Route
+			key={i}
+			index={route.index}
+			path={route.index ? undefined : prefix + route.path}
+			element={<Suspense fallback={<div>Loading...</div>}>{route.Component}</Suspense>}
+		/>
+	);
 };
 
 export interface IAppRouteBase {
 	path: string;
+	index?: boolean;
 }
 export interface IRedirectAppRoute extends IAppRouteBase {
 	redirectTo: string;

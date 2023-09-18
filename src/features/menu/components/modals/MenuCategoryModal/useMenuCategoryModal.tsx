@@ -28,12 +28,12 @@ export default function useMenuCategoryModal({ onAddSuccess, onEditSuccess }: IU
 
 	async function addCategory() {
 		try {
-            console.log("Add")
 			const payload = { ...form.getFieldsValue(), restaurantId };
 
 			const addedCategory = await addMenuCategory(payload).unwrap();
 
 			onAddSuccess(addedCategory);
+			onCancel();
 		} catch (error) {
 			reportErrorMessage(error);
 		}
@@ -41,12 +41,13 @@ export default function useMenuCategoryModal({ onAddSuccess, onEditSuccess }: IU
 
 	async function editCategory() {
 		try {
-            console.log("Edit")
-			const payload = { ...form.getFieldsValue(), restaurantId };
+			const payload = { ...currentMenuCategoryDetails, ...form.getFieldsValue(), restaurantId } as Partial<IMenuCategory>;
 
+			delete payload.menuItems;
 			const edittedCategory = await updateMenuCategory(payload).unwrap();
 
 			onEditSuccess(edittedCategory);
+            onCancel();
 		} catch (error) {
 			reportErrorMessage(error);
 		}

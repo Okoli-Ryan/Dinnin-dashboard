@@ -3,24 +3,26 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { useFetchMenuCategoriesQuery } from "../../api/MenuCategory.api";
 import { reportErrorMessage } from "../../core/Utils";
-import { IMenuCategory, IMenuItem } from "../../models";
+import { IMenuCategory, IMenuItem, IRestaurant } from "../../models";
+import { useAppSelector } from "../../store/Store";
 import { DUMMY_categoryList } from "./components/CategoryCard/CategoryCard.dummy";
 import { useMenuCategoryContext } from "./context/MenuCategoryProvider";
 
 export default function useMenu() {
-	const { data = [], isLoading, error, isError } = useFetchMenuCategoriesQuery();
+	const { id } = useAppSelector((state) => state.restaurant) as IRestaurant;
+	const { data = [], isLoading, error, isError, fulfilledTimeStamp } = useFetchMenuCategoriesQuery(id);
 	const { setCurrentMenuCategoryDetails } = useMenuCategoryContext();
-	const [categoryList, setCategoryList] = useState(DUMMY_categoryList);
+	const [categoryList, setCategoryList] = useState(data);
 
 	useEffect(() => {
-		moveCard(0, 0);
-	}, []);
+		setCategoryList(data);
+	}, [fulfilledTimeStamp]);
 
 	/**
 	 * @description function to sort the menu category cards in order of how it'll show to users
 	 */
 	const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-		setCategoryList((prevCards: Partial<IMenuCategory>[]) =>
+		setCategoryList((prevCards: IMenuCategory[]) =>
 			update(prevCards, {
 				$splice: [
 					[dragIndex, 1],
@@ -44,6 +46,10 @@ export default function useMenu() {
 
 			return previousList;
 		});
+	}
+
+	function deleteCategory(categoryId: string) {
+		setCategoryList((prev) => prev.filter((e) => e.id !== categoryId));
 	}
 
 	/**
@@ -98,5 +104,5 @@ export default function useMenu() {
 		setCurrentMenuCategoryDetails({});
 	}
 
-	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal, editCategory, addMenuItem, editMenuItem };
+	return { categoryList, moveCard, addCategory, isLoading, showMenuCategoryModal, editCategory, addMenuItem, editMenuItem, deleteCategory };
 }

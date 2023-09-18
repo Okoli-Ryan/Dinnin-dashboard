@@ -4,7 +4,7 @@ import { IMenuCategory, IMenuItem } from "../models";
 import { commonFetchBaseQuery } from "./common";
 
 export const MenuItemApi = createApi({
-	...commonFetchBaseQuery("menuItem", true),
+	...commonFetchBaseQuery("menu-item", true),
 	reducerPath: "MenuItemApi",
 	endpoints: (build) => ({
 		saveMenuItem: build.mutation<IMenuItem, Partial<IMenuItem>>({
