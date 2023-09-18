@@ -56,19 +56,23 @@ export default function useMenu() {
 	 * @description add menu item to appropriate menu category card
 	 */
 	function addMenuItem(menuItem: IMenuItem) {
-		const newCategoryList = [...categoryList];
-
-		const categoryIndex = newCategoryList.findIndex((category) => category.id === menuItem.menuCategoryId);
-
-		const categoryMenuItems = [...newCategoryList[categoryIndex].menuItems!];
-
-		newCategoryList[categoryIndex].menuItems = [...categoryMenuItems, menuItem];
-
-		setCategoryList(newCategoryList);
+		setCategoryList((prevCategoryList) => {
+			return prevCategoryList.map((category) => {
+				if (category.id === menuItem.menuCategoryId) {
+					// Clone the category and add the new menuItem to its menuItems array
+					return {
+						...category,
+						menuItems: [...(category.menuItems || []), menuItem],
+					};
+				}
+				// Return unchanged categories
+				return category;
+			});
+		});
 	}
 
 	function editMenuItem(menuItem: IMenuItem, previousCategoryId: string) {
-		const newCategoryList = [...categoryList];
+		let newCategoryList = [...categoryList];
 
 		const categoryIndex = newCategoryList.findIndex((category) => category.id === previousCategoryId);
 
@@ -82,7 +86,7 @@ export default function useMenu() {
 
 			const updatedCategoryMenuItems = categoryMenuItems.filter((item, index) => index !== edittedMenuItemIndex);
 
-			newCategoryList[categoryIndex].menuItems = updatedCategoryMenuItems;
+			newCategoryList[categoryIndex] = { ...newCategoryList[categoryIndex], menuItems: updatedCategoryMenuItems };
 
 			setCategoryList(newCategoryList);
 
@@ -94,10 +98,32 @@ export default function useMenu() {
 
 		categoryMenuItems[edittedMenuItemIndex] = menuItem;
 
-		newCategoryList[categoryIndex].menuItems = categoryMenuItems;
+		newCategoryList[categoryIndex] = { ...newCategoryList[categoryIndex], menuItems: categoryMenuItems };
 
 		setCategoryList(newCategoryList);
 	}
+
+	// function editMenuItem(menuItem: IMenuItem, previousCategoryId: string) {
+	// 	setCategoryList((prevCategoryList) => {
+	// 		return prevCategoryList.map((category) => {
+	// 			if (category.id === previousCategoryId) {
+	// 				// If the user changed the category of the menu item, remove it from the previous category
+	// 				return {
+	// 					...category,
+	// 					menuItems: category.menuItems.filter((item) => item.id !== menuItem.id),
+	// 				};
+	// 			} else if (category.id === menuItem.menuCategoryId) {
+	// 				// If the category matches the new category, add the edited menu item to it
+	// 				return {
+	// 					...category,
+	// 					menuItems: [...(category.menuItems || []), menuItem],
+	// 				};
+	// 			}
+	// 			// Return unchanged categories
+	// 			return category;
+	// 		});
+	// 	});
+	// }
 
 	//Open modal with no initial values
 	function showMenuCategoryModal() {

@@ -22,7 +22,7 @@ export const RestaurantApi = createApi({
 		updateRestaurant: build.mutation<Restaurant, Partial<Restaurant>>({
 			query: (body) => ({
 				url: "/",
-				method: "PATCH",
+				method: "PUT",
 				body,
 			}),
 		}),

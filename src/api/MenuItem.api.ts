@@ -16,8 +16,8 @@ export const MenuItemApi = createApi({
 		}),
 		updateMenuItem: build.mutation<IMenuItem, Partial<IMenuItem>>({
 			query: (body) => ({
-				url: "/",
-				method: "PATCH",
+				url: "",
+				method: "PUT",
 				body,
 			}),
 		}),

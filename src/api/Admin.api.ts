@@ -31,7 +31,7 @@ export const AdminApi = createApi({
 		updateAdmin: build.mutation<IAdmin, Partial<IAdmin>>({
 			query: (body) => ({
 				url: "/",
-				method: "PATCH",
+				method: "PUT",
 				body,
 			}),
 		}),
