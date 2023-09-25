@@ -17,7 +17,7 @@ interface DragItem {
 	type: string;
 }
 
-export const DndCardContainer: FC<IDndCardContainer> = ({ index, moveCard, children, accept, id, isDraggable }) => {
+export const DndCardContainer: FC<IDndCardContainer> = ({ index, moveCard, children, accept, id }) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	const [{ isDragging }, drag] = useDrag({

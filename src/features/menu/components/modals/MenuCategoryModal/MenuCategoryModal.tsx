@@ -1,5 +1,6 @@
-import { Form, Modal, Switch } from "antd";
+import { Form, Modal } from "antd";
 
+import Switch from "@/components/formComponents/Switch";
 import { IMenuCategory } from "@/models";
 
 import { TextInput } from "../../../../../components";
@@ -33,7 +34,14 @@ export default function MenuCategoryModal({ onAddSuccess, onEditSuccess }: IMenu
 					rules={[{ required: true, message: "Please set the name of the category" }]}
 					className="h-12 mt-4 text-lg"
 				/>
-				{currentMenuCategoryDetails?.categoryName && <Switch checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked />}
+				{currentMenuCategoryDetails?.categoryName && (
+					<Switch
+						name="activeStatus"
+						checkedChildren="Active"
+						unCheckedChildren="Inactive"
+						defaultChecked={currentMenuCategoryDetails?.activeStatus}
+					/>
+				)}
 			</Form>
 		</Modal>
 	);

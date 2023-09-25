@@ -30,8 +30,8 @@ const Menu = () => {
 		editMenuItem,
 		deleteCategory,
 		isDraggable,
+		isReorderLoading,
 		toggleDraggable,
-		reOrderCategories,
 	} = useMenu();
 
 	if (isLoading) return <LoadingComponent />;
@@ -49,6 +49,7 @@ const Menu = () => {
 					<Button.Outline
 						icon={isDraggable ? <AiOutlineSortAscending /> : <AiOutlinePlus />}
 						className="flex items-center gap-4 px-4 w-max"
+						loading={isReorderLoading}
 						onClick={toggleDraggable}>
 						{isDraggable ? "Save order" : "Reorder items"}
 					</Button.Outline>

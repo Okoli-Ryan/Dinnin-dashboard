@@ -1,19 +1,22 @@
 import { IMenuCategory, IMenuItem } from "@/models";
 
 export function compareCategory(initialArray: IMenuCategory[], finalArray: IMenuCategory[]) {
-	console.log({ initialArray, finalArray });
 	const changedItems = [];
 
-	// Create a map of items from the final array for efficient lookup
-	const finalArrayMap = new Map(finalArray.map((item, index) => [item.id, { ...item, sortingOrder: index }]));
+	const finalArrayWithSortingOrder = finalArray.map((item, index) => ({
+		...item,
+		sortingOrder: index,
+	}));
+	console.log({ initialArray, finalArrayWithSortingOrder });
 
-	for (const initialItem of initialArray) {
-		const finalItem = finalArrayMap.get(initialItem.id);
+	for (let i = 0; i < initialArray.length; i++) {
+		const initialItem = initialArray[i];
+		const finalItem = finalArrayWithSortingOrder[i];
 
-		if (finalItem && initialItem.sortingOrder !== finalItem.sortingOrder) {
-			changedItems.push(initialItem);
+		if (finalItem && initialItem.id !== finalItem.id) {
+			changedItems.push(finalItem);
 		}
 	}
 
-	return changedItems;
+	return { newCategoryList: finalArrayWithSortingOrder, changedItems };
 }

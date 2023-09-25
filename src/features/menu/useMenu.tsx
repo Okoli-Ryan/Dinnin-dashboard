@@ -1,7 +1,7 @@
 import update from "immutability-helper";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { useFetchMenuCategoriesQuery } from "../../api/MenuCategory.api";
+import { useFetchMenuCategoriesQuery, useUpdateMultipleMenuCategoryMutation } from "../../api/MenuCategory.api";
 import { reportErrorMessage } from "../../core/Utils";
 import { IMenuCategory, IMenuItem, IRestaurant } from "../../models";
 import { useAppSelector } from "../../store/Store";
@@ -12,9 +12,11 @@ import { compareCategory } from "./utils/compareCategory";
 export default function useMenu() {
 	const { id } = useAppSelector((state) => state.restaurant) as IRestaurant;
 	const { data = [], isLoading, error, isError, fulfilledTimeStamp } = useFetchMenuCategoriesQuery(id);
+	const [updateMultipleMenuCategory, { isLoading: isReorderLoading }] = useUpdateMultipleMenuCategoryMutation();
 	const [isDraggable, setIsDraggable] = useState(false);
 	const { setCurrentMenuCategoryDetails } = useMenuCategoryContext();
 	const [categoryList, setCategoryList] = useState(data);
+	const [categoryListCopy, setCategoryListCopy] = useState<IMenuCategory[]>([]);
 
 	useEffect(() => {
 		setCategoryList(data);
@@ -105,19 +107,34 @@ export default function useMenu() {
 		setCategoryList(newCategoryList);
 	}
 
-	function reOrderCategories() {
-		const changedOrder = compareCategory(data, categoryList);
+	async function reOrderCategories() {
+		const { changedItems, newCategoryList } = compareCategory(categoryListCopy, categoryList);
 
-		console.log(changedOrder);
+		if (changedItems.length === 0) return;
+
+		try {
+			await updateMultipleMenuCategory(changedItems).unwrap();
+			setCategoryList(newCategoryList);
+		} catch (error) {
+			console.log(error);
+			setCategoryList(categoryListCopy);
+			reportErrorMessage(error, "Failed to reorder categories");
+		}
 	}
 
 	function showMenuCategoryModal() {
 		setCurrentMenuCategoryDetails({});
 	}
 
-	function toggleDraggable() {
+	async function toggleDraggable() {
+		// if done re-ordering categoies, run the re-order to the database
 		if (isDraggable) {
-			reOrderCategories();
+			await reOrderCategories();
+		}
+
+		if (!isDraggable) {
+			// Set copy of the categoryList before re-ordering
+			setCategoryListCopy(categoryList);
 		}
 		setIsDraggable((prev) => !prev);
 	}
@@ -127,12 +144,12 @@ export default function useMenu() {
 		moveCard,
 		addCategory,
 		isLoading,
+		isReorderLoading,
 		showMenuCategoryModal,
 		editCategory,
 		addMenuItem,
 		editMenuItem,
 		deleteCategory,
-		reOrderCategories,
 		isDraggable,
 		toggleDraggable,
 	};

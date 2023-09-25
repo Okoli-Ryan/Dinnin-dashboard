@@ -21,7 +21,14 @@ export const MenuCategoryApi = createApi({
 			query: (body) => ({
 				url: "/",
 				method: "PUT",
-				body
+				body,
+			}),
+		}),
+		updateMultipleMenuCategory: build.mutation<IMenuCategory[], Partial<IMenuCategory>[]>({
+			query: (body) => ({
+				url: "/multiple",
+				method: "PUT",
+				body,
 			}),
 		}),
 		deleteMenuCategory: build.mutation<boolean, string>({
@@ -33,4 +40,10 @@ export const MenuCategoryApi = createApi({
 	}),
 });
 
-export const { useSaveMenuCategoryMutation, useFetchMenuCategoriesQuery, useUpdateMenuCategoryMutation, useDeleteMenuCategoryMutation } = MenuCategoryApi;
+export const {
+	useSaveMenuCategoryMutation,
+	useFetchMenuCategoriesQuery,
+	useUpdateMenuCategoryMutation,
+	useDeleteMenuCategoryMutation,
+	useUpdateMultipleMenuCategoryMutation,
+} = MenuCategoryApi;
