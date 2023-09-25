@@ -26,7 +26,7 @@ export default function CategoryCard({ index, moveCard, menuCategory, isDraggabl
 
 	return (
 		<CardContainer index={index} moveCard={moveCard} isDraggable={isDraggable} menuCategory={menuCategory}>
-			<div className="flex flex-col rounded-md shadow-md" style={{ opacity: menuCategory.activeStatus ? 1 : 0.5 }}>
+			<div className="flex flex-col rounded-md shadow-md h-max" style={{ opacity: menuCategory.activeStatus ? 1 : 0.5 }}>
 				<div className="flex items-center justify-between p-4 ">
 					<h5 className="font-bold text-secondary">{categoryName}</h5>
 					<div className="flex items-center gap-4">
