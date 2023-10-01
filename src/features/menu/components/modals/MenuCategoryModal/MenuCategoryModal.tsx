@@ -2,8 +2,8 @@ import { Form, Modal } from "antd";
 
 import Switch from "@/components/formComponents/Switch";
 import { IMenuCategory } from "@/models";
+import { TextInput } from "@components/formComponents";
 
-import { TextInput } from "../../../../../components";
 import useMenuCategoryModal from "./useMenuCategoryModal";
 
 export interface IMenuCategoryModal {

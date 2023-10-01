@@ -9,11 +9,10 @@ import Config from './Config';
 
 export function ParseError(error?: SerializedError | FetchBaseQueryError): IError<unknown> {
 	if (error && (error as FetchBaseQueryError).status === "FETCH_ERROR") {
-
-        const response = {
+		const response = {
 			status: 500,
 			message: "Network Error",
-			data: null
+			data: null,
 		};
 
 		return new ErrorResponse(response);
@@ -68,4 +67,16 @@ export const ParseFormData = (data: Record<string, any>) => {
 	}
 
 	return formData;
+};
+
+export const GenerateRandomString = (length: number) => {
+	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	let result = "";
+
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * characters.length);
+		result += characters.charAt(randomIndex);
+	}
+
+	return result;
 };

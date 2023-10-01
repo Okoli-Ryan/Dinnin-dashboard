@@ -3,7 +3,8 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 //@ts-ignore
 import storage from "redux-persist/lib/storage";
 
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TableApi } from "@/api/Table.api";
+import { combineReducers, configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 
 import { AdminApi } from "../api/Admin.api";
 import { ImageApi } from "../api/Image.api";
@@ -14,15 +15,15 @@ import { VerificationApi } from "../api/Verification.api";
 import AdminReducer from "./models/Admin.store";
 import RestaurantReducer from "./models/Restaurant.store";
 
+const API_LIST = [AdminApi, ImageApi, MenuCategoryApi, MenuItemApi, RestaurantApi, VerificationApi, TableApi];
+
 const rootReducer = combineReducers({
 	admin: AdminReducer,
 	restaurant: RestaurantReducer,
-	[AdminApi.reducerPath]: AdminApi.reducer,
-	[ImageApi.reducerPath]: ImageApi.reducer,
-	[MenuCategoryApi.reducerPath]: MenuCategoryApi.reducer,
-	[RestaurantApi.reducerPath]: RestaurantApi.reducer,
-	[VerificationApi.reducerPath]: VerificationApi.reducer,
-	[MenuItemApi.reducerPath]: MenuItemApi.reducer,
+	...API_LIST.reduce((reducers: ReducersMapObject, api) => {
+		reducers[api.reducerPath] = api.reducer;
+		return reducers;
+	}, {}),
 });
 
 const PersistConfig = {
@@ -41,12 +42,7 @@ export const store = configureStore({
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		}),
-		AdminApi.middleware,
-		RestaurantApi.middleware,
-		VerificationApi.middleware,
-		ImageApi.middleware,
-		MenuCategoryApi.middleware,
-		MenuItemApi.middleware,
+		...API_LIST.map((api) => api.middleware),
 	],
 });
 
