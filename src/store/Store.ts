@@ -15,15 +15,16 @@ import { VerificationApi } from "../api/Verification.api";
 import AdminReducer from "./models/Admin.store";
 import RestaurantReducer from "./models/Restaurant.store";
 
-const API_LIST = [AdminApi, ImageApi, MenuCategoryApi, MenuItemApi, RestaurantApi, VerificationApi, TableApi];
-
 const rootReducer = combineReducers({
 	admin: AdminReducer,
 	restaurant: RestaurantReducer,
-	...API_LIST.reduce((reducers: ReducersMapObject, api) => {
-		reducers[api.reducerPath] = api.reducer;
-		return reducers;
-	}, {}),
+	[AdminApi.reducerPath]: AdminApi.reducer,
+	[ImageApi.reducerPath]: ImageApi.reducer,
+	[MenuCategoryApi.reducerPath]: MenuCategoryApi.reducer,
+	[RestaurantApi.reducerPath]: RestaurantApi.reducer,
+	[VerificationApi.reducerPath]: VerificationApi.reducer,
+	[MenuItemApi.reducerPath]: MenuItemApi.reducer,
+	[TableApi.reducerPath]: TableApi.reducer,
 });
 
 const PersistConfig = {
@@ -42,7 +43,13 @@ export const store = configureStore({
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		}),
-		...API_LIST.map((api) => api.middleware),
+		AdminApi.middleware,
+		ImageApi.middleware,
+		MenuCategoryApi.middleware,
+		RestaurantApi.middleware,
+		VerificationApi.middleware,
+		MenuItemApi.middleware,
+		TableApi.middleware,
 	],
 });
 
