@@ -5,7 +5,7 @@ import { TextInput } from '@/components';
 import Switch from '@/components/formComponents/Switch';
 import { ITable } from '@/models/Table';
 
-import QrCodeComponent from '../components';
+import QrCodeComponent from "./components";
 import useTableModal from './useTableModal';
 
 export interface ITableModal {
@@ -40,6 +40,7 @@ export default function TableModal(props: ITableModal) {
 					className="h-12 mt-4 text-lg"
 				/>
 				{inEditMode && <QrCodeComponent />}
+				{/* //! Add preview code to link here */}
 				{inEditMode && (
 					<Switch name="activeStatus" checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked={selectedTable!.activeStatus} />
 				)}

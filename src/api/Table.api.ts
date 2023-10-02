@@ -34,10 +34,9 @@ export const TableApi = createApi({
 			}),
 		}),
 		deleteTable: build.mutation<boolean, string>({
-			query: (body) => ({
-				url: "/",
+			query: (id) => ({
+				url: `/${id}`,
 				method: "DELETE",
-				body,
 			}),
 		}),
 	}),
