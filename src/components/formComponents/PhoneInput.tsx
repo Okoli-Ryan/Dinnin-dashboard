@@ -1,14 +1,13 @@
 //@ts-nocheck
 
 import { Form } from "antd";
-import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import React from "react";
 import PI from "react-phone-input-2";
 
 const PhoneInputComponent = PI.default ? PI.default : PI;
 
 export default function PhoneInput({ value, name, label, isRequired, onChangeValue = (e) => {} }: IPhoneInput) {
-	const form = useFormInstance();
+	const form = Form.useFormInstance();
 
 	return (
 		<Form.Item name={name} label={label || "Phone Number"} required={isRequired}>

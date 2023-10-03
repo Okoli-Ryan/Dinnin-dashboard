@@ -16,6 +16,7 @@
 		"noEmit": true,
 		"jsx": "react-jsx",
 		"baseUrl": ".",
+		"types": ["node", "jest", "@testing-library/jest-dom"],
 		"paths": {
 			"@/*": ["./src/*"],
 			"@models/*": ["./src/models/*"],
@@ -25,9 +26,10 @@
 			"@interfaces/*": ["./src/interfaces/*"],
 			"@store/*": ["./src/store/*"],
 			"@api/*": ["./src/api/*"],
-			"@core/*": ["./src/core/*"]
+			"@core/*": ["./src/core/*"],
+			"@testUtils": ["./src/testUtils"]
 		}
 	},
 	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [{ "path": "./tsconfig.node.json" }],
 }

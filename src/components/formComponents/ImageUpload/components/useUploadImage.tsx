@@ -1,11 +1,9 @@
-import { FormInstance, message, UploadProps } from "antd";
-import useFormInstance from "antd/es/form/hooks/useFormInstance";
-import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
-import React, { useState } from "react";
+import { Form, message } from "antd";
+import { UploadChangeParam, UploadFile } from "antd/es/upload";
+import { useState } from "react";
 
 import { useLazyUploadQuery } from "../../../../api/Image.api";
-import { ParseError, ParseFormData, reportErrorMessage } from "../../../../core/Utils";
-import { getBase64 } from "./UploadImage.utils";
+import { ParseFormData, reportErrorMessage } from "../../../../core/Utils";
 
 interface IUseUploadImage {
 	onSuccess?: () => void;
@@ -14,7 +12,7 @@ interface IUseUploadImage {
 }
 
 export default function useUploadImage({ onSuccess, folderName, name }: IUseUploadImage) {
-	const form = useFormInstance();
+	const form =  Form.useFormInstance();
 	const [isUploading, setIsUploading] = useState(false);
 	const [imageUrl, setImageUrl] = useState<string>(form.getFieldValue(name));
 	const [upload] = useLazyUploadQuery();

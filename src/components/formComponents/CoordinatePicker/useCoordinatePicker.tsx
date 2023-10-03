@@ -1,14 +1,14 @@
-import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import { ICoordinatePicker } from "./CoordinatePicker";
+import { Form } from "antd";
 
 //Lagos, Nigeria coordinates
 const DefaultLocation = { lat: 6.5244, lng: 3.3792 };
 const DefaultZoom = 20;
 
 export default function useCoordinatePicker({ latitudeFieldName, longitudeFieldName }: ICoordinatePicker) {
-	const form = useFormInstance();
+	const form = Form.useFormInstance();
 
 	const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
 

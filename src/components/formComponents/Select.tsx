@@ -1,5 +1,4 @@
 import { Form, Select as SelectInput } from "antd";
-import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import { NamePath } from "antd/es/form/interface";
 import { BaseOptionType, DefaultOptionType, SelectProps } from "antd/es/select";
 import React, { ComponentProps, InputHTMLAttributes, useMemo } from "react";
@@ -31,7 +30,7 @@ export default function Select<T extends BaseOptionType | DefaultOptionType>({
 	valueKey,
 	...props
 }: ISelect<T>) {
-	const form = useFormInstance();
+	const form = Form.useFormInstance();
 	const optionValues = useMemo(() => options.map((value) => ({ label: value[labelKey] || value, value: value[valueKey] || value })), [options]);
 
 	return (

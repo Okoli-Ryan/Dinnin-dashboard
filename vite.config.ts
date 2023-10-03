@@ -21,6 +21,7 @@ export default defineConfig({
 			{ find: "@hooks", replacement: path.resolve(__dirname, "src/hooks") },
 			{ find: "@interfaces", replacement: path.resolve(__dirname, "src/interfaces") },
 			{ find: "@models", replacement: path.resolve(__dirname, "src/models") },
+			{ find: "@testUtils", replacement: path.resolve(__dirname, "src/testUtils.tsx") },
 		],
 	},
 });

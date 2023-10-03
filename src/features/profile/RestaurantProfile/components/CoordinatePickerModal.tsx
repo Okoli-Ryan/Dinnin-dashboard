@@ -1,5 +1,4 @@
 import { Form, Modal } from "antd";
-import useFormInstance from "antd/es/form/hooks/useFormInstance";
 import React from "react";
 
 import { TextInput } from "../../../../components";
@@ -11,7 +10,7 @@ interface ICoordinatePickerModal {
 }
 
 export default function CoordinatePickerModal({ isOpen, onClose }: ICoordinatePickerModal) {
-	const form = useFormInstance();
+	const form = Form.useFormInstance();
 
 	return (
 		<Modal

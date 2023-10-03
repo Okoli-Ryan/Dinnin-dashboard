@@ -1,19 +1,18 @@
-import { Form, message } from "antd";
-import { FormInstance, useForm } from "antd/es/form/Form";
+import { Form, FormInstance, message } from "antd";
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 import { useCreateAdminMutation } from "../../../../api/Admin.api";
 import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
-import { IAuthScreenOutletContext } from "../../AuthScreen";
+import { AuthScreenOutletContext, IAuthScreenOutletContext } from "../../AuthScreen";
 
 export default function useSignup() {
 	const [loading, setLoading] = useState(false);
 
-	const [form] = useForm();
+	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const [createAdmin] = useCreateAdminMutation();
-	const { setShowVerificationNote } = useOutletContext<IAuthScreenOutletContext>();
+	const { setShowVerificationNote } = AuthScreenOutletContext()
 	Form.useWatch("phoneNumber", { form, preserve: true });
 
 	const validateConfirmPassword = ({ getFieldValue }: IValidateConfirmPasswordProps) => ({

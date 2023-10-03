@@ -1,5 +1,4 @@
-import { message } from "antd";
-import { useForm } from "antd/es/form/Form";
+import { Form, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "../../../../api/Admin.api";
@@ -8,7 +7,7 @@ import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
 import { AuthScreenOutletContext } from "../../AuthScreen";
 
 export default function useLogin() {
-	const [form] = useForm();
+	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const { setShowVerificationNote } = AuthScreenOutletContext();
 	const [login, { isLoading }] = useLoginMutation();
