@@ -1,8 +1,9 @@
 import { rest } from "msw";
 
-import { server } from "@/../jest/mocks/server";
+import { server as serverInstance} from "@/../jest/mocks/server";
 
 import { parseUrl } from "../common";
+import { setupServer } from "msw/node";
 
 export const AdminSuccessHandlers = [
 	// Successful Login
@@ -11,4 +12,6 @@ export const AdminSuccessHandlers = [
 	}),
 ];
 
-export const setupSuccessHandlers = () => server.use(...AdminSuccessHandlers);
+export const mswServer = setupServer();
+
+export const setupSuccessHandlers = () => mswServer.use(...AdminSuccessHandlers);

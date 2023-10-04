@@ -1,5 +1,5 @@
 import * as AdminApi from '@/api/AdminApi/Admin.api';
-import { setupSuccessHandlers } from '@/api/AdminApi/Admin.msw';
+import { mswServer, setupSuccessHandlers } from '@/api/AdminApi/Admin.msw';
 import { render, renderHook, screen, userEvent, waitFor } from '@/testUtils';
 
 import * as AuthScreen from '../../AuthScreen';
@@ -11,14 +11,20 @@ beforeAll(() => {
 			setShowVerificationNote: jest.fn(),
 		};
 	});
+
+	mswServer.listen()
 });
 
+afterAll(() => {
+	mswServer.close();
+})
+
 beforeEach(() => {
-	render(<Login />);
+	// render(<Login />);
 });
 
 describe("Login Interaction works", () => {
-	it.only("should render", () => {
+	it("should render", () => {
 		const TitleHeader = screen.getByText(/Welcome/i);
 		expect(TitleHeader).toBeDefined();
 	});
@@ -43,18 +49,19 @@ describe("Login Interaction works", () => {
 		expect(emailInput).toHaveClass("ant-input-status-success");
 	});
 
-	it("should send accurate payload", async () => {
+	it.only("should send accurate payload", async () => {
 		//Disable AntD validator warnings
 		console.warn = jest.fn();
 
-        //Setup mock server
-        setupSuccessHandlers()
-
 		const login = jest.fn();
-		const mockLoginMutation = jest.fn(() => [login, { isLoading: false }]);
+		// renderHook(() => AdminApi.useLoginMutation())
+		jest.spyOn(AdminApi, "useLoginMutation").mockReturnValue([login, { isLoading: false } as any]);
+		render(<Login />)
 
-        const { result } = renderHook(() => AdminApi.useLoginMutation())
-        
+		//Setup mock server
+		setupSuccessHandlers()
+
+
 		const payload = {
 			email: "wrong@email.com",
 			password: "Password1",
@@ -67,8 +74,8 @@ describe("Login Interaction works", () => {
 		await userEvent.type(passwordInput, payload.password);
 		await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
-		await waitFor(() => expect(result.current).toMatchObject({
-            status: 'fulfilled'
-        }));
+
+		await waitFor(() => expect(login).toHaveBeenCalledWith(payload))
+
 	});
 });
