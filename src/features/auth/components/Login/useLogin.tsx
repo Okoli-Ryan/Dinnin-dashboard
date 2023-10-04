@@ -1,9 +1,9 @@
 import { Form, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import { useLoginMutation } from "../../../../api/Admin.api";
-import { IError } from "../../../../interfaces/IError";
-import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
+import { useLoginMutation } from "@api/AdminApi/Admin.api";
+import { ErrorResponse } from "@models/Error/ErrorResponse";
+
 import { AuthScreenOutletContext } from "../../AuthScreen";
 
 export default function useLogin() {

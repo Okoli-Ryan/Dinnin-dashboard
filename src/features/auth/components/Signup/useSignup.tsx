@@ -2,7 +2,7 @@ import { Form, FormInstance, message } from "antd";
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
-import { useCreateAdminMutation } from "../../../../api/Admin.api";
+import { useCreateAdminMutation } from "../../../../api/AdminApi/Admin.api";
 import { ErrorResponse } from "../../../../models/Error/ErrorResponse";
 import { AuthScreenOutletContext, IAuthScreenOutletContext } from "../../AuthScreen";
 
@@ -12,7 +12,7 @@ export default function useSignup() {
 	const [form] = Form.useForm();
 	const navigate = useNavigate();
 	const [createAdmin] = useCreateAdminMutation();
-	const { setShowVerificationNote } = AuthScreenOutletContext()
+	const { setShowVerificationNote } = AuthScreenOutletContext();
 	Form.useWatch("phoneNumber", { form, preserve: true });
 
 	const validateConfirmPassword = ({ getFieldValue }: IValidateConfirmPasswordProps) => ({

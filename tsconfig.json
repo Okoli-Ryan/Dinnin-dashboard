@@ -27,9 +27,10 @@
 			"@store/*": ["./src/store/*"],
 			"@api/*": ["./src/api/*"],
 			"@core/*": ["./src/core/*"],
-			"@testUtils": ["./src/testUtils"]
+			"@testUtils": ["./src/testUtils"],
+			"@jest/*": ["./jest/*"]
 		}
 	},
-	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }],
+	"include": ["src", "jest"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

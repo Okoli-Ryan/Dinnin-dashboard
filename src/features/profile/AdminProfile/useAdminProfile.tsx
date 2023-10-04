@@ -1,7 +1,7 @@
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 
-import { useUpdateAdminMutation } from "../../../api/Admin.api";
+import { useUpdateAdminMutation } from "../../../api/AdminApi/Admin.api";
 import { reportErrorMessage } from "../../../core/Utils";
 import { useAppSelector } from "../../../store";
 

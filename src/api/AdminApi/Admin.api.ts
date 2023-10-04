@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { Admin, IAdmin } from "../models";
-import { IAdminLoginRequest, IAdminLoginResponse } from "../models/Admin";
-import { commonFetchBaseQuery } from "./common";
+import { Admin, IAdmin } from "../../models";
+import { IAdminLoginRequest, IAdminLoginResponse } from "../../models/Admin";
+import { commonFetchBaseQuery } from "../common";
 
 export const AdminApi = createApi({
 	reducerPath: "AdminApi",

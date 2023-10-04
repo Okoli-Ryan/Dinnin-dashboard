@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { AdminApi } from "../../api/Admin.api";
+import { AdminApi } from "../../api/AdminApi/Admin.api";
 import { RestaurantApi } from "../../api/Restaurant.api";
 import { IRestaurant } from "../../models";
 

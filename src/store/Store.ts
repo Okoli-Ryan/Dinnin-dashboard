@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import { TableApi } from "@/api/Table.api";
 import { combineReducers, configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 
-import { AdminApi } from "../api/Admin.api";
+import { AdminApi } from "../api/AdminApi/Admin.api";
 import { ImageApi } from "../api/Image.api";
 import { MenuCategoryApi } from "../api/MenuCategory.api";
 import { MenuItemApi } from "../api/MenuItem.api";
