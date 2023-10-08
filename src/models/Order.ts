@@ -1,5 +1,6 @@
 import { IBaseModel } from "./BaseModel";
 import { IOrderItem } from "./OrderItem";
+import { ITable } from "./Table";
 
 export interface IOrder extends IBaseModel {
 	orderNote?: string;
@@ -9,5 +10,6 @@ export interface IOrder extends IBaseModel {
 	tableId?: string;
 	paymentOption: string;
 	orderStatus: "Initial" | "Pending" | "Completed";
+	table: ITable;
 	orderItems: IOrderItem[];
 }

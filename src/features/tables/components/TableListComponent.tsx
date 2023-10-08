@@ -1,6 +1,6 @@
 import { Space, Table } from 'antd';
 import { format } from 'date-fns';
-import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
+import { BsEyeFill, BsFillTrashFill } from "react-icons/bs";
 
 import { ITable } from '@/models/Table';
 
@@ -23,8 +23,8 @@ export default function TableListComponent({ data, onDeleteClick, onEditClick }:
 				key="action"
 				render={(_: any, record: ITable) => (
 					<Space size="middle">
-						<BsPencilFill className="text-base cursor-pointer" onClick={() => onEditClick(record)} />
-						<BsFillTrashFill className="text-base cursor-pointer" onClick={() => onDeleteClick(record)} />
+						<BsEyeFill className="text-base cursor-pointer" onClick={() => onEditClick(record)} size={18} />
+						<BsFillTrashFill className="text-base cursor-pointer" onClick={() => onDeleteClick(record)} size={18} />
 					</Space>
 				)}
 			/>

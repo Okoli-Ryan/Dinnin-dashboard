@@ -1,9 +1,15 @@
 import { Form } from 'antd';
 
 import { TableCodeLength } from '@/core/Constants';
-import { GenerateRandomString } from '@/core/Utils';
+import { GenerateRandomString, reportSuccessMessage } from "@/core/Utils";
+import { useAppSelector } from "@/store";
+
+import { ParseRestaurantUrl } from "./utils/ParseTableUrl";
 
 export default function useQrCodeComponent() {
+
+    const { slug } = useAppSelector((state) => state.restaurant)!;
+
 	const form = Form.useFormInstance();
 
 	Form.useWatch("code", form);
@@ -14,7 +20,15 @@ export default function useQrCodeComponent() {
 		const newQrCode = GenerateRandomString(TableCodeLength);
 		console.log(newQrCode);
 		form.setFieldValue("code", newQrCode);
+		reportSuccessMessage("Code generated");
 	}
 
-	return { generateCode, qrCode };
+    function copyCode() {
+		//generate link to copy from
+		const link = ParseRestaurantUrl(slug, qrCode);
+		navigator.clipboard.writeText(link);
+		reportSuccessMessage("Link copied to clipboard");
+	}
+
+	return { generateCode, copyCode, qrCode };
 }

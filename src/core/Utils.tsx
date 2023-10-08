@@ -43,6 +43,10 @@ export const reportErrorMessage = (error: any, customMessage?: string) => {
 	message.error(errorResponse.message);
 };
 
+export const reportSuccessMessage = (successMessage: string) => {
+	message.success(successMessage);
+};
+
 export const getToken = () => {
 	return localStorage.getItem(Config.VITE_JWT_TOKEN);
 };

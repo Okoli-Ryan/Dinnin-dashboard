@@ -25,9 +25,7 @@ export default function useSelectTable() {
 	return {
 		selectedTable,
 		selectedDeleteTable,
-		setSelectedTable,
 		onSelectDeleteTable,
-		setSelectedDeleteTable,
 		onShowTableModal,
 		onCloseTableModal,
 		onCloseDeleteTableModal,
