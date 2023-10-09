@@ -13,19 +13,19 @@ export default function OrderStatusButton({ ...props }: IOrderStatusButton) {
 	if (orderStatus === "Initial")
 		return (
 			<Button.Text loading={isLoading} onClick={() => updateOrderAsync("Pending")}>
-				Acknowledge
+				<span className="text-pending">Acknowledge Order</span>
 			</Button.Text>
 		);
 	if (orderStatus === "Pending")
 		return (
 			<Button.Text loading={isLoading} onClick={() => updateOrderAsync("Completed")}>
-				Complete Order
+				<span className="text-success">Complete Order</span>
 			</Button.Text>
 		);
 	if (orderStatus === "Completed")
 		return (
 			<Button.Text loading={isLoading} onClick={(_) => updateOrderAsync("Pending")}>
-				Restore
+				Restore Order
 			</Button.Text>
 		);
 

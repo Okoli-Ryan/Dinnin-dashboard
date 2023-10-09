@@ -1,3 +1,3 @@
-import OrderItemsList from "./OrderItemsList";
+import OrderItemsTable from "./OrderItemsTable";
 
-export default OrderItemsList;
+export default OrderItemsTable;

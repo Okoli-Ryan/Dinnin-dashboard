@@ -14,7 +14,7 @@ const { Column } = Table;
 
 export default function TableListComponent({ data, onDeleteClick, onEditClick }: ITableComponent) {
 	return (
-		<Table dataSource={data}>
+		<Table dataSource={data} rowKey={(e: ITable) => e.id}>
 			<Column title="Table Name" dataIndex="tableName" key="tableName" />
 			<Column title="Code" dataIndex="code" key="code" />
 			<Column title="Last Updated" dataIndex="updatedAt" key="updatedAt" render={(e: Date) => format(new Date(e), "Pp")} />

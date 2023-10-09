@@ -1,3 +1,7 @@
 .ant-layout-header {
     @apply bg-[#f5f5f5] flex justify-end items-center
 }
+
+.ant-table .ant-table {
+    margin-inline: 56px -16px !important;
+}
