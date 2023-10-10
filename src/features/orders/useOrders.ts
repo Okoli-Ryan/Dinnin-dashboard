@@ -12,9 +12,6 @@ export default function useOrders() {
 		if (data) {
 			setOrderList(data);
 		}
-		if (data && data.length > 0) {
-			setExpandedRowKey([data[0].id]);
-		}
 	}, [fulfilledTimeStamp]);
 
 	function onExpandedRowClick(rowKey: string) {
@@ -26,7 +23,11 @@ export default function useOrders() {
 		setExpandedRowKey([rowKey]);
 	}
 
-	return { orderList, isLoading, onExpandedRowClick, expandedRowKey };
+	function onNewOrder(e: IOrder) {
+		setOrderList([...orderList, e]);
+	}
+
+	return { orderList, isLoading, onExpandedRowClick, expandedRowKey, onNewOrder };
 }
 
 // TODO Create Orders Api file

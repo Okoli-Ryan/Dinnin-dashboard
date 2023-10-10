@@ -9,11 +9,13 @@ import { IOrder } from "@/models/Order";
 import PageWrapper from "../../components/PageWrapper";
 import OrderItemsTable from "./components/orderItemsList";
 import OrderStatusButton from "./components/orderStatusButton";
+import useLiveOrders from "./useLiveOrders";
 import useOrders from "./useOrders";
 
 const { Column } = Table;
 export default function Orders() {
-	const { orderList, isLoading, expandedRowKey, onExpandedRowClick } = useOrders();
+	const { orderList, isLoading, expandedRowKey, onExpandedRowClick, onNewOrder } = useOrders();
+	useLiveOrders({ onNewOrder });
 
 	if (isLoading) return <LoadingComponent />;
 
