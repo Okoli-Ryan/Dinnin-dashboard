@@ -30,7 +30,7 @@ export default function Orders() {
 					indentSize: 30,
 					expandedRowKeys: expandedRowKey,
 				}}>
-				<Column title="Table" key="tableName" render={(e: IOrder) => e.table.tableName} />
+				<Column title="Table" key="tableName" render={(_, e: IOrder) => e.table.tableName} />
 				<Column title="Amount Paid" dataIndex="price" key="price" render={(e: number) => formatCurrency(e)} />
 				<Column title="Time Ordered" dataIndex="updatedAt" key="updatedAt" render={(e: Date) => format(new Date(e), "Pp")} />
 				<Column

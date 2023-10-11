@@ -29,6 +29,7 @@ export default function useLiveOrders({ onNewOrder }: ILiveOrder) {
 
 		// Action called when a new order is created
 		channel.bind(Constants.NEW_ORDER_EVENT, function data(e: IOrder) {
+			console.log(e);
 			onNewOrder(e);
 		});
 

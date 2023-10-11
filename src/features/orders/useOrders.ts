@@ -24,7 +24,7 @@ export default function useOrders() {
 	}
 
 	function onNewOrder(e: IOrder) {
-		setOrderList([...orderList, e]);
+		setOrderList((prev) => [...prev, e]);
 	}
 
 	return { orderList, isLoading, onExpandedRowClick, expandedRowKey, onNewOrder };
