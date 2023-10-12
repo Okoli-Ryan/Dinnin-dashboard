@@ -7,6 +7,7 @@ const configSchema = z.object({
 	VITE_API_KEY: z.string().nonempty(),
 	VITE_JWT_TOKEN: z.string().nonempty(),
 	VITE_GOOGLE_MAP_KEY: z.string().nonempty(),
+	VITE_USER_CLIENT_URL: z.string().nonempty(),
 });
 
 const Config = configSchema.parse(import.meta.env);

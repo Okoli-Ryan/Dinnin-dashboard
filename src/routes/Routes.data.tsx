@@ -1,19 +1,15 @@
 import { lazy } from 'react';
 
-import Tables from '@/features/tables';
-
-import LoginRoute from '../features/auth/components/Login';
-import SignupRoute from '../features/auth/components/Signup';
-import VerificationScreen from '../features/auth/components/VerificationScreen';
-import CreateRestaurant from '../features/createRestaurant';
-import Dashboard from '../features/dashboard';
-import Menu from '../features/menu';
-import Orders from '../features/orders';
-import Profile from '../features/profile';
-import { IAppRoute } from './utils';
+import VerificationScreen from "../features/auth/components/VerificationScreen";
+import CreateRestaurant from "../features/createRestaurant";
+import { IAppRoute } from "./utils";
 
 const Login = lazy(() => import("../features/auth/components/Login"));
 const Signup = lazy(() => import("../features/auth/components/Signup"));
+const Menu = lazy(() => import("../features/menu"));
+const Orders = lazy(() => import("../features/orders"));
+const Tables = lazy(() => import("../features/tables"));
+const Profile = lazy(() => import("../features/profile"));
 
 export const AuthenticationRoutes: Array<IAppRoute> = [
 	{

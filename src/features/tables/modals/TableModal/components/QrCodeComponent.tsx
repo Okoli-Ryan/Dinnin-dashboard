@@ -1,21 +1,26 @@
-import { Form, QRCode, QRCodeProps } from 'antd';
-import React, { ComponentType } from 'react';
+import { Form, QRCode } from "antd";
+import { BiCopy } from "react-icons/bi";
+import { BsArrowClockwise } from "react-icons/bs";
 
-import { Button } from '@/components';
-import { ITable } from '@/models';
+import { Button } from "@/components";
 
-import useQrCodeComponent from './useQrCodeComponent';
+import useQrCodeComponent from "./useQrCodeComponent";
 
 export default function QrCodeComponent() {
-	const { generateCode, qrCode } = useQrCodeComponent();
+	const { generateCode, copyCode, qrCode } = useQrCodeComponent();
 
 	return (
 		<Form.Item name="code" className="w-full">
 			<div className="w-full flex flex-col items-center justify-center">
 				<QRCode value={qrCode} size={256} errorLevel="H" />
-				<Button.Outline size="small" onClick={generateCode} className="mt-2">
-					Refresh Code
-				</Button.Outline>
+				<div className="flex gap-4">
+					<Button size="small" onClick={generateCode} className="mt-2" icon={<BsArrowClockwise />}>
+						Refresh Code
+					</Button>
+					<Button.Outline size="small" onClick={copyCode} className="mt-2" icon={<BiCopy />}>
+						Copy
+					</Button.Outline>
+				</div>
 			</div>
 		</Form.Item>
 	);

@@ -40,10 +40,9 @@ export default function TableModal(props: ITableModal) {
 					className="h-12 mt-4 text-lg"
 				/>
 				{inEditMode && <QrCodeComponent />}
-				{/* // TODO Add preview code to link here */}
-				{inEditMode && (
+				{/* {inEditMode && (
 					<Switch name="activeStatus" checkedChildren="Active" unCheckedChildren="Inactive" defaultChecked={selectedTable!.activeStatus} />
-				)}
+				)} */}
 			</Form>
 		</Modal>
 	);

@@ -8,6 +8,8 @@ export default {
 			colors: {
 				primary: "#F2003C",
 				secondary: "#001529",
+				pending: "#FFD700",
+				success: "#008000",
 			},
 			fontFamily: {
 				sans: ["Satoshi", ...defaultTheme.fontFamily.sans],

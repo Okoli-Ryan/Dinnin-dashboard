@@ -5,4 +5,6 @@ export interface IOrderItem extends IBaseModel {
 	quantity: number;
 	menuItem: IMenuItem;
 	orderId: string;
+	menuItemName: string;
+	itemPrice: number;
 }

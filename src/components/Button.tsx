@@ -9,7 +9,7 @@ function Button({ className, icon, block, ...props }: IButton) {
 			size="large"
 			icon={icon}
 			type="primary"
-			className={`${className} ${icon ? "!flex !gap-2" : ""}  !bg-primary hover:!bg-primary/80 !rounded-none disabled:opacity-50`}
+			className={`${className} ${icon ? "!flex !gap-2 items-center" : ""}  !bg-primary hover:!bg-primary/80 !rounded-none disabled:opacity-50`}
 			{...props}
 		/>
 	);

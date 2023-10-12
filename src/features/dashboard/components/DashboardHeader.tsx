@@ -4,13 +4,18 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 
 import { Button } from '../../../components';
-import { useAppDispatch } from '../../../store';
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { clearAdmin } from '../../../store/models/Admin.store';
 import { clearRestaurant } from '../../../store/models/Restaurant.store';
 
 const DashboardHeader = () => {
+	const { firstName } = useAppSelector((state) => state.admin)!;
+
 	return (
-		<div className="flex items-center justify-end">
+		<div className="flex items-center justify-between w-full">
+			<h2 className="text-2xl font-bold">
+				Welcome, <span className="text-primary">{firstName}</span>
+			</h2>
 			<Dropdown menu={{ items: items() }} placement="bottomLeft" arrow>
 				<div className="flex flex-row items-center">
 					<div className="rounded-full px-4 py-4 cursor-pointer bg-white text-secondary shadow-lg flex  items-center gap-x-2 hover:!bg-[#EEEEEE] hover:!text-secondary">

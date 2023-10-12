@@ -43,6 +43,10 @@ export const reportErrorMessage = (error: any, customMessage?: string) => {
 	message.error(errorResponse.message);
 };
 
+export const reportSuccessMessage = (successMessage: string) => {
+	message.success(successMessage);
+};
+
 export const getToken = () => {
 	return localStorage.getItem(Config.VITE_JWT_TOKEN);
 };
@@ -79,4 +83,11 @@ export const GenerateRandomString = (length: number) => {
 	}
 
 	return result;
+};
+
+export const formatCurrency = (value: number) => {
+	return new Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "NGN",
+	}).format(value);
 };
