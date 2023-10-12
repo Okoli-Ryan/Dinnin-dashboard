@@ -18,8 +18,7 @@ export const AdminReducer = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addMatcher(AdminApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-			saveToken(payload.token);
-			return payload.admin;
+			return payload;
 		});
 	},
 });

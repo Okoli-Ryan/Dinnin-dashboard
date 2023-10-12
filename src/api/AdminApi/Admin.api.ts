@@ -21,7 +21,7 @@ export const AdminApi = createApi({
 			},
 		}),
 
-		login: build.mutation<IAdminLoginResponse, IAdminLoginRequest>({
+		login: build.mutation<IAdmin, IAdminLoginRequest>({
 			query: (body) => ({
 				url: "/login",
 				method: "POST",

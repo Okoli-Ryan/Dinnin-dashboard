@@ -5,6 +5,7 @@ import { useLoginMutation } from "@api/AdminApi/Admin.api";
 import { ErrorResponse } from "@models/Error/ErrorResponse";
 
 import { AuthScreenOutletContext } from "../../AuthScreen";
+import { reportErrorMessage } from "@/core/Utils";
 
 export default function useLogin() {
 	const [form] = Form.useForm();
@@ -18,15 +19,16 @@ export default function useLogin() {
 
 	async function onSubmit() {
 		try {
-			const response = await login(form.getFieldsValue()).unwrap();
+			const admin = await login(form.getFieldsValue()).unwrap();
 
-			if (response.admin.restaurant === null) {
+			if (admin.restaurant === null) {
 				navigate("/create");
 				return;
 			}
 
 			navigate("/");
 		} catch (error: any) {
+			
 			const errorResponse = new ErrorResponse(error);
 
 			//User was authenticated but has not been confirmed
@@ -35,7 +37,7 @@ export default function useLogin() {
 				return;
 			}
 
-			message.error(errorResponse.message);
+			reportErrorMessage(error);
 		}
 	}
 

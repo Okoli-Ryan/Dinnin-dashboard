@@ -1,5 +1,6 @@
 import * as AdminApi from '@/api/AdminApi/Admin.api';
-import { mswServer, setupSuccessHandlers } from '@/api/AdminApi/Admin.msw';
+import * as Utils from '@/core/Utils';
+import { mswServer, setupErrorHandlers, setupSuccessHandlers } from '@/api/AdminApi/Admin.msw';
 import { render, renderHook, screen, userEvent, waitFor } from '@/testUtils';
 
 import * as AuthScreen from '../../AuthScreen';
@@ -25,15 +26,23 @@ beforeEach(() => {
 
 describe("Login Interaction works", () => {
 	it("should render", () => {
+
+		render(<Login />);
 		const TitleHeader = screen.getByText(/Welcome/i);
 		expect(TitleHeader).toBeDefined();
 	});
+
+
+
 
 	it("should fail validation on wrong input", async () => {
 		//Disable AntD validator warnings
 		console.warn = jest.fn();
 
-		const emailInput = screen.getByRole("textbox", { name: "Email" });
+		render(<Login />)
+
+
+		const emailInput = screen.getByLabelText("Email");
 
 		// Expect Email validation to work
 		await userEvent.type(emailInput, "wrong");
@@ -49,7 +58,11 @@ describe("Login Interaction works", () => {
 		expect(emailInput).toHaveClass("ant-input-status-success");
 	});
 
-	it.only("should send accurate payload", async () => {
+
+
+
+
+	it("form submission works", async () => {
 		//Disable AntD validator warnings
 		console.warn = jest.fn();
 
@@ -77,5 +90,35 @@ describe("Login Interaction works", () => {
 
 		await waitFor(() => expect(login).toHaveBeenCalledWith(payload))
 
+
+
 	});
+
+
+	it.only("Error response was called", async () => {
+
+		setupSuccessHandlers()
+
+		//Disable AntD validator warnings
+		console.warn = jest.fn();
+
+		const reportErrorMock = jest.spyOn(Utils, "reportErrorMessage")
+		render(<Login />)
+
+
+		const payload = {
+			email: "wrong@email.com",
+			password: "Password1",
+		};
+
+		const emailInput = screen.getByLabelText("Email");
+		const passwordInput = screen.getByLabelText("Password");
+
+		await userEvent.type(emailInput, payload.email);
+		await userEvent.type(passwordInput, payload.password);
+		await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
+
+
+		await waitFor(() => expect(reportErrorMock).toHaveBeenCalled());
+	})
 });

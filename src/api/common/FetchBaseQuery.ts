@@ -10,7 +10,6 @@ export const commonFetchBaseQuery = (model: string, AuthorizationHeader?: boolea
 		baseUrl: parseUrl(model),
 		prepareHeaders(headers, api) {
 			headers.set("x-api-key", Config.VITE_API_KEY);
-			AuthorizationHeader && headers.set("Authorization", `Bearer ${getToken()}`);
 		},
 	}),
 });

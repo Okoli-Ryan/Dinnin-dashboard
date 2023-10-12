@@ -1,4 +1,5 @@
-require("@testing-library/jest-dom");
+import "@testing-library/jest-dom"
+import "whatwg-fetch"
 
 import.meta.env.VITE_PUSHER_APP_KEY = "1";
 import.meta.env.VITE_PUSHER_APP_CLUSTER = "1";

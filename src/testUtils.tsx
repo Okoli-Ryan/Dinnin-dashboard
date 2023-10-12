@@ -1,5 +1,4 @@
 import "@/../jest/mocks/jsdomMock.js";
-import "whatwg-fetch";
 
 import { ReactElement } from "react";
 import { Provider } from "react-redux";
