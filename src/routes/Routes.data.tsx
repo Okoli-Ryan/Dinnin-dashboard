@@ -13,6 +13,10 @@ const Profile = lazy(() => import("../features/profile"));
 
 export const AuthenticationRoutes: Array<IAppRoute> = [
 	{
+		redirectTo: "/login",
+		path: "/",
+	},
+	{
 		Component: <Login />,
 		path: "/login",
 	},
@@ -25,7 +29,7 @@ export const AuthenticationRoutes: Array<IAppRoute> = [
 		path: "/create",
 	},
 	{
-		Component: <Login />,
+		redirectTo: "/login",
 		path: "*",
 	},
 ];
@@ -39,8 +43,11 @@ export const CommonRoutes: Array<IAppRoute> = [
 
 export const DashboardRoutes: Array<IAppRoute> = [
 	{
+		redirectTo: "/orders",
+		path: "/",
+	},
+	{
 		Component: <Orders />,
-		// index: true,
 		path: "/orders",
 	},
 	{
