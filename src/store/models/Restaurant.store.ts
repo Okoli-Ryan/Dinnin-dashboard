@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { AdminApi } from "../../api/AdminApi/Admin.api";
-import { RestaurantApi } from "../../api/Restaurant.api";
-import { IRestaurant } from "../../models";
+import { AdminApi } from '../../api/AdminApi/Admin.api';
+import { RestaurantApi } from '../../api/Restaurant.api';
+import { IRestaurant } from '../../models';
 
 const initialState = null as IRestaurant | null;
 
@@ -16,7 +16,7 @@ export const RestaurantReducer = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addMatcher(AdminApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-			return payload.admin.restaurant;
+			return payload.restaurant;
 		});
 
 		builder.addMatcher(RestaurantApi.endpoints.createRestaurant.matchFulfilled, (state, { payload }) => {

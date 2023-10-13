@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 
-import { useGetActiveOrdersQuery } from "@/api/OrderApi";
+import { useLazyGetActiveOrdersQuery } from "@/api/OrderApi";
+import { reportErrorMessage } from "@/core/Utils";
 import { IOrder } from "@/models/Order";
 
+import { removeDuplicates } from "./utils/RemoveDuplicates";
+
 export default function useOrders() {
-	const { data, isLoading, fulfilledTimeStamp } = useGetActiveOrdersQuery();
+	const [fetchActiveOrders, { isLoading, isError, error }] = useLazyGetActiveOrdersQuery();
 	const [orderList, setOrderList] = useState<IOrder[]>([]);
 	const [expandedRowKey, setExpandedRowKey] = useState<string[]>([]);
 
-	useEffect(() => {
-		if (data) {
-			setOrderList(data);
+	async function getActiveOrders() {
+		const lastFetchedOrderTime = orderList.at(-1)?.createdAt as Date;
+
+		try {
+			const response = await fetchActiveOrders(lastFetchedOrderTime).unwrap();
+			setOrderList((prev) => removeDuplicates([...prev, ...response]));
+		} catch (error) {
+			reportErrorMessage(error, "Failed to fetch active orders");
 		}
-	}, [fulfilledTimeStamp]);
+	}
 
 	function onExpandedRowClick(rowKey: string) {
 		if (expandedRowKey[0] === rowKey) {
@@ -27,7 +35,9 @@ export default function useOrders() {
 		setOrderList((prev) => [...prev, e]);
 	}
 
-	return { orderList, isLoading, onExpandedRowClick, expandedRowKey, onNewOrder };
+	if (isError) reportErrorMessage(error);
+
+	return { orderList, isLoading: orderList.length === 0 && isLoading, expandedRowKey, onExpandedRowClick, getActiveOrders, onNewOrder };
 }
 
 // TODO Create Orders Api file

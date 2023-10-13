@@ -8,9 +8,13 @@ export const OrderApi = createApi({
 	tagTypes: ["Order"],
 	...commonFetchBaseQuery("Order"),
 	endpoints: (build) => ({
-		getActiveOrders: build.query<IOrder[], void>({
-			query: () => ({
+		getActiveOrders: build.query<IOrder[], Date | undefined>({
+			/**
+			 * @param lastTime - The last time data was retrieved.
+			 */
+			query: (lastTime) => ({
 				url: "/active",
+				params: { lastTime },
 				method: "GET",
 			}),
 		}),
@@ -24,4 +28,4 @@ export const OrderApi = createApi({
 	}),
 });
 
-export const { useGetActiveOrdersQuery, useUpdateOrderMutation } = OrderApi;
+export const { useLazyGetActiveOrdersQuery, useUpdateOrderMutation } = OrderApi;

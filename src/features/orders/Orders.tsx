@@ -7,6 +7,7 @@ import { formatCurrency } from "@/core/Utils";
 import { IOrder } from "@/models/Order";
 
 import PageWrapper from "../../components/PageWrapper";
+import ConnectionStateIndicator from "./components/connectionStateIndicator";
 import OrderItemsTable from "./components/orderItemsList";
 import OrderStatusButton from "./components/orderStatusButton";
 import useLiveOrders from "./useLiveOrders";
@@ -14,17 +15,16 @@ import useOrders from "./useOrders";
 
 const { Column } = Table;
 export default function Orders() {
-	const { orderList, isLoading, expandedRowKey, onExpandedRowClick, onNewOrder } = useOrders();
-	useLiveOrders({ onNewOrder });
-
-	if (isLoading) return <LoadingComponent />;
+	const { orderList, isLoading, expandedRowKey, onExpandedRowClick, onNewOrder, getActiveOrders } = useOrders();
+	const { connectionState } = useLiveOrders({ onNewOrder, getActiveOrders });
 
 	return (
-		<PageWrapper title="Orders" subtitle="View Restaurant orders">
+		<PageWrapper title="Orders" subtitle="View Restaurant orders" extra={<ConnectionStateIndicator connectionState={connectionState} />}>
 			<Table
+				loading={isLoading}
 				dataSource={orderList}
 				rowKey={(e: IOrder) => e.id}
-				onRow={(order, index) => ({ onClick: () => onExpandedRowClick(order.id) })}
+				onRow={(order) => ({ onClick: () => onExpandedRowClick(order.id) })}
 				expandable={{
 					expandedRowRender: ({ orderItems }: IOrder) => <OrderItemsTable orderItems={orderItems} />,
 					indentSize: 30,
@@ -36,11 +36,9 @@ export default function Orders() {
 				<Column
 					title="Action"
 					key="action"
-					// colSpan={100}
 					render={(_: any, record: IOrder) => (
 						<Space>
 							<OrderStatusButton {...record} />
-							{/* <BsThreeDots /> */}
 						</Space>
 					)}
 				/>

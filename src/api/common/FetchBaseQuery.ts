@@ -1,13 +1,14 @@
-import { fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
 
-import Config from "../../core/Config";
-import { getToken } from "../../core/Utils";
+import Config from '../../core/Config';
+import { getToken } from '../../core/Utils';
 
 export const parseUrl = (url: string) => `${Config.VITE_BASE_URL}/${url}`;
 
 export const commonFetchBaseQuery = (model: string, AuthorizationHeader: boolean = true) => ({
 	baseQuery: fetchBaseQuery({
 		baseUrl: parseUrl(model),
+		credentials: "include",
 		prepareHeaders(headers, api) {
 			headers.set("x-api-key", Config.VITE_API_KEY);
 		},
