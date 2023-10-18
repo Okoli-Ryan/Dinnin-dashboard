@@ -7,3 +7,5 @@ export const COLORS = {
 	success: "#008000",
 	danger: "#FF0000",
 };
+
+export const HAS_PUSH_NOTIFICATIONS_REQUEST_BEEN_ASKED = "HAS_NOTIFICATIONS_REQUEST_BEEN_ASKED";

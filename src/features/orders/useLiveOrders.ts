@@ -33,6 +33,7 @@ export default function useLiveOrders({ onNewOrder, getActiveOrders }: ILiveOrde
 	).current;
 
 	useEffect(() => {
+		return;
 		const restaurantChannel = pusher.subscribe(restaurantId);
 
 		// Get active orders on connection

@@ -1,17 +1,17 @@
-import { Space, Table } from "antd";
-import { format } from "date-fns";
-import { BsThreeDots } from "react-icons/bs";
+import { Space, Table } from 'antd';
+import { format } from 'date-fns';
+import { BsThreeDots } from 'react-icons/bs';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { formatCurrency } from "@/core/Utils";
-import { IOrder } from "@/models/Order";
+import LoadingComponent from '@/components/LoadingComponent';
+import { formatCurrency } from '@/core/Utils';
+import { IOrder } from '@/models/Order';
 
-import PageWrapper from "../../components/PageWrapper";
-import ConnectionStateIndicator from "./components/connectionStateIndicator";
-import OrderItemsTable from "./components/orderItemsList";
-import OrderStatusButton from "./components/orderStatusButton";
-import useLiveOrders from "./useLiveOrders";
-import useOrders from "./useOrders";
+import PageWrapper from '../../components/PageWrapper';
+import ConnectionStateIndicator from './components/connectionStateIndicator';
+import OrderItemsTable from './components/orderItemsList';
+import OrderStatusButton from './components/orderStatusButton';
+import useLiveOrders from './useLiveOrders';
+import useOrders from './useOrders';
 
 const { Column } = Table;
 export default function Orders() {
@@ -47,5 +47,3 @@ export default function Orders() {
 		</PageWrapper>
 	);
 }
-
-// TODO change table header names
