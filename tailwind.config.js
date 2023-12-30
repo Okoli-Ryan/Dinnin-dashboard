@@ -6,6 +6,7 @@ const COLORS = {
 	secondary: "#001529",
 	pending: "#FFD700",
 	success: "#008000",
+	danger: "#FF0000",
 };
 
 export default {

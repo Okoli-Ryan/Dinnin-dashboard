@@ -14,14 +14,14 @@ const connectionStatusData: Record<ConnectionState, { color: string; label: stri
 };
 
 export default function ConnectionStateIndicator({ connectionState }: { connectionState: ConnectionState }) {
-	const color = connectionStatusData[connectionState]?.color;
-	const label = connectionStatusData[connectionState]?.label;
+	const statusThemeColor = connectionStatusData[connectionState].color;
+	const statusLabel = connectionStatusData[connectionState].label;
 
 	return (
-		<div className="self-end items-center flex flex-end gap-2 ">
-			<span className={`w-3 h-3 rounded-full `} style={{ backgroundColor: color }}></span>
-			<span style={{ color }} className="text-base">
-				{label}
+		<div className="flex items-center self-end gap-2 flex-end ">
+			<span className={`w-3 h-3 rounded-full `} style={{ backgroundColor: statusThemeColor }}></span>
+			<span style={{ color: statusThemeColor }} className="text-base">
+				{statusLabel}
 			</span>
 		</div>
 	);
