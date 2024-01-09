@@ -1,0 +1,171 @@
+/* Calendar.css */
+
+.custom-datepicker {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.custom-datepicker #calendar {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    background-color: white;
+    padding: 20px 16px;
+    height: max-content;
+  }
+
+  .custom-datepicker .ant-modal-content, .custom-rangepicker .ant-modal-content {
+    padding: 0 !important;
+    width: max-content;
+  }
+  
+  .custom-datepicker .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 1rem;
+  }
+  
+  .custom-datepicker .calendar-header h2 {
+    font-weight: 600;
+    line-height: 24px;
+    color: #475467;
+  }
+  
+  .custom-datepicker .prev-button,
+  .custom-datepicker .next-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .custom-datepicker .prev-button:disabled,
+  .custom-datepicker .next-button:disabled {
+    opacity: 0.4;
+  }
+  
+  .custom-datepicker thead {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .custom-datepicker table {
+    width: 100%;
+  }
+  
+  .custom-datepicker th,
+  .custom-datepicker td {
+    cursor: pointer;
+  }
+  
+  .custom-datepicker tbody,
+  .custom-datepicker thead > tr {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(20px, 48px));
+    row-gap: 4px;
+    justify-items: center;
+  }
+  
+  .custom-datepicker th {
+    font-weight: 500;
+    font-size: 12px;
+  }
+  
+  .custom-datepicker .today {
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  .custom-datepicker .in-range {
+    background: #F9F9F9;
+    border-radius: 0;
+  }
+  
+  .custom-datepicker .start-of-range,
+  .custom-datepicker .end-of-range {
+    border: 0.5px dotted #02123055;
+    background-color: #021230;
+    color: white;
+  }
+  
+  .custom-datepicker .start-of-range {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  
+  .custom-datepicker .end-of-range {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .custom-datepicker .selected-date {
+    background-color: #021230;
+    color: #fff;
+  }
+  
+  .custom-datepicker .other-month {
+    color: #ccc;
+  }
+  
+  .custom-datepicker .day {
+    height: 40px;
+    position: relative;
+    justify-content: space-between;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-items: normal;
+  }
+  
+  .custom-datepicker .day > button {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    line-height: 1;
+  }
+  
+  .custom-datepicker .day > button:disabled {
+    color: #ccc;
+  }
+  
+  .custom-datepicker .date-display {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  
+  .custom-datepicker .current-date {
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    padding: 0.7rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 12px;
+  }
+  
+  .custom-datepicker .today-button {
+    border: 1px solid #ccc;
+    font-size: 12px;
+    padding: 0.7rem;
+    border-radius: 8px;
+  }
+  
+  .custom-datepicker .pin::after {
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: #3f5bf6;
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  

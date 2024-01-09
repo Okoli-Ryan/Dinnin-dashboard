@@ -2,17 +2,20 @@ import { Form, Select as SelectInput } from "antd";
 import { NamePath } from "antd/es/form/interface";
 import { BaseOptionType, DefaultOptionType, SelectProps } from "antd/es/select";
 import React, { ComponentProps, InputHTMLAttributes, useMemo } from "react";
+import { FaChevronDown } from "react-icons/fa";
+
+import { COLORS } from "@/core/Constants";
 
 interface ISelect<T extends BaseOptionType | DefaultOptionType> extends ComponentProps<(typeof Form)["Item"]> {
 	name: NamePath;
+	options: Array<T>;
+	labelKey?: keyof T;
+	valueKey?: keyof T;
 	inputProps?: ComponentProps<typeof SelectInput>;
 	placeholder?: string;
 	labelClassName?: InputHTMLAttributes<HTMLParagraphElement>["className"];
-	options: Array<T>;
 	containerClassName?: InputHTMLAttributes<HTMLParagraphElement>["className"];
-	labelKey: keyof T;
 	showSearch?: boolean;
-	valueKey: keyof T;
 	selectProps?: SelectProps;
 }
 
@@ -26,8 +29,8 @@ export default function Select<T extends BaseOptionType | DefaultOptionType>({
 	options,
 	className,
 	showSearch,
-	labelKey,
-	valueKey,
+	labelKey = "label",
+	valueKey = "value",
 	...props
 }: ISelect<T>) {
 	const form = Form.useFormInstance();
@@ -36,10 +39,11 @@ export default function Select<T extends BaseOptionType | DefaultOptionType>({
 	return (
 		<Form.Item label={label} name={name} {...props}>
 			<SelectInput
+				suffixIcon={<FaChevronDown color={COLORS.lightGray} size={10} />}
 				showSearch={showSearch}
 				className={`placeholder:capitalize !rounded-none ${className}`}
 				placeholder={placeholder}
-				value={form.getFieldValue(name)}
+				value={form?.getFieldValue(name)}
 				optionFilterProp="children"
 				filterOption={(input, option) => {
 					if (props.selectProps?.showSearch) {

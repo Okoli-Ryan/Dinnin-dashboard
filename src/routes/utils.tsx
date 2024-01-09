@@ -1,5 +1,7 @@
 import { ReactElement, Suspense } from 'react';
-import { Navigate, Route } from "react-router-dom";
+import { Navigate, Route } from 'react-router-dom';
+
+import LoadingComponent from '@/components/LoadingComponent';
 
 export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): ReactElement => {
 	if ("redirectTo" in route)
@@ -9,7 +11,7 @@ export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): R
 				index={route.index}
 				path={route.index ? undefined : prefix + route.path}
 				element={
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense fallback={<LoadingComponent />}>
 						<Navigate to={route.redirectTo} />
 					</Suspense>
 				}
@@ -21,7 +23,7 @@ export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): R
 			key={i}
 			index={route.index}
 			path={route.index ? undefined : prefix + route.path}
-			element={<Suspense fallback={<div>Loading...</div>}>{route.Component}</Suspense>}
+			element={<Suspense fallback={<LoadingComponent />}>{route.Component}</Suspense>}
 		/>
 	);
 };

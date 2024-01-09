@@ -18,7 +18,7 @@ const DashboardHeader = () => {
 			</h2>
 			<Dropdown menu={{ items: items() }} placement="bottomLeft" arrow>
 				<div className="flex flex-row items-center">
-					<div className="rounded-full px-4 py-4 cursor-pointer bg-white text-secondary shadow-lg flex  items-center gap-x-2 hover:!bg-[#EEEEEE] hover:!text-secondary">
+					<div className="rounded-full p-4 cursor-pointer bg-white text-secondary shadow-lg flex  items-center gap-x-2 hover:!bg-[#EEEEEE] hover:!text-secondary">
 						<span>
 							<FaUser className="text-lg text-secondary" />
 						</span>

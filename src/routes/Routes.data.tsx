@@ -1,11 +1,12 @@
 import { lazy } from 'react';
 
-import VerificationScreen from "../features/auth/components/VerificationScreen";
-import CreateRestaurant from "../features/createRestaurant";
 import { IAppRoute } from "./utils";
 
 const Login = lazy(() => import("../features/auth/components/Login"));
 const Signup = lazy(() => import("../features/auth/components/Signup"));
+const VerificationScreen = lazy(() => import("../features/auth/components/VerificationScreen"));
+const CreateRestaurant = lazy(() => import("../features/createRestaurant"));
+const Analytics = lazy(() => import("../features/analytics"));
 const Menu = lazy(() => import("../features/menu"));
 const Orders = lazy(() => import("../features/orders"));
 const Tables = lazy(() => import("../features/tables"));
@@ -53,6 +54,10 @@ export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Profile />,
 		path: "/profile",
+	},
+	{
+		Component: <Analytics />,
+		path: "/analytics",
 	},
 	{
 		Component: <Menu />,

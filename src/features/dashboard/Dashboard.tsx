@@ -1,6 +1,5 @@
 import { Layout, Menu } from "antd";
-import React, { memo, useMemo, useState } from "react";
-import { Navigate, NavLink, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { DashboardHeader } from "./components";
 import NotificationInfoModal from "./components/NotificationInfoModal";
@@ -8,7 +7,7 @@ import { dashboardMenuItems } from "./Dashboard.data";
 import useDashboard from "./useDashboard";
 import usePushNotifications from "./usePushNotifications";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Sider } = Layout;
 
 export default function Dashboard() {
 	const { currentPathName, restaurant } = useDashboard();
@@ -31,6 +30,7 @@ export default function Dashboard() {
 					</div>
 				</Layout>
 			</Layout>
+			{/* TODO move notificationInfoModal logic inside the modal */}
 			<NotificationInfoModal onCloseModal={onCloseNotificationMessage} showModal={showNotificationMessage} />
 		</>
 	);
