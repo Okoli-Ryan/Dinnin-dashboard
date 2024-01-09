@@ -1,11 +1,11 @@
-import "./AuthScreen.style.css";
+import './AuthScreen.style.css';
 
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Navigate, Outlet, useOutletContext } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 
-import { useAppSelector } from "../../store";
-import VerificationNotice from "./components/VerificationNotice/VerificationNotice";
+import { useAppSelector } from '../../store';
+import VerificationNotice from './components/VerificationNotice/VerificationNotice';
 
 export default function AuthScreen() {
 	const [showVerificationNote, setShowVerificationNote] = useState(false);
