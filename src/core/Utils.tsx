@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { format, parseISO } from "date-fns";
 
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
@@ -85,9 +86,28 @@ export const GenerateRandomString = (length: number) => {
 	return result;
 };
 
-export const formatCurrency = (value: number) => {
+export const formatCurrency = (value: number = 0) => {
 	return new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "NGN",
 	}).format(value);
 };
+
+export const formatDate = (date: string) => {
+	return format(parseISO(date), "PP");
+};
+
+export function stringToDarkColor(inputString: string): string {
+	let hash = 0;
+	for (let i = 0; i < inputString.length; i++) {
+		hash = inputString.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	let color = "#";
+	for (let j = 0; j < 3; j++) {
+		const value = (hash >> (j * 8)) & 0xff;
+		color += ("00" + Math.floor(value * 0.95).toString(16)).slice(-2); // Reduce the brightness for a darker color
+	}
+	return color;
+}
+  
+  

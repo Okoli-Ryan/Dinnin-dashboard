@@ -7,6 +7,8 @@ const COLORS = {
 	pending: "#FFD700",
 	success: "#008000",
 	danger: "#FF0000",
+	lightGray: "#AAAAAA",
+	gray: "#000000E0",
 };
 
 export default {
