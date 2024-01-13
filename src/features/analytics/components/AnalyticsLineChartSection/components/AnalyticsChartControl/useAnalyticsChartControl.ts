@@ -1,7 +1,6 @@
 import { Form } from "antd";
-import React from "react";
 
-import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum, AnalyticsLineChartTypes } from "../../AnalyticsChartSection.types";
+import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum } from "../../AnalyticsChartSection.types";
 
 const HEADER_LABEL = {
 	[AnalyticsChartTypeEnum.REVENUE]: "Revenue from orders made",

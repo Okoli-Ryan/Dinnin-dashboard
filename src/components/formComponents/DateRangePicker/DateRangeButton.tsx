@@ -4,31 +4,30 @@ import { useState } from "react";
 import { BsCalendarDate } from "react-icons/bs";
 
 import { Button } from "@/components/Button";
+import { IAnalyticsRequestParams } from "@/models/Analytics";
 
 import CalenderRangePicker from "./CalenderRangePicker";
+import { formatRangeDateFormat } from "./DateRangeButton.utils";
 
 interface IDateRangeButton {
-	onChange: (start: Date, end: Date) => void;
+	onChange?: (start: Date, end: Date) => void;
 	name: string;
 }
 
-export default function DateRangeButton({ onChange, name }: IDateRangeButton) {
+export default function DateRangeButton({ onChange = () => {}, name }: IDateRangeButton) {
 	const [showModal, setShowModal] = useState(false);
 
 	const onCloseModal = () => setShowModal(false);
 
 	const form = Form.useFormInstance();
 
-	const dateValue = form.getFieldValue(name);
-
-	const formatRangeDateFormat = ({ startDate, endDate }: { startDate: Date; endDate: Date }) => {
-		return `${format(startDate, "MMM d, yyyy")} - ${format(endDate, "MMM d, yyyy")}`;
-	};
+	const startDate = form.getFieldValue("startTime");
+	const endDate = form.getFieldValue("endTime");
 
 	return (
 		<Form.Item>
 			<Button.Outline size="middle" onClick={() => setShowModal(true)} icon={<BsCalendarDate />}>
-				{dateValue ? formatRangeDateFormat(dateValue) : "Select Date"}
+				{startDate ? formatRangeDateFormat({ startDate, endDate }) : "Select Date"}
 			</Button.Outline>
 			<CalenderRangePicker
 				name={name}
@@ -36,7 +35,8 @@ export default function DateRangeButton({ onChange, name }: IDateRangeButton) {
 				onClose={onCloseModal}
 				onChange={(start, end) => {
 					onChange(start, end);
-					form.setFieldValue(name, { startDate: start, endDate: end });
+					form.setFieldValue("startTime", start);
+					form.setFieldValue("endTime", end);
 					onCloseModal();
 				}}
 			/>

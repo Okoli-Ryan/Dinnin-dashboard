@@ -23,7 +23,7 @@ export default function AnalyticsLineChartControl({ children, showIntervalContro
 				<div className="flex items-center gap-4">
 					{showIntervalControl && <Select name="interval" options={AnalyticsLineChartIntervalOptions} />}
 					{showChartTypeControl && <Select name="chartType" options={AnalyticsLineChartTypes} />}
-					<DateRangeButton name="dateRange" onChange={(startDate, endDate) => console.log({ startDate, endDate })} />
+					<DateRangeButton name="dateRange" />
 				</div>
 			</div>
 			{children}

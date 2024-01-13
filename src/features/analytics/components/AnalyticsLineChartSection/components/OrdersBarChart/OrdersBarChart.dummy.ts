@@ -1,6 +1,6 @@
-import { ChartValue } from "@/models/Analytics";
+import { IChartValue } from "@/models/Analytics";
 
-export const DUMMY_ORDERS_COUNT_CHART_DATA_DAILY: ChartValue[] = [
+export const DUMMY_ORDERS_COUNT_CHART_DATA_DAILY: IChartValue[] = [
 	{
 		date: "Mon",
 		value: 12,
@@ -23,7 +23,7 @@ export const DUMMY_ORDERS_COUNT_CHART_DATA_DAILY: ChartValue[] = [
 	},
 ];
 
-export const DUMMY_ORDERS_AMOUNT_CHART_DATA_DAILY: ChartValue[] = [
+export const DUMMY_ORDERS_AMOUNT_CHART_DATA_DAILY: IChartValue[] = [
 	{
 		date: "Mon",
 		value: 1200,
