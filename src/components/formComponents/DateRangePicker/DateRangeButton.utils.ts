@@ -1,5 +1,5 @@
-import { format } from "date-fns";
+import { format, parseISO, toDate } from "date-fns";
 
-export const formatRangeDateFormat = ({ startDate, endDate }: { startDate: Date; endDate: Date }) => {
-	return `${format(startDate, "MMM d, yyyy")} - ${format(endDate, "MMM d, yyyy")}`;
+export const formatRangeDateFormat = ({ startDate, endDate }: { startDate: string; endDate: string }) => {
+	return `${format(parseISO(startDate), "MMM d, yyyy")} - ${format(parseISO(endDate), "MMM d, yyyy")}`;
 };

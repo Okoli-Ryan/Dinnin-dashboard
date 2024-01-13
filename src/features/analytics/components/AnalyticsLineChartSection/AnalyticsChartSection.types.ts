@@ -10,7 +10,7 @@ export const AnalyticsLineChartIntervalOptions = [
 
 export enum AnalyticsChartTypeEnum {
 	REVENUE = "Revenue",
-	ORDER_COUNT = "Order Count",
+	ORDER_COUNT = "Count",
 }
 
 export const AnalyticsLineChartTypes = [
@@ -21,4 +21,7 @@ export const AnalyticsLineChartTypes = [
 export enum AnalyticsControlOptionsEnum {
 	CHARTTYPE = "chartType",
 	INTERVAL = "interval",
+	STARTTIME = "startTime",
+	ENDTIME = "endTime",
+	DATERANGE = "dateRange",
 }

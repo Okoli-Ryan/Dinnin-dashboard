@@ -18,7 +18,13 @@ export function AnalyticsChartSection({ children, showChartTypeControl = true, s
 
 	return (
 		<ShadowCard className="h-full">
-			<Form form={form} initialValues={{ chartType: AnalyticsChartTypeEnum.REVENUE, interval: AnalyticsLineChartIntervalOptionsEnum.MONTHLY }}>
+			<Form
+				form={form}
+				name="chart"
+				initialValues={{
+					chartType: AnalyticsChartTypeEnum.REVENUE,
+					interval: AnalyticsLineChartIntervalOptionsEnum.MONTHLY,
+				}}>
 				<AnalyticsLineChartControl showIntervalControl={showIntervalControl} showChartTypeControl={showChartTypeControl}>
 					{children}
 				</AnalyticsLineChartControl>

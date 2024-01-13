@@ -13,8 +13,8 @@ export default function useCalenderRangePicker({ name }: IUseDateRangePicker) {
 	const formStartDate = form.getFieldValue(name)?.startDate;
 	const formEndDate = form.getFieldValue(name)?.endDate;
 
-	const [startDate, setStartDate] = useState(formStartDate || initDate);
-	const [endDate, setEndDate] = useState(formEndDate || initDate);
+	const [startDate, setStartDate] = useState<Date>(formStartDate || initDate);
+	const [endDate, setEndDate] = useState<Date>(formEndDate || initDate);
 	const [selectedRangeOption, setSelectedRangeOption] = useState<string | undefined>("Today");
 	const [currentMonthView, setCurrentMonthView] = useState(initDate);
 	const [dateInputState, setDateInputState] = useState("start");

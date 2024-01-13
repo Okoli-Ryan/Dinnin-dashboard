@@ -12,5 +12,5 @@ export default function useAnalyticsChartControl() {
 
 	const chartType = form.getFieldValue(AnalyticsControlOptionsEnum.CHARTTYPE) as AnalyticsChartTypeEnum;
 
-	return { headerLabel: HEADER_LABEL[chartType] };
+	return { headerLabel: HEADER_LABEL[chartType], form };
 }

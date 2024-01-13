@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import { formatISO } from "date-fns";
 import { memo } from "react";
 
 import { Button } from "@/components/Button";
@@ -11,7 +12,7 @@ import useCalenderRangePicker from "./useCalenderRangePicker";
 interface ICalenderRangePicker {
 	show: boolean;
 	onClose: () => void;
-	onChange: (start: Date, end: Date) => void;
+	onChange: (start: Date | string, end: Date | string) => void;
 	name: string;
 }
 
@@ -78,7 +79,7 @@ function CalenderRangePicker({ show, onClose, onChange, name }: ICalenderRangePi
 						<Button.Text size="small" onClick={onClose}>
 							Cancel
 						</Button.Text>
-						<Button size="small" onClick={() => onChange(startDate, endDate)}>
+						<Button size="small" onClick={() => onChange(startDate.toISOString(), endDate.toISOString())}>
 							Apply
 						</Button>
 					</div>

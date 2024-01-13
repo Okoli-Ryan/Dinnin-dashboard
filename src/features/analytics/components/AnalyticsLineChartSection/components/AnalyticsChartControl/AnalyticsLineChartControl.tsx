@@ -3,7 +3,7 @@ import React from "react";
 import DateRangeButton from "@/components/formComponents/DateRangePicker";
 import Select from "@/components/formComponents/Select";
 
-import { AnalyticsLineChartIntervalOptions, AnalyticsLineChartTypes } from "../../AnalyticsChartSection.types";
+import { AnalyticsControlOptionsEnum, AnalyticsLineChartIntervalOptions, AnalyticsLineChartTypes } from "../../AnalyticsChartSection.types";
 import useAnalyticsChartControl from "./useAnalyticsChartControl";
 
 interface IAnalyticsLineChartControl {
@@ -14,16 +14,16 @@ interface IAnalyticsLineChartControl {
 }
 
 export default function AnalyticsLineChartControl({ children, showIntervalControl, showChartTypeControl }: IAnalyticsLineChartControl) {
-	const { headerLabel } = useAnalyticsChartControl();
+	const { headerLabel, form } = useAnalyticsChartControl();
 
 	return (
 		<div>
 			<div className="flex items-center justify-between ">
-				<h3 className="text-base font-bold">{headerLabel}</h3>
+				<h3 className="text-base font-bold mb-6">{headerLabel}</h3>
 				<div className="flex items-center gap-4">
 					{showIntervalControl && <Select name="interval" options={AnalyticsLineChartIntervalOptions} />}
 					{showChartTypeControl && <Select name="chartType" options={AnalyticsLineChartTypes} />}
-					<DateRangeButton name="dateRange" />
+					<DateRangeButton name={AnalyticsControlOptionsEnum.DATERANGE} />
 				</div>
 			</div>
 			{children}
