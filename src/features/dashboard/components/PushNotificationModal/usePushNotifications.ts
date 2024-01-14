@@ -4,7 +4,7 @@ import { HAS_PUSH_NOTIFICATIONS_REQUEST_BEEN_ASKED } from "@/core/Constants";
 import { reportErrorMessage } from "@/core/Utils";
 import { useAppSelector } from "@/store";
 
-import { beamsClientInstance, beamsTokenProvider } from "./utils/BeamsClient";
+import { beamsClientInstance, beamsTokenProvider } from "../../utils/BeamsClient";
 
 export default function usePushNotifications() {
 	const { id: adminId } = useAppSelector((state) => state.admin)!;

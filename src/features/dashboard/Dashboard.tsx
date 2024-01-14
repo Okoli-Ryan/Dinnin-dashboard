@@ -4,16 +4,14 @@ import { Layout, Menu } from "antd";
 import { Navigate, Outlet } from "react-router-dom";
 
 import { DashboardHeader } from "./components";
-import NotificationInfoModal from "./components/NotificationInfoModal";
+import PushNotificationModal from "./components/PushNotificationModal";
 import { dashboardMenuItems } from "./Dashboard.data";
 import useDashboard from "./useDashboard";
-import usePushNotifications from "./usePushNotifications";
 
 const { Header, Sider } = Layout;
 
 export default function Dashboard() {
 	const { currentPathName, restaurant } = useDashboard();
-	const { onCloseNotificationMessage, showNotificationMessage } = usePushNotifications();
 
 	if (!restaurant) return <Navigate to="/login" />;
 
@@ -32,8 +30,7 @@ export default function Dashboard() {
 					</div>
 				</Layout>
 			</Layout>
-			{/* TODO move notificationInfoModal logic inside the modal */}
-			<NotificationInfoModal onCloseModal={onCloseNotificationMessage} showModal={showNotificationMessage} />
+			<PushNotificationModal />
 		</>
 	);
 }
