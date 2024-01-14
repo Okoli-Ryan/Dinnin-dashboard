@@ -1,5 +1,5 @@
 .ant-layout-header {
-    @apply bg-[#f5f5f5] flex justify-end items-center !px-8
+    @apply bg-[#f5f5f5] flex justify-end items-center !px-8 z-20
 }
 
 .ant-table .ant-table {

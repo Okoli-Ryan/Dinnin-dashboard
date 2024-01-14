@@ -1,31 +1,33 @@
 import { Form } from "antd";
-import React from "react";
 
 import ShadowCard from "@/components/ShadowCard";
+import { AnalyticsGroupByEnum } from "@/models/Analytics";
 
-import { AnalyticsChartTypeEnum, AnalyticsLineChartIntervalOptionsEnum } from "./AnalyticsChartSection.types";
+import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum } from "./AnalyticsChartSection.types";
 import { AnalyticsLineChartControl } from "./components/AnalyticsChartControl";
+import { IAnalyticsChartControl } from "./components/AnalyticsChartControl/AnalyticsChartControl";
 import useAnalyticsChartSection from "./useAnalyticsChartSection";
 
-interface IAnalyticsChartSection {
-	children: React.ReactNode;
-	showIntervalControl?: boolean;
-	showChartTypeControl?: boolean;
-}
+const { CHARTTYPE, GROUPBY: INTERVAL, YEAR } = AnalyticsControlOptionsEnum;
 
-export function AnalyticsChartSection({ children, showChartTypeControl = true, showIntervalControl = true }: IAnalyticsChartSection) {
+interface IAnalyticsChartSection extends IAnalyticsChartControl {}
+
+export function AnalyticsChartSection({ children, ...props }: IAnalyticsChartSection) {
 	const { form } = useAnalyticsChartSection();
 
 	return (
 		<ShadowCard className="h-full">
 			<Form
 				form={form}
-				name="chart"
 				initialValues={{
-					chartType: AnalyticsChartTypeEnum.REVENUE,
-					interval: AnalyticsLineChartIntervalOptionsEnum.MONTHLY,
+					[CHARTTYPE]: AnalyticsChartTypeEnum.REVENUE,
+					[INTERVAL]: AnalyticsGroupByEnum.MONTH,
+					[YEAR]: new Date().getFullYear(),
 				}}>
-				<AnalyticsLineChartControl showIntervalControl={showIntervalControl} showChartTypeControl={showChartTypeControl}>
+				<AnalyticsLineChartControl
+					showDateRangeControl={props.showDateRangeControl}
+					showYearDropdown={props.showYearDropdown}
+					showIntervalControl={props.showIntervalControl}>
 					{children}
 				</AnalyticsLineChartControl>
 			</Form>

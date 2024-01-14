@@ -1,38 +1,33 @@
 import { Form } from "antd";
-import React from "react";
 
-import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum, AnalyticsLineChartIntervalOptionsEnum } from "../../AnalyticsChartSection.types";
-import {
-	DUMMY_ORDERS_AMOUNT_CHART_DATA,
-	DUMMY_ORDERS_AMOUNT_CHART_DATA_WEEKLY,
-	DUMMY_ORDERS_COUNT_CHART_DATA,
-	DUMMY_ORDERS_COUNT_CHART_DATA_WEEKLY,
-} from "./OrdersLineChart.dummy";
+import { useGetChartAnalyticsQuery, useGetOrderCountAnalyticsQuery, useGetRevenueAnalyticsQuery } from "@/api/AnalyticsApi";
+import { reportErrorMessage } from "@/core/Utils";
+import { AnalyticsGroupByEnum } from "@/models/Analytics";
 
-const { CHARTTYPE, INTERVAL } = AnalyticsControlOptionsEnum;
+import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum } from "../../AnalyticsChartSection.types";
+import { INITIAL_CHART_RESPONSE } from "../../AnalyticsChartSection.utils";
+
+const { CHARTTYPE, STARTTIME, ENDTIME, DATERANGE } = AnalyticsControlOptionsEnum;
 
 export default function useOrdersLineChart() {
 	const form = Form.useFormInstance();
 
-	Form.useWatch([CHARTTYPE], form);
-	Form.useWatch([INTERVAL], form);
+	Form.useWatch(CHARTTYPE, form);
+	Form.useWatch(DATERANGE, form);
 
-	const chartType = form.getFieldValue(AnalyticsControlOptionsEnum.CHARTTYPE);
-	const interval = form.getFieldValue(AnalyticsControlOptionsEnum.INTERVAL);
+	const endTime = form.getFieldValue(DATERANGE)?.[ENDTIME];
+	const startTime = form.getFieldValue(DATERANGE)?.[STARTTIME];
+	const chartType = form.getFieldValue(CHARTTYPE);
 
-	let chartData;
-	if (interval === AnalyticsLineChartIntervalOptionsEnum.MONTHLY && chartType === AnalyticsChartTypeEnum.REVENUE) {
-		chartData = DUMMY_ORDERS_AMOUNT_CHART_DATA;
-	}
-	if (interval === AnalyticsLineChartIntervalOptionsEnum.MONTHLY && chartType === AnalyticsChartTypeEnum.ORDER_COUNT) {
-		chartData = DUMMY_ORDERS_COUNT_CHART_DATA;
-	}
-	if (interval === AnalyticsLineChartIntervalOptionsEnum.WEEKLY && chartType === AnalyticsChartTypeEnum.REVENUE) {
-		chartData = DUMMY_ORDERS_AMOUNT_CHART_DATA_WEEKLY;
-	}
-	if (interval === AnalyticsLineChartIntervalOptionsEnum.WEEKLY && chartType === AnalyticsChartTypeEnum.ORDER_COUNT) {
-		chartData = DUMMY_ORDERS_COUNT_CHART_DATA_WEEKLY;
+	const {
+		data: chartResponse = INITIAL_CHART_RESPONSE,
+		isFetching,
+		isError,
+	} = useGetChartAnalyticsQuery({ groupBy: AnalyticsGroupByEnum.DATE, startTime, endTime, chartType }, { refetchOnMountOrArgChange: true });
+
+	if (isError) {
+		reportErrorMessage(null, "Unable to get analytics data");
 	}
 
-	return { form, chartType, chartData };
+	return { chartData: chartResponse.chartData, yAxisKey: chartResponse.key };
 }

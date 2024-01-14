@@ -4,10 +4,10 @@ import ShadowCard from "@/components/ShadowCard";
 import { stringToDarkColor } from "@/core/Utils";
 
 import ChartItemLabel from "./components/ChartItemLabel";
-import { DUMMY_ORDER_ITEMS_CHART_DATA } from "./OrderItemsChart.dummy";
+import useOrderItemsChart from "./useOrderItemsChart";
 
 export default function OrderItemsChart() {
-	const data = DUMMY_ORDER_ITEMS_CHART_DATA;
+	const { chartData } = useOrderItemsChart();
 
 	return (
 		<ShadowCard className="flex flex-col h-full gap-4" header={<h3 className="text-base font-bold">Items Purchased</h3>}>
@@ -16,7 +16,7 @@ export default function OrderItemsChart() {
 					<PieChart width={300} height={300}>
 						<Tooltip />
 						<Pie
-							data={data}
+							data={chartData}
 							dataKey="count"
 							nameKey="itemName"
 							cx="50%"
@@ -26,7 +26,7 @@ export default function OrderItemsChart() {
 							fill="#82ca9d"
 							label
 							paddingAngle={5}>
-							{data.map((entry, index) => (
+							{chartData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={stringToDarkColor(entry.itemName)} />
 							))}
 						</Pie>
@@ -34,7 +34,7 @@ export default function OrderItemsChart() {
 				</ResponsiveContainer>
 			</div>
 			<div className="flex flex-wrap justify-center gap-4">
-				{data.map(({ itemName }) => (
+				{chartData.map(({ itemName }) => (
 					<ChartItemLabel label={itemName} />
 				))}
 			</div>

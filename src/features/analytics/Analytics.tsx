@@ -11,12 +11,12 @@ export default function Analytics() {
 		<PageWrapper title="Analytics" subtitle="Get insights on your restaurant analytics">
 			<div className="flex flex-col gap-8">
 				<AnalyticsCardSection />
-				<AnalyticsChartSection>
+				<AnalyticsChartSection showDateRangeControl>
 					<OrdersLineChart />
 				</AnalyticsChartSection>
-				<div className="grid grid-cols-4 gap-8">
-					<div className="col-span-3">
-						<AnalyticsChartSection showIntervalControl={false}>
+				<div className="grid grid-cols-3 gap-8">
+					<div className="col-span-2">
+						<AnalyticsChartSection showIntervalControl showYearDropdown>
 							<OrdersBarChart />
 						</AnalyticsChartSection>
 					</div>

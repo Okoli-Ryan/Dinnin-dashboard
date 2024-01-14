@@ -1,11 +1,9 @@
-export enum AnalyticsLineChartIntervalOptionsEnum {
-	MONTHLY = "month",
-	WEEKLY = "week",
-}
+import { AnalyticsGroupByEnum } from '@/models/Analytics';
 
-export const AnalyticsLineChartIntervalOptions = [
-	{ label: "Monthly", value: AnalyticsLineChartIntervalOptionsEnum.MONTHLY },
-	{ label: "Weekly", value: AnalyticsLineChartIntervalOptionsEnum.WEEKLY },
+export const AnalyticsBarChartDropdownOptions = [
+	{ label: "By Day", value: AnalyticsGroupByEnum.DAY },
+	{ label: "By Week", value: AnalyticsGroupByEnum.WEEK },
+	{ label: "By Month", value: AnalyticsGroupByEnum.MONTH },
 ];
 
 export enum AnalyticsChartTypeEnum {
@@ -20,8 +18,9 @@ export const AnalyticsLineChartTypes = [
 
 export enum AnalyticsControlOptionsEnum {
 	CHARTTYPE = "chartType",
-	INTERVAL = "interval",
+	GROUPBY = "groupBy",
 	STARTTIME = "startTime",
 	ENDTIME = "endTime",
 	DATERANGE = "dateRange",
+	YEAR = "year",
 }

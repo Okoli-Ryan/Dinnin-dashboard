@@ -2,7 +2,7 @@ import { Form } from "antd";
 
 import { AnalyticsControlOptionsEnum } from "./AnalyticsChartSection.types";
 
-const { CHARTTYPE, INTERVAL, STARTTIME, ENDTIME } = AnalyticsControlOptionsEnum;
+const { CHARTTYPE, GROUPBY: INTERVAL, STARTTIME, ENDTIME } = AnalyticsControlOptionsEnum;
 
 export default function useAnalyticsChartSection() {
 	const [form] = Form.useForm();

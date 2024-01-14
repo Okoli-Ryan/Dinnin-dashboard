@@ -1,3 +1,3 @@
-import AnalyticsLineChartControl from "./AnalyticsLineChartControl";
+import AnalyticsChartControl from "./AnalyticsChartControl";
 
-export { AnalyticsLineChartControl };
+export { AnalyticsChartControl as AnalyticsLineChartControl };

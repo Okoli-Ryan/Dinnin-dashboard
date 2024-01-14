@@ -1,14 +1,13 @@
-import { isDate } from "date-fns";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { COLORS } from "@/core/Constants";
-import { formatDate } from "@/core/Utils";
 
 import { AnalyticsChartTypeEnum } from "../../AnalyticsChartSection.types";
+import { convertDateFormat } from "./OrdersLineChart.utils";
 import useOrdersLineChart from "./useOrdersLineChart";
 
 export default function OrdersLineChart() {
-	const { chartType, chartData } = useOrdersLineChart();
+	const { chartData, yAxisKey } = useOrdersLineChart();
 
 	return (
 		<ResponsiveContainer width="100%" height={300}>
@@ -27,9 +26,9 @@ export default function OrdersLineChart() {
 					</linearGradient>
 				</defs>
 				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey={({ date }) => (isDate(date) ? formatDate(date) : date)} />
-				{chartType === AnalyticsChartTypeEnum.REVENUE && <YAxis type="number" label={{ value: "Revenue", position: "top", dx: 20, dy: -15 }} />}
-				{chartType === AnalyticsChartTypeEnum.ORDER_COUNT && <YAxis label={{ value: "Number of orders", position: "top", dx: 25, dy: -15 }} />}
+				<XAxis dataKey={({ date }) => convertDateFormat(date)} />
+				{yAxisKey === AnalyticsChartTypeEnum.REVENUE && <YAxis type="number" label={{ value: "Revenue", position: "top", dx: 20, dy: -15 }} />}
+				{yAxisKey === AnalyticsChartTypeEnum.ORDER_COUNT && <YAxis label={{ value: "Number of orders", position: "top", dx: 25, dy: -15 }} />}
 				<Tooltip />
 				<Area dataKey="value" stroke={COLORS.primary} fill="url(#data)" />
 			</AreaChart>
