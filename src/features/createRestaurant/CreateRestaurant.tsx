@@ -35,14 +35,14 @@ function CreateRestaurant() {
 							addonBefore: siteOriginName,
 						}}
 					/>
-					<TextInput name="address" rules={[{ required: true }]} />
+					<TextInput label="Address" name="address" rules={[{ required: true }]} />
 
 					<div className="grid grid-cols-2 gap-2">
-						<TextInput name="city" rules={[{ required: true }]} />
-						<TextInput name="state" rules={[{ required: true }]} />
+						<TextInput label="City" name="city" rules={[{ required: true }]} />
+						<TextInput label="State" name="state" rules={[{ required: true }]} />
 					</div>
 
-					<TextInput name="country" rules={[{ required: true }]} />
+					<TextInput label="Country" name="country" rules={[{ required: true }]} />
 					<Button block htmlType="submit" disabled={!isSlugValid} type="primary" loading={isSlugValidating || isLoading}>
 						Get Started
 					</Button>

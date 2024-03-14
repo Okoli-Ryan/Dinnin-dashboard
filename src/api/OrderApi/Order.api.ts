@@ -6,7 +6,7 @@ import { commonFetchBaseQuery } from "../common";
 export const OrderApi = createApi({
 	reducerPath: "OrderApi",
 	tagTypes: ["Order"],
-	...commonFetchBaseQuery("Order"),
+	...commonFetchBaseQuery("order"),
 	endpoints: (build) => ({
 		getActiveOrders: build.query<IOrder[], Date | undefined>({
 			/**

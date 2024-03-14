@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import Staff from "@/features/staff/Staff";
+
 import { IAppRoute } from "./utils";
 
 const Login = lazy(() => import("../features/auth/components/Login"));
@@ -66,6 +68,10 @@ export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Tables />,
 		path: "/table",
+	},
+	{
+		Component: <Staff />,
+		path: "/staff",
 	},
 	{
 		path: "*",
