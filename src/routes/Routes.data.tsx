@@ -40,7 +40,7 @@ export const AuthenticationRoutes: Array<IAppRoute> = [
 export const CommonRoutes: Array<IAppRoute> = [
 	{
 		Component: <VerificationScreen />,
-		path: "/verify/:id/:code",
+		path: "/verify/:code",
 	},
 ];
 

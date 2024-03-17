@@ -9,7 +9,7 @@ export const VerificationApi = createApi({
 	tagTypes: ["Verify"],
 	endpoints: (build) => ({
 		verifyAdmin: build.query<Admin, { id?: string; code?: string }>({
-			query: ({ id, code }) => `/${id}/${code}`,
+			query: ({ code }) => `/${code}`,
 		}),
 	}),
 });
