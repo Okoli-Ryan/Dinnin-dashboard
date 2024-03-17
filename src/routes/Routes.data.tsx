@@ -25,6 +25,10 @@ export const AuthenticationRoutes: Array<IAppRoute> = [
 		path: "/create",
 	},
 	{
+		path: "/",
+		redirectTo: "/login",
+	},
+	{
 		Component: <Login />,
 		path: "*",
 	},
@@ -40,7 +44,6 @@ export const CommonRoutes: Array<IAppRoute> = [
 export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Orders />,
-		// index: true,
 		path: "/orders",
 	},
 	{

@@ -8,7 +8,6 @@ import { AuthenticationRoutes, CommonRoutes, DashboardRoutes } from "./Routes.da
 import { generateRoutes } from "./utils";
 
 export default function Routes() {
-	const { pathname } = useLocation();
 	const restaurant = useAppSelector((state) => state.restaurant);
 	const isAuthenticated = !!restaurant;
 

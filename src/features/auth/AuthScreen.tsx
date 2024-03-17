@@ -10,10 +10,10 @@ export default function AuthScreen() {
 	const [showVerificationNote, setShowVerificationNote] = useState(false);
 	const restaurant = useAppSelector((state) => state.restaurant);
 
-	if (window.location.pathname === "/") {
-		// Redirect to "/login"
-		return <Navigate replace to="/login" />;
-	}
+	// if (window.location.pathname === "/") {
+	// 	// Redirect to "/login"
+	// 	return <Navigate replace to="/login" />;
+	// }
 
 	if (restaurant) return <Navigate replace to="/" />;
 
@@ -21,7 +21,7 @@ export default function AuthScreen() {
 		<AnimatePresence mode="wait">
 			<div className="flex items-center justify-center h-screen bg-gray-50">
 				<div className="grid w-full h-full grid-cols-5 overflow-hidden">
-					<div
+					<div data-testid="background-image"
 						className="flex flex-col flex-1 h-screen col-span-3 bg-center bg-no-repeat bg-cover"
 						style={{ backgroundImage: `url(${BackgroundImage})` }}></div>
 					<div className="flex flex-col justify-center w-full h-full max-w-sm col-span-2 p-4 mx-auto">

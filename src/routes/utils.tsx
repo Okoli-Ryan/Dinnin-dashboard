@@ -10,7 +10,7 @@ export const generateRoutes = (route: IAppRoute, i: any, prefix: string = ""): R
 				path={route.index ? undefined : prefix + route.path}
 				element={
 					<Suspense fallback={<div>Loading...</div>}>
-						<Navigate to={route.redirectTo} />
+						<Navigate replace to={route.redirectTo} />
 					</Suspense>
 				}
 			/>
