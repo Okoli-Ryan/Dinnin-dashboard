@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useLazyGetActiveOrdersQuery } from "@/api/OrderApi";
-import { reportErrorMessage } from "@/core/Utils";
-import { IOrder } from "@/models/Order";
+import { useLazyGetActiveOrdersQuery } from '@/api/OrderApi';
+import { reportErrorMessage } from '@/core/Utils';
+import { IOrder } from '@/models/Order';
 
-import { removeDuplicates } from "./utils/RemoveDuplicates";
+import { removeDuplicates } from './utils/RemoveDuplicates';
 
 export default function useOrders() {
 	const [fetchActiveOrders, { isLoading, isError, error }] = useLazyGetActiveOrdersQuery();
@@ -40,4 +40,6 @@ export default function useOrders() {
 	return { orderList, isLoading: orderList.length === 0 && isLoading, expandedRowKey, onExpandedRowClick, getActiveOrders, onNewOrder };
 }
 
-// TODO Create Orders Api file
+// TODO Add Push notifications feature
+// https://github.com/juliofuentescerrada/push-notifications-server-dotnet
+// https://pusher.com/docs/beams/guides/publish-to-specific-user/web/

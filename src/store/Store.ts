@@ -3,6 +3,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 //@ts-ignore
 import storage from "redux-persist/lib/storage";
 
+import { AnalyticsApi } from "@/api/AnalyticsApi/Analytics.api";
 import { OrderApi } from "@/api/OrderApi";
 import { TableApi } from "@/api/Table.api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
 	[MenuItemApi.reducerPath]: MenuItemApi.reducer,
 	[TableApi.reducerPath]: TableApi.reducer,
 	[OrderApi.reducerPath]: OrderApi.reducer,
+	[AnalyticsApi.reducerPath]: AnalyticsApi.reducer,
 });
 
 const PersistConfig = {
@@ -53,6 +55,7 @@ export const store = configureStore({
 		MenuItemApi.middleware,
 		TableApi.middleware,
 		OrderApi.middleware,
+		AnalyticsApi.middleware,
 	],
 });
 

@@ -9,16 +9,16 @@ interface IPageWrapper {
 
 export default function PageWrapper({ title, subtitle, children, extra }: IPageWrapper) {
 	return (
-		<div className="px-4 h-full">
+		<div className="h-full px-4">
 			<div className="flex flex-col h-full gap-8 py-8 overflow-auto bg-white/90">
-				<div className="flex gap-4 mx-8 items-center justify-between">
+				<div className="flex items-center justify-between gap-4 px-4">
 					<div className="flex flex-col">
 						<div className="text-2xl font-bold text-secondary">{title}</div>
 						<div className="text-base text-secondary">{subtitle}</div>
 					</div>
 					{extra}
 				</div>
-				{children}
+				<div className="p-4">{children}</div>
 			</div>
 		</div>
 	);

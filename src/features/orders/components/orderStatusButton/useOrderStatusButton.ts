@@ -10,7 +10,7 @@ export default function useOrderStatusButton({ orderStatus: initialOrderStatus, 
 
 	async function updateOrderAsync(status: IOrder["orderStatus"]) {
 		try {
-			await updateOrder({ ...props, orderStatus: status });
+			await updateOrder({ ...props, orderStatus: status }).unwrap();
 			setOrderStatus(status);
 		} catch (error) {
 			reportErrorMessage(error, "Could not update order status");

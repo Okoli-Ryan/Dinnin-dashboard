@@ -6,4 +6,8 @@ export const COLORS = {
 	pending: "#FFD700",
 	success: "#008000",
 	danger: "#FF0000",
+	lightGray: "#AAAAAA",
+	gray: "#000000E0",
 };
+
+export const HAS_PUSH_NOTIFICATIONS_REQUEST_BEEN_ASKED = "HAS_NOTIFICATIONS_REQUEST_BEEN_ASKED";

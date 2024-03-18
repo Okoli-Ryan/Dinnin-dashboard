@@ -29,10 +29,12 @@ export default function useLiveOrders({ onNewOrder, getActiveOrders }: ILiveOrde
 	const pusher = useRef(
 		new Pusher(Config.VITE_PUSHER_APP_KEY, {
 			cluster: Config.VITE_PUSHER_APP_CLUSTER,
+			// forceTLS: false,
 		})
 	).current;
 
 	useEffect(() => {
+		// return;
 		const restaurantChannel = pusher.subscribe(restaurantId);
 
 		// Get active orders on connection
