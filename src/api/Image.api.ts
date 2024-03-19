@@ -7,7 +7,7 @@ export const ImageApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${Config.VITE_BASE_URL}/image`,
 		prepareHeaders(headers, api) {
-			headers.set("x-api-key", Config.VITE_API_KEY);
+			headers.set("x_api_key", Config.VITE_API_KEY);
 		},
 	}),
 	endpoints: (build) => ({
