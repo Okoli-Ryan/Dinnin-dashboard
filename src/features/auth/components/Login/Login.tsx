@@ -6,7 +6,7 @@ import { withFadeIn } from "@/hoc";
 import useLogin from './useLogin';
 
 function Login() {
-	const { form, navigateToSignup, onSubmit, isLoading } = useLogin();
+	const { form, navigateToSignup, onSubmit, isLoading, onLoginWithDemoCredentials } = useLogin();
 
 	return (
 		<>
@@ -19,6 +19,9 @@ function Login() {
 					<Button size="large" type="primary" htmlType="submit" loading={isLoading}>
 						Sign In
 					</Button>
+					<Button.Outline className="mt-4" onClick={onLoginWithDemoCredentials} size="large">
+						Sign In with Test Account
+					</Button.Outline>
 				</div>
 			</Form>
 			<p className="mt-4 text-center">

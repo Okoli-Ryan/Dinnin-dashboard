@@ -1,3 +1,8 @@
+export const DEMO_CREDENTIALS = {
+	email: "testAdmin@email.com",
+	password: "@Password1",
+};
+
 export const TableCodeLength = 20;
 
 export const COLORS = {

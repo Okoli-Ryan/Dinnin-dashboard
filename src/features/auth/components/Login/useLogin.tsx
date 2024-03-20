@@ -1,11 +1,13 @@
 import { Form, message } from "antd";
 import { useNavigate } from "react-router-dom";
 
+import { DEMO_CREDENTIALS } from "@/core/Constants";
+import { reportErrorMessage } from "@/core/Utils";
+import { IAdminLoginRequest } from "@/models/Admin";
 import { useLoginMutation } from "@api/AdminApi/Admin.api";
 import { ErrorResponse } from "@models/Error/ErrorResponse";
 
 import { AuthScreenOutletContext } from "../../AuthScreen";
-import { reportErrorMessage } from "@/core/Utils";
 
 export default function useLogin() {
 	const [form] = Form.useForm();
@@ -15,6 +17,11 @@ export default function useLogin() {
 
 	function navigateToSignup() {
 		navigate("/signup");
+	}
+
+	async function onLoginWithDemoCredentials() {
+		form.setFieldsValue(DEMO_CREDENTIALS);
+		await onSubmit();
 	}
 
 	async function onSubmit() {
@@ -28,7 +35,6 @@ export default function useLogin() {
 
 			navigate("/");
 		} catch (error: any) {
-			
 			const errorResponse = new ErrorResponse(error);
 
 			//User was authenticated but has not been confirmed
@@ -41,5 +47,5 @@ export default function useLogin() {
 		}
 	}
 
-	return { form, navigateToSignup, onSubmit, isLoading };
+	return { form, navigateToSignup, onSubmit, isLoading, onLoginWithDemoCredentials };
 }

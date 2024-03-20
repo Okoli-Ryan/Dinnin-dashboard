@@ -11,8 +11,9 @@ export default function QrCodeComponent() {
 
 	return (
 		<Form.Item name="code" className="w-full">
-			<div className="w-full flex flex-col items-center justify-center">
+			<div className="flex flex-col items-center justify-center w-full">
 				<QRCode value={restaurantLink} size={256} errorLevel="H" />
+				<h3 className="text-center text-primary">Scan code to preview restaurant</h3>
 				<div className="flex gap-4">
 					<Button size="small" onClick={generateCode} className="mt-2" icon={<BsArrowClockwise />}>
 						Refresh Code
