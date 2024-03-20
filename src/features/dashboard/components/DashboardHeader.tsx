@@ -3,6 +3,8 @@ import { memo } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 
+import { ParseRestaurantUrl } from "@/features/tables/modals/TableModal/components/utils/ParseTableUrl";
+
 import { Button } from '../../../components';
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { clearAdmin } from '../../../store/models/Admin.store';
@@ -34,6 +36,12 @@ const DashboardHeader = () => {
 
 const items: () => MenuProps["items"] = () => {
 	const dispatch = useAppDispatch();
+    const { slug } = useAppSelector((state) => state.restaurant)!;
+
+	function preview() {
+		// open in new tab
+		window.open(ParseRestaurantUrl(slug), "_blank");
+	}
 
 	function logout() {
 		dispatch(clearAdmin());
@@ -42,7 +50,12 @@ const items: () => MenuProps["items"] = () => {
 
 	return [
 		{
-			key: "1",
+			key: "preview",
+			label: <Button.Text className="!text-gray hover:!text-lightGray">View Restaurant</Button.Text>,
+			onClick: preview,
+		},
+		{
+			key: "logout",
 			label: <Button.Text>Log out</Button.Text>,
 			onClick: logout,
 		},

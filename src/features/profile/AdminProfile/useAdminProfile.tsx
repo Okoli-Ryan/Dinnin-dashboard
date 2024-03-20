@@ -7,12 +7,12 @@ import { useAppSelector } from "../../../store";
 
 export default function useAdminProfile() {
 	const [form] = useForm();
-	const { id } = useAppSelector((state) => state.admin)!;
+	const admin = useAppSelector((state) => state.admin)!;
 	const [updateAdminMutation, { isLoading }] = useUpdateAdminMutation();
 
 	async function updateAdmin() {
 		try {
-			const payload = { ...form.getFieldsValue(), id };
+			const payload = { ...form.getFieldsValue(), id: admin.id };
 
 			await updateAdminMutation(payload).unwrap();
 		} catch (error) {
@@ -20,5 +20,5 @@ export default function useAdminProfile() {
 		}
 	}
 
-	return { form, updateAdmin, isLoading };
+	return { form, updateAdmin, isLoading, admin };
 }
