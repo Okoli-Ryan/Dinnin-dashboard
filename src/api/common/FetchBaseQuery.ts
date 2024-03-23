@@ -5,7 +5,7 @@ import { getToken } from '../../core/Utils';
 
 export const parseUrl = (url: string) => `${Config.VITE_BASE_URL}/${url}`;
 
-export const commonFetchBaseQuery = (model: string, AuthorizationHeader: boolean = true) => ({
+export const commonFetchBaseQuery = (model: string) => ({
 	baseQuery: fetchBaseQuery({
 		baseUrl: parseUrl(model),
 		credentials: "include",

@@ -4,7 +4,7 @@ import { IMenuCategory } from '../models';
 import { commonFetchBaseQuery } from './common';
 
 export const MenuCategoryApi = createApi({
-	...commonFetchBaseQuery("menu-category", true),
+	...commonFetchBaseQuery("menu-category"),
 	reducerPath: "MenuCategoryApi",
 	endpoints: (build) => ({
 		fetchMenuCategories: build.query<IMenuCategory[], string>({

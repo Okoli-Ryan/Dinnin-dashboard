@@ -1,7 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IListResponse } from "@/interfaces/IListResponse";
+import { IAdminListRequest } from "@/models/Admin/AdminListRequest";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { Admin, IAdmin } from "../../models";
-import { IAdminLoginRequest, IAdminLoginResponse } from "../../models/Admin";
+import { IAdminLoginRequest } from "../../models/Admin";
 import { commonFetchBaseQuery } from "../common";
 
 export const AdminApi = createApi({
@@ -9,6 +11,13 @@ export const AdminApi = createApi({
 	tagTypes: ["Admin"],
 	...commonFetchBaseQuery("admin"),
 	endpoints: (build) => ({
+		getAdmins: build.query<IListResponse<IAdmin>, IAdminListRequest>({
+			query: (params) => ({
+				url: `/`,
+				method: "GET",
+				params,
+			}),
+		}),
 		createAdmin: build.mutation<Admin, Partial<Admin>>({
 			query: (body) => ({
 				url: "/",
@@ -42,5 +51,6 @@ export const {
 	useCreateAdminMutation,
 	useLoginMutation,
 	useUpdateAdminMutation,
+	useGetAdminsQuery,
 	endpoints: { login },
 } = AdminApi;

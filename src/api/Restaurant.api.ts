@@ -4,7 +4,7 @@ import { Restaurant } from "../models";
 import { commonFetchBaseQuery } from "./common";
 
 export const RestaurantApi = createApi({
-	...commonFetchBaseQuery("restaurant", true),
+	...commonFetchBaseQuery("restaurant"),
 	tagTypes: ["Restaurant", "Slug"],
 	reducerPath: "RestaurantApi",
 	endpoints: (build) => ({
