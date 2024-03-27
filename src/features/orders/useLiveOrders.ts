@@ -55,7 +55,7 @@ export default function useLiveOrders({ onNewOrder, getActiveOrders }: ILiveOrde
 
 		return () => {
 			restaurantChannel.unbind();
-			pusher.unsubscribe("Channel");
+			pusher.unsubscribe(restaurantId);
 		};
 	}, []);
 

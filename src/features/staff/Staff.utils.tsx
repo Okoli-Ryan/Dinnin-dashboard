@@ -1,7 +1,8 @@
 import { Space } from "antd";
 import { BsEyeFill, BsFillTrashFill } from "react-icons/bs";
 
-import { IQueryColumn } from "@/core/CommonTypes";
+import { IFilterData, IQueryColumn } from "@/core/CommonTypes";
+import { formatDate } from "@/core/Utils";
 import { IAdmin } from "@/models";
 
 export const STAFF_LIST_COLUMS: IQueryColumn<IAdmin> = [
@@ -21,6 +22,11 @@ export const STAFF_LIST_COLUMS: IQueryColumn<IAdmin> = [
 		dataIndex: "position",
 	},
 	{
+		title: "Created At",
+		key: "createdAt",
+		render: (data: IAdmin) => formatDate(data.createdAt as string),
+	},
+	{
 		title: "Actions",
 		key: "actions",
 		render: (data: IAdmin) => (
@@ -31,3 +37,20 @@ export const STAFF_LIST_COLUMS: IQueryColumn<IAdmin> = [
 		),
 	},
 ];
+
+export const STAFF_FILTER_OPTIONS: IFilterData = {
+	search: [
+		{
+			label: "Name",
+			fieldName: "name",
+		},
+		{
+			label: "Email",
+			fieldName: "email",
+		},
+		{
+			label: "Phone No.",
+			fieldName: "phoneNumber",
+		},
+	],
+};

@@ -23,7 +23,7 @@ interface ITextArea extends ComponentProps<(typeof Form)["Item"]> {
 
 function TextInput({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextInput) {
 	return (
-		<Form.Item label={label} name={name} {...props}>
+		<Form.Item label={label} name={name} className={containerClassName} {...props}>
 			<Input
 				className={`placeholder:capitalize !rounded-none ${className}`}
 				name={name as string}

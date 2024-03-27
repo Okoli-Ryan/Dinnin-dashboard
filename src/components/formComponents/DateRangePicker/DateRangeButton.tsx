@@ -11,13 +11,14 @@ import CalenderRangePicker from "./CalenderRangePicker";
 import { formatRangeDateFormat } from "./DateRangeButton.utils";
 
 interface IDateRangeButton {
+	className?: string;
 	onChange?: (start: Date, end: Date) => void;
 	name: string;
 }
 
 const { STARTTIME, ENDTIME } = AnalyticsControlOptionsEnum;
 
-export default function DateRangeButton({ onChange = () => {}, name }: IDateRangeButton) {
+export default function DateRangeButton({ onChange = () => {}, name, className }: IDateRangeButton) {
 	const [showModal, setShowModal] = useState(false);
 
 	const onCloseModal = () => setShowModal(false);
@@ -30,7 +31,7 @@ export default function DateRangeButton({ onChange = () => {}, name }: IDateRang
 	const endDate = form.getFieldValue(name)?.[ENDTIME];
 
 	return (
-		<Form.Item name={name}>
+		<Form.Item name={name} className={className}>
 			<Button.Outline size="middle" onClick={() => setShowModal(true)} icon={<BsCalendarDate />}>
 				{startDate ? formatRangeDateFormat({ startDate, endDate }) : "Select Date"}
 			</Button.Outline>
@@ -46,5 +47,3 @@ export default function DateRangeButton({ onChange = () => {}, name }: IDateRang
 		</Form.Item>
 	);
 }
-
-// TODO add Form instance to date rangepicker
