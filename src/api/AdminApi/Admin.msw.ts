@@ -8,7 +8,7 @@ import { parseUrl } from "../common";
 export const AdminSuccessHandlers = [
 	// Successful Login
 	rest.post(parseUrl("admin/login"), (req, res, ctx) => {
-		const apiKeyHeader = req.headers.get("x-api-key");
+		const apiKeyHeader = req.headers.get("x_api_key");
 
 		expect(apiKeyHeader).not.toBeDefined();
 
@@ -28,7 +28,7 @@ export const AdminSuccessHandlers = [
 export const AdminErrorHandlers = [
 	// Successful Login
 	rest.post(parseUrl("admin/login"), (req, res, ctx) => {
-		const apiKeyHeader = req.headers.get("x-api-key");
+		const apiKeyHeader = req.headers.get("x_api_key");
 
 		expect(apiKeyHeader).not.toBeDefined();
 

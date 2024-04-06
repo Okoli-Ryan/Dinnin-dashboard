@@ -4,7 +4,7 @@ import { ITable } from '../models';
 import { commonFetchBaseQuery } from './common';
 
 export const TableApi = createApi({
-	...commonFetchBaseQuery("table", true),
+	...commonFetchBaseQuery("table"),
 	reducerPath: "TableApi",
 	endpoints: (build) => ({
 		getTables: build.query<ITable[], string>({

@@ -9,7 +9,7 @@ export const beamsClientInstance = new PusherPushNotifications.Client({
 export const beamsTokenProvider = new PusherPushNotifications.TokenProvider({
 	url: parseUrl("pusher/gen-token"),
 	headers: {
-		"x-api-key": Config.VITE_API_KEY,
+		x_api_key: Config.VITE_API_KEY,
 	},
 	credentials: "include",
 });

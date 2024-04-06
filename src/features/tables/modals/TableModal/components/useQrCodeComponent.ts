@@ -15,6 +15,7 @@ export default function useQrCodeComponent() {
 	Form.useWatch("code", form);
 
 	const qrCode = form.getFieldValue("code");
+    const restaurantLink = ParseRestaurantUrl(slug, qrCode);
 
 	async function generateCode() {
 		const newQrCode = GenerateRandomString(TableCodeLength);
@@ -25,10 +26,9 @@ export default function useQrCodeComponent() {
 
     function copyCode() {
 		//generate link to copy from
-		const link = ParseRestaurantUrl(slug, qrCode);
-		navigator.clipboard.writeText(link);
+		navigator.clipboard.writeText(restaurantLink);
 		reportSuccessMessage("Link copied to clipboard");
 	}
 
-	return { generateCode, copyCode, qrCode };
+	return { generateCode, copyCode, restaurantLink };
 }

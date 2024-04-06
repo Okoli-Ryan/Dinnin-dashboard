@@ -5,6 +5,7 @@ import React, { ComponentProps, InputHTMLAttributes } from 'react';
 
 interface ITextInput extends ComponentProps<(typeof Form)["Item"]> {
 	name: NamePath;
+	disabled?: boolean;
 	inputProps?: ComponentProps<typeof Input>;
 	placeholder?: string;
 	labelClassName?: InputHTMLAttributes<HTMLParagraphElement>["className"];
@@ -13,6 +14,7 @@ interface ITextInput extends ComponentProps<(typeof Form)["Item"]> {
 
 interface ITextArea extends ComponentProps<(typeof Form)["Item"]> {
 	name: NamePath;
+	disabled?: boolean;
 	inputProps?: ComponentProps<(typeof Input)["TextArea"]>;
 	placeholder?: string;
 	labelClassName?: InputHTMLAttributes<HTMLParagraphElement>["className"];
@@ -21,11 +23,12 @@ interface ITextArea extends ComponentProps<(typeof Form)["Item"]> {
 
 function TextInput({ label, labelClassName, containerClassName, name, inputProps, placeholder, className, ...props }: ITextInput) {
 	return (
-		<Form.Item label={label} name={name} {...props}>
+		<Form.Item label={label} name={name} className={containerClassName} {...props}>
 			<Input
 				className={`placeholder:capitalize !rounded-none ${className}`}
 				name={name as string}
 				placeholder={(placeholder || label || name) as string}
+				disabled={props.disabled}
 				{...inputProps}
 			/>
 		</Form.Item>

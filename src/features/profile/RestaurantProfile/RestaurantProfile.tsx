@@ -22,8 +22,8 @@ export default function RestaurantProfile() {
 				<TextInput name="state" label="State" rules={[{ required: true, message: "Please add the state" }]} />
 				<TextInput name="country" label="Country" rules={[{ required: true, message: "Please add the country" }]} />
 				<div className="grid grid-cols-2 gap-4">
-					<TextInput name="xCoordinate" inputProps={{ disabled: true, value: form.getFieldValue("xCoordinate") }} label="x-Coordinate" />
-					<TextInput name="yCoordinate" inputProps={{ disabled: true, value: form.getFieldValue("yCoordinate") }} label="y-Coordinate" />
+					<TextInput name="xCoordinate" inputProps={{ disabled: true }} label="x-Coordinate" />
+					<TextInput name="yCoordinate" inputProps={{ disabled: true }} label="y-Coordinate" />
 				</div>
 				<Button.Outline className="mb-4" icon={<AiOutlinePlus />} onClick={onOpen}>
 					Set Restaurant Coordinates
