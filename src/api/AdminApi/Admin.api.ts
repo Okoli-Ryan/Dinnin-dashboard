@@ -5,6 +5,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { Admin, IAdmin } from "../../models";
 import { IAdminLoginRequest } from "../../models/Admin";
 import { commonFetchBaseQuery } from "../common";
+import { GetPermissionResponse } from "@/models/Permission";
 
 export const AdminApi = createApi({
 	reducerPath: "AdminApi",
@@ -44,6 +45,18 @@ export const AdminApi = createApi({
 				body,
 			}),
 		}),
+		getAdminPermissions: build.query<GetPermissionResponse, string>({
+			query: (adminId) => ({
+				url: `/permissions/${adminId}`,
+			})
+		}),
+		updateAdminPermissions: build.mutation<boolean, { adminId: string; permissionIds: string[] }>({
+			query: (body) => ({
+				url: `/permissions/${body.adminId}`,
+				method: "POST",
+				body,
+			})
+		})
 	}),
 });
 
@@ -52,5 +65,7 @@ export const {
 	useLoginMutation,
 	useUpdateAdminMutation,
 	useGetAdminsQuery,
+	useGetAdminPermissionsQuery,
+	useUpdateAdminPermissionsMutation,
 	endpoints: { login },
 } = AdminApi;
