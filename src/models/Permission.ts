@@ -5,4 +5,4 @@ export interface Permission {
 	permissionDescription: string
 }
 
-export type GetPermissionResponse = Record<Permission["permissionCategory"], Permission>
+export type PermissionGroup = Record<Permission["permissionCategory"], Array<Permission>>

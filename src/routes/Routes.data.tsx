@@ -13,6 +13,7 @@ const Menu = lazy(() => import("../features/menu"));
 const Orders = lazy(() => import("../features/orders"));
 const Tables = lazy(() => import("../features/tables"));
 const Profile = lazy(() => import("../features/profile"));
+const StaffPermissions = lazy(() => import("../features/staff/subpages/StaffPermissions"));
 
 export const AuthenticationRoutes: Array<IAppRoute> = [
 	{
@@ -72,6 +73,10 @@ export const DashboardRoutes: Array<IAppRoute> = [
 	{
 		Component: <Staff />,
 		path: "/staff",
+	},
+	{
+		Component: <StaffPermissions />,
+		path: "/staff/permissions/:id",
 	},
 	{
 		path: "*",
