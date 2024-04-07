@@ -2,26 +2,33 @@ import { Form } from "antd";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { useGetAdminPermissionsQuery } from "@/api/AdminApi/Admin.api";
+import { useGetAdminPermissionsQuery, useUpdateAdminPermissionsMutation } from "@/api/AdminApi/Admin.api";
 import { useGetPermissionsQuery } from "@/api/PermissionApi/Permission.api";
-import { reportErrorMessage } from "@/core/Utils";
+import { arraysHaveSameValues, reportErrorMessage, reportSuccessMessage } from "@/core/Utils";
 
 export default function useStaffPermissions() {
 	const { id } = useParams();
 	const [form] = Form.useForm();
 
-	const {
-		data: allPermissions,
-		isLoading: isAllPermissionsLoading,
-		isError: isGetAllPermissionsError,
-		error: getAllPermissionsError,
-	} = useGetPermissionsQuery();
-	const {
-		data: adminPermissions,
-		isLoading: isAdminPermissionsLoading,
-		isError: isGetAdminPermissionsError,
-		error: getAdminPermissionsError,
-	} = useGetAdminPermissionsQuery(id!);
+	const { data: allPermissions, isLoading: isAllPermissionsLoading, isError: isGetAllPermissionsError } = useGetPermissionsQuery();
+	const { data: adminPermissions, isLoading: isAdminPermissionsLoading, isError: isGetAdminPermissionsError } = useGetAdminPermissionsQuery(id!);
+	const [updatePermissions, { isLoading: isUpdatePermissionsLoading }] = useUpdateAdminPermissionsMutation();
+
+	async function onUpdatePermissions() {
+		const permissionIds = form.getFieldValue("permissions");
+
+		if (arraysHaveSameValues(permissionIds, adminPermissions?.permissions || [])) {
+			reportSuccessMessage("Permissions have not changed");
+			return;
+		}
+
+		try {
+			await updatePermissions({ adminId: id!, permissionIds }).unwrap();
+			reportSuccessMessage("Permissions Updated");
+		} catch (error) {
+			reportErrorMessage("Unable to update permissions");
+		}
+	}
 
 	useEffect(() => {
 		if (isGetAdminPermissionsError || isGetAllPermissionsError) {
@@ -34,6 +41,8 @@ export default function useStaffPermissions() {
 		permissions: allPermissions || {},
 		adminPermissions: adminPermissions || DEFAULT_ADMIN_PERMISSIONS,
 		form,
+		onUpdatePermissions,
+		isUpdatePermissionsLoading,
 	};
 }
 

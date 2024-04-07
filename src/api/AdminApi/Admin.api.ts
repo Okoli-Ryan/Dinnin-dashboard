@@ -59,7 +59,7 @@ export const AdminApi = createApi({
 			query: (body) => ({
 				url: `/permissions/${body.adminId}`,
 				method: "POST",
-				body,
+				body: body.permissionIds,
 			}),
 		}),
 	}),
