@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 
 import { AnalyticsApi } from "@/api/AnalyticsApi/Analytics.api";
 import { OrderApi } from "@/api/OrderApi";
+import { PermissionApi } from "@/api/PermissionApi/Permission.api";
 import { TableApi } from "@/api/Table.api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
 	[TableApi.reducerPath]: TableApi.reducer,
 	[OrderApi.reducerPath]: OrderApi.reducer,
 	[AnalyticsApi.reducerPath]: AnalyticsApi.reducer,
+	[PermissionApi.reducerPath]: PermissionApi.reducer,
 });
 
 const PersistConfig = {
@@ -56,6 +58,7 @@ export const store = configureStore({
 		TableApi.middleware,
 		OrderApi.middleware,
 		AnalyticsApi.middleware,
+		PermissionApi.middleware,
 	],
 });
 
