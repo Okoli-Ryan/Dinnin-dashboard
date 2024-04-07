@@ -6,3 +6,8 @@ export interface Permission {
 }
 
 export type PermissionGroup = Record<Permission["permissionCategory"], Array<Permission>>
+
+export type GetPermissionsByAdminResponse = {
+	adminName: string;
+	permissionGroups: PermissionGroup;
+};

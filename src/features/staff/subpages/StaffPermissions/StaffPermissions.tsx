@@ -11,17 +11,12 @@ export default function StaffPermissions() {
 	const { form, isLoading, permissions, adminPermissions } = useStaffPermissions();
 
 	Form.useWatch([], form);
-	const values = form.getFieldsValue();
-
-	useEffect(() => {
-		console.log(values);
-	}, [values]);
 
 	if (isLoading) return <LoadingComponent />;
 
 	return (
-		<PageWrapper title="Manage User Permissions" subtitle="Select the permissions you want to give to this user">
-			<Form form={form} initialValues={{ permissions: adminPermissions }}>
+		<PageWrapper title={`Manage Permissions for ${adminPermissions.adminName}`} subtitle="Select the permissions you want to give to this user">
+			<Form form={form} initialValues={{ permissions: adminPermissions.permissions }}>
 				<div className="grid grid-cols-3 gap-8">
 					{Object.entries(permissions).map(([category, permissions]) => (
 						<PermissionFormItem key={category} category={category} permissions={permissions} />

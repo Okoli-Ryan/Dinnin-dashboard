@@ -1,6 +1,6 @@
 import { IListResponse } from "@/interfaces/IListResponse";
 import { IAdminListRequest } from "@/models/Admin/AdminListRequest";
-import { PermissionGroup } from "@/models/Permission";
+import { GetPermissionsByAdminResponse, PermissionGroup } from "@/models/Permission";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { Admin, IAdmin } from "../../models";
@@ -45,12 +45,14 @@ export const AdminApi = createApi({
 				body,
 			}),
 		}),
-		getAdminPermissions: build.query<number[], string>({
+		getAdminPermissions: build.query<{ adminName: string; permissions: number[] }, string>({
 			query: (adminId) => ({
 				url: `/permissions/${adminId}`,
 			}),
-			transformResponse: (response: PermissionGroup) => {
-				return Object.values(response).flatMap((permissions) => permissions.map((permission) => permission.id));
+			transformResponse: (response: GetPermissionsByAdminResponse) => {
+				let permissionGroups = Object.values(response.permissionGroups).flatMap((permissions) => permissions.map((permission) => permission.id));
+
+				return { permissions: permissionGroups, adminName: response.adminName };
 			},
 		}),
 		updateAdminPermissions: build.mutation<boolean, { adminId: string; permissionIds: string[] }>({

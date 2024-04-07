@@ -10,8 +10,18 @@ export default function useStaffPermissions() {
 	const { id } = useParams();
 	const [form] = Form.useForm();
 
-	const { data: allPermissions, isLoading: isAllPermissionsLoading, isError: isGetAllPermissionsError } = useGetPermissionsQuery();
-	const { data: adminPermissions, isLoading: isAdminPermissionsLoading, isError: isGetAdminPermissionsError } = useGetAdminPermissionsQuery(id!);
+	const {
+		data: allPermissions,
+		isLoading: isAllPermissionsLoading,
+		isError: isGetAllPermissionsError,
+		error: getAllPermissionsError,
+	} = useGetPermissionsQuery();
+	const {
+		data: adminPermissions,
+		isLoading: isAdminPermissionsLoading,
+		isError: isGetAdminPermissionsError,
+		error: getAdminPermissionsError,
+	} = useGetAdminPermissionsQuery(id!);
 
 	useEffect(() => {
 		if (isGetAdminPermissionsError || isGetAllPermissionsError) {
@@ -22,7 +32,12 @@ export default function useStaffPermissions() {
 	return {
 		isLoading: isAdminPermissionsLoading || isAllPermissionsLoading,
 		permissions: allPermissions || {},
-		adminPermissions: adminPermissions || [],
+		adminPermissions: adminPermissions || DEFAULT_ADMIN_PERMISSIONS,
 		form,
 	};
 }
+
+const DEFAULT_ADMIN_PERMISSIONS = {
+	adminName: "",
+	permissions: [],
+};

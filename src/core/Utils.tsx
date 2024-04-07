@@ -34,6 +34,11 @@ export function ParseError(error?: SerializedError | FetchBaseQueryError): IErro
 }
 
 export const reportErrorMessage = (error: any, customMessage?: string) => {
+	if (typeof error === "string") {
+		message.error(error);
+		return;
+	}
+
 	if (customMessage) {
 		message.error(customMessage);
 		return;
@@ -109,5 +114,3 @@ export function stringToDarkColor(inputString: string): string {
 	}
 	return color;
 }
-  
-  
