@@ -36,6 +36,13 @@ export const AdminApi = createApi({
 				url: "/login",
 				method: "POST",
 				body,
+				credentials: undefined,
+			}),
+		}),
+		logout: build.query<void, void>({
+			query: () => ({
+				url: "/logout",
+				credentials: undefined,
 			}),
 		}),
 		updateAdmin: build.mutation<IAdmin, Partial<IAdmin>>({
@@ -68,6 +75,7 @@ export const AdminApi = createApi({
 export const {
 	useCreateAdminMutation,
 	useLoginMutation,
+	useLazyLogoutQuery,
 	useUpdateAdminMutation,
 	useGetAdminsQuery,
 	useGetAdminPermissionsQuery,

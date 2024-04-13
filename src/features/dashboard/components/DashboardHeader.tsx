@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 
+import { useLazyLogoutQuery } from "@/api/AdminApi/Admin.api";
 import { ParseRestaurantUrl } from "@/features/tables/modals/TableModal/components/utils/ParseTableUrl";
 
 import { Button } from '../../../components';
@@ -37,15 +38,17 @@ const DashboardHeader = () => {
 const items: () => MenuProps["items"] = () => {
 	const dispatch = useAppDispatch();
     const { slug } = useAppSelector((state) => state.restaurant)!;
+    const [logoutAsync] = useLazyLogoutQuery();
 
 	function preview() {
 		// open in new tab
 		window.open(ParseRestaurantUrl(slug), "_blank");
 	}
 
-	function logout() {
+	async function logout() {
 		dispatch(clearAdmin());
 		dispatch(clearRestaurant());
+		await logoutAsync().unwrap();
 	}
 
 	return [

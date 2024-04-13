@@ -1,4 +1,4 @@
-import { Form } from "antd";
+import { Checkbox, Form } from "antd";
 import React, { useEffect } from "react";
 
 import { Button } from "@/components";
@@ -18,12 +18,16 @@ export default function StaffPermissions() {
 	return (
 		<PageWrapper title={`Manage Permissions for ${adminPermissions.adminName}`} subtitle="Select the permissions you want to give to this user">
 			<Form form={form} initialValues={{ permissions: adminPermissions.permissions }} onFinish={onUpdatePermissions}>
-				<div className="grid grid-cols-3 gap-8">
-					{Object.entries(permissions).map(([category, permissions]) => (
-						<PermissionFormItem key={category} category={category} permissions={permissions} />
-					))}
-				</div>
-				<div className="mt-4">
+				<Form.Item name={"permissions"}>
+					<Checkbox.Group className="w-full">
+						<div className="grid justify-center w-full grid-cols-3 gap-6">
+							{Object.entries(permissions).map(([category, permissions]) => (
+								<PermissionFormItem key={category} category={category} permissions={permissions} />
+							))}
+						</div>
+					</Checkbox.Group>
+				</Form.Item>
+				<div className="mt-12">
 					<Button htmlType="submit" loading={isUpdatePermissionsLoading}>
 						Update
 					</Button>

@@ -10,18 +10,14 @@ interface IPermissionFormItem {
 
 export default function PermissionFormItem({ category, permissions }: IPermissionFormItem) {
 	return (
-		<div className="flex flex-col gap-3">
-			<p className="font-bold text-xl">{category.replace("_", " ")}</p>
+		<div className="flex flex-col w-full gap-3">
+			<p className="text-xl font-bold">{category.replace("_", " ")}</p>
 			<div className="flex flex-col gap-3 ml-4">
-				<Form.Item name={"permissions"}>
-					<Checkbox.Group className="flex flex-col">
-						{permissions.map((permission) => (
-							<Checkbox key={permission.id} value={permission.id} rootClassName="!ml-0">
-								{permission.permissionDescription}
-							</Checkbox>
-						))}
-					</Checkbox.Group>
-				</Form.Item>
+				{permissions.map((permission) => (
+					<Checkbox key={permission.id} value={permission.id} rootClassName="!ml-0">
+						{permission.permissionDescription}
+					</Checkbox>
+				))}
 			</div>
 		</div>
 	);
