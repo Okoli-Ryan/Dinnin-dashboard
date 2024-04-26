@@ -1,15 +1,16 @@
 import { PermissionGroup } from "@/models/Permission";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { commonFetchBaseQuery } from "../common";
 
-export const PermissionApi = createApi({
-	...commonFetchBaseQuery("permission"),
-	reducerPath: "PermissionApi",
-	endpoints: build => ({
+import { ApiBaseUrl, BaseAPI, commonFetchBaseQuery, parseUrl } from "../common";
+
+const baseUrl = ApiBaseUrl("permission");
+
+export const PermissionApi = BaseAPI.injectEndpoints({
+	endpoints: (build) => ({
 		getPermissions: build.query<PermissionGroup, void>({
-			query: () => `/`,
-		})
-	})
-})
+			query: () => baseUrl("permission"),
+		}),
+	}),
+});
 
-export const { useGetPermissionsQuery } = PermissionApi
+export const { useGetPermissionsQuery } = PermissionApi;

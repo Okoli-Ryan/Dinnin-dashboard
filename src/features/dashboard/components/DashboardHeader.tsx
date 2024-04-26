@@ -4,6 +4,7 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 
 import { useLazyLogoutQuery } from "@/api/AdminApi/Admin.api";
+import { BaseAPI } from "@/api/common";
 import { ParseRestaurantUrl } from "@/features/tables/modals/TableModal/components/utils/ParseTableUrl";
 
 import { Button } from '../../../components';
@@ -48,6 +49,7 @@ const items: () => MenuProps["items"] = () => {
 	async function logout() {
 		dispatch(clearAdmin());
 		dispatch(clearRestaurant());
+		dispatch(BaseAPI.util.resetApiState());
 		await logoutAsync().unwrap();
 	}
 

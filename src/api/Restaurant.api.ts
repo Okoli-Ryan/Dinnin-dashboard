@@ -1,27 +1,23 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-
 import { Restaurant } from "../models";
-import { commonFetchBaseQuery } from "./common";
+import { ApiBaseUrl, BaseAPI } from "./common";
 
-export const RestaurantApi = createApi({
-	...commonFetchBaseQuery("restaurant"),
-	tagTypes: ["Restaurant", "Slug"],
-	reducerPath: "RestaurantApi",
+const baseUrl = ApiBaseUrl("restaurant");
+export const RestaurantApi = BaseAPI.injectEndpoints({
 	endpoints: (build) => ({
 		doesSlugExist: build.query<boolean, string>({
-			query: (slugName) => `/slug/${slugName}`,
+			query: (slugName) => baseUrl(`/slug/${slugName}`),
 			providesTags: (res, err, arg) => [{ type: "Slug", id: arg }],
 		}),
 		createRestaurant: build.mutation<Restaurant, Partial<Restaurant>>({
 			query: (body) => ({
-				url: "/",
+				url: baseUrl(),
 				method: "POST",
 				body,
 			}),
 		}),
 		updateRestaurant: build.mutation<Restaurant, Partial<Restaurant>>({
 			query: (body) => ({
-				url: "/",
+				url: baseUrl(),
 				method: "PUT",
 				body,
 			}),
