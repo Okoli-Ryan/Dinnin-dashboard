@@ -35,13 +35,11 @@ export const AdminApi = BaseAPI.injectEndpoints({
 				url: baseUrl("/login"),
 				method: "POST",
 				body,
-				credentials: undefined,
 			}),
 		}),
 		logout: build.query<void, void>({
 			query: () => ({
 				url: baseUrl("/logout"),
-				credentials: undefined,
 			}),
 		}),
 		updateAdmin: build.mutation<IAdmin, Partial<IAdmin>>({

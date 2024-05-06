@@ -17,12 +17,12 @@ export const commonFetchBaseQuery = (model: string) => ({
 
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
 	const result = await fetchBaseQuery({
+		...api,
 		baseUrl: Config.VITE_BASE_URL,
 		credentials: "include",
 		prepareHeaders(headers, api) {
 			headers.set("x_api_key", Config.VITE_API_KEY);
 		},
-		...api,
 	})(args, api, extraOptions);
 
 	return result;
