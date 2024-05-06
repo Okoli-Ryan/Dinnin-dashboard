@@ -3,6 +3,8 @@ export const DEMO_CREDENTIALS = {
 	password: "@Password1",
 };
 
+export const DEMO_RESTAURANT_CODE = "9N0jiGsQtmpM3FLi3Z6C"
+
 export const TableCodeLength = 20;
 
 export const COLORS = {
