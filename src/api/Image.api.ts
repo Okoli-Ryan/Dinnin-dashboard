@@ -1,19 +1,11 @@
+import { ApiBaseUrl, BaseAPI } from "./common";
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-
-import Config from '../core/Config';
-
-export const ImageApi = createApi({
-	baseQuery: fetchBaseQuery({
-		baseUrl: `${Config.VITE_BASE_URL}/image`,
-		prepareHeaders(headers, api) {
-			headers.set("x_api_key", Config.VITE_API_KEY);
-		},
-	}),
+const baseUrl = ApiBaseUrl("image");
+export const ImageApi = BaseAPI.injectEndpoints({
 	endpoints: (build) => ({
 		upload: build.query<{ url: string }, FormData>({
 			query: (file) => ({
-				url: "/",
+				url: baseUrl(),
 				method: "POST",
 				body: file,
 			}),

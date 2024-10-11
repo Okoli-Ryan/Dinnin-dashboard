@@ -1,29 +1,27 @@
-import { createApi } from "@reduxjs/toolkit/dist/query/react";
+import { IMenuItem } from "../models";
+import { ApiBaseUrl, BaseAPI } from "./common";
 
-import { IMenuCategory, IMenuItem } from "../models";
-import { commonFetchBaseQuery } from "./common";
+const baseUrl = ApiBaseUrl("menu-item");
 
-export const MenuItemApi = createApi({
-	...commonFetchBaseQuery("menu-item"),
-	reducerPath: "MenuItemApi",
+export const MenuItemApi = BaseAPI.injectEndpoints({
 	endpoints: (build) => ({
 		saveMenuItem: build.mutation<IMenuItem, Partial<IMenuItem>>({
 			query: (body) => ({
-				url: "/",
+				url: baseUrl(),
 				method: "POST",
 				body,
 			}),
 		}),
 		updateMenuItem: build.mutation<IMenuItem, Partial<IMenuItem>>({
 			query: (body) => ({
-				url: "",
+				url: baseUrl(),
 				method: "PUT",
 				body,
 			}),
 		}),
 		deleteMenuItem: build.mutation<boolean, string>({
 			query: (body) => ({
-				url: "/",
+				url: baseUrl(),
 				method: "DELETE",
 				body,
 			}),

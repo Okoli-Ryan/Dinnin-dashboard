@@ -16,7 +16,7 @@ interface IQueryTable<F = any, T = any> extends TableProps<T> {
 	header: string;
 	columns?: IQueryColumn<T>;
 	queryFn: UseQuery<
-		QueryDefinition<F, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, string, IListResponse<T>, string>
+		QueryDefinition<F, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, {}>, string, IListResponse<T>, string>
 	>;
 }
 

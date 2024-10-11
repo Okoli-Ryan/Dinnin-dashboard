@@ -4,6 +4,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from "redux-persist/lib/storage";
 
 import { AnalyticsApi } from "@/api/AnalyticsApi/Analytics.api";
+import { BaseAPI } from "@/api/common";
 import { OrderApi } from "@/api/OrderApi";
 import { PermissionApi } from "@/api/PermissionApi/Permission.api";
 import { TableApi } from "@/api/Table.api";
@@ -49,16 +50,7 @@ export const store = configureStore({
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		}),
-		AdminApi.middleware,
-		ImageApi.middleware,
-		MenuCategoryApi.middleware,
-		RestaurantApi.middleware,
-		VerificationApi.middleware,
-		MenuItemApi.middleware,
-		TableApi.middleware,
-		OrderApi.middleware,
-		AnalyticsApi.middleware,
-		PermissionApi.middleware,
+		BaseAPI.middleware,
 	],
 });
 

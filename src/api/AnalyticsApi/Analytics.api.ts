@@ -2,29 +2,29 @@ import { AnalyticsChartTypeEnum } from "@/features/analytics/components/Analytic
 import { IAnalyticsCards, IAnalyticsRequestParams, IAnalyticsTimeParams, IChartResponse, IOrderItemAnalyticsResponse } from "@/models/Analytics";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 
-import { commonFetchBaseQuery } from "../common";
+import { ApiBaseUrl, BaseAPI, commonFetchBaseQuery } from "../common";
 
-export const AnalyticsApi = createApi({
-	...commonFetchBaseQuery("analytics"),
-	reducerPath: "AnalyticsApi",
+const baseUrl = ApiBaseUrl("analytics");
+
+export const AnalyticsApi = BaseAPI.injectEndpoints({
 	endpoints: (build) => ({
 		getAnalyticsCards: build.query<IAnalyticsCards, void>({
-			query: () => "/",
+			query: () => baseUrl(),
 		}),
 		getRevenueAnalytics: build.query<IChartResponse, IAnalyticsRequestParams>({
-			query: (params) => ({ url: "/order-amount", params }),
+			query: (params) => ({ url: baseUrl("/order-amount"), params }),
 		}),
 		getOrderCountAnalytics: build.query<IChartResponse, IAnalyticsRequestParams>({
-			query: (params) => ({ url: "/order-count", params }),
+			query: (params) => ({ url: baseUrl("/order-count"), params }),
 		}),
 		getOrderItemsAnalytics: build.query<IOrderItemAnalyticsResponse[], IAnalyticsTimeParams | void>({
-			query: (params) => ({ url: "/order-item-count", params: params as IAnalyticsRequestParams }),
+			query: (params) => ({ url: baseUrl("/order-item-count"), params: params as IAnalyticsRequestParams }),
 		}),
 		getChartAnalytics: build.query<IChartResponse, IAnalyticsRequestParams & { chartType: AnalyticsChartTypeEnum }>({
 			query: (params) => {
 				let url = params.chartType === AnalyticsChartTypeEnum.REVENUE ? "/order-amount" : "/order-count";
 				const { chartType, ...restParams } = params;
-				return { url, params: restParams };
+				return { url: baseUrl(url), params: restParams };
 			},
 		}),
 	}),
