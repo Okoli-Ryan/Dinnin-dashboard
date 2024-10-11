@@ -8,7 +8,7 @@ const baseUrl = ApiBaseUrl("permission");
 export const PermissionApi = BaseAPI.injectEndpoints({
 	endpoints: (build) => ({
 		getPermissions: build.query<PermissionGroup, void>({
-			query: () => baseUrl("permission"),
+			query: () => baseUrl(""),
 		}),
 	}),
 });
