@@ -1,11 +1,11 @@
-import { Form } from "antd";
-import React from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { Form } from 'antd';
+import React from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
 
-import { Button, TextInput, UploadImage } from "../../../components";
-import PhoneInput from "../../../components/formComponents/PhoneInput";
-import CoordinatePickerModal from "./components/CoordinatePickerModal";
-import useRestaurantProfile from "./useRestaurantProfile";
+import { Button, TextInput, UploadImage } from '../../../components';
+import PhoneInput from '../../../components/formComponents/PhoneInput';
+import CoordinatePickerModal from './components/CoordinatePickerModal';
+import useRestaurantProfile from './useRestaurantProfile';
 
 export default function RestaurantProfile() {
 	const { form, isOpen, onClose, onOpen, updateRestaurantProfile, isLoading, initialValues } = useRestaurantProfile();
@@ -26,11 +26,11 @@ export default function RestaurantProfile() {
 					<TextInput name="yCoordinate" inputProps={{ disabled: true }} label="y-Coordinate" />
 				</div>
 				<Button.Outline className="mb-4" icon={<AiOutlinePlus />} onClick={onOpen}>
-					Set Restaurant Coordinates
+					Set location
 				</Button.Outline>
 				<TextInput.TextArea name="description" label="Description" />
 				<Button block type="primary" htmlType="submit" loading={isLoading}>
-					Edit Restaurant Details
+					Edit Details
 				</Button>
 			</Form>
 		</div>

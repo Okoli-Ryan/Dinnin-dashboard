@@ -18,13 +18,13 @@ export interface IAnalyticsChartControl {
 const { YEAR, CHARTTYPE, GROUPBY, DATERANGE } = AnalyticsControlOptionsEnum;
 
 export default function AnalyticsChartControl({ children, showIntervalControl, showYearDropdown, showDateRangeControl }: IAnalyticsChartControl) {
-	const { headerLabel, form } = useAnalyticsChartControl();
+	const { headerLabel } = useAnalyticsChartControl();
 
 	return (
 		<div>
-			<div className="flex items-center justify-between ">
-				<h3 className="text-base font-bold mb-6">{headerLabel}</h3>
-				<div className="flex items-center gap-4">
+			<div className="flex flex-col justify-between md:items-center md:flex-row ">
+				<h3 className="mb-6 text-base font-bold">{headerLabel}</h3>
+				<div className="flex flex-col max-w-xs gap-0 md:gap-4 md:items-center md:flex-row">
 					<Select name={CHARTTYPE} options={AnalyticsLineChartTypes} />
 					{showIntervalControl && <Select name={GROUPBY} options={AnalyticsBarChartDropdownOptions} />}
 					{showYearDropdown && <Select name={YEAR} options={YEAR_DROPDOWN_OPTIONS} />}

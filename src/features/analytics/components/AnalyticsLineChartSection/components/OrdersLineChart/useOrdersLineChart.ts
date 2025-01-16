@@ -1,11 +1,11 @@
-import { Form } from "antd";
+import { Form } from 'antd';
 
-import { useGetChartAnalyticsQuery, useGetOrderCountAnalyticsQuery, useGetRevenueAnalyticsQuery } from "@/api/AnalyticsApi";
-import { reportErrorMessage } from "@/core/Utils";
-import { AnalyticsGroupByEnum } from "@/models/Analytics";
+import { useGetChartAnalyticsQuery } from '@/api/AnalyticsApi';
+import { reportErrorMessage } from '@/core/Utils';
+import { AnalyticsGroupByEnum } from '@/models/Analytics';
 
-import { AnalyticsChartTypeEnum, AnalyticsControlOptionsEnum } from "../../AnalyticsChartSection.types";
-import { INITIAL_CHART_RESPONSE } from "../../AnalyticsChartSection.utils";
+import { AnalyticsControlOptionsEnum } from '../../AnalyticsChartSection.types';
+import { INITIAL_CHART_RESPONSE } from '../../AnalyticsChartSection.utils';
 
 const { CHARTTYPE, STARTTIME, ENDTIME, DATERANGE } = AnalyticsControlOptionsEnum;
 
@@ -19,11 +19,10 @@ export default function useOrdersLineChart() {
 	const startTime = form.getFieldValue(DATERANGE)?.[STARTTIME];
 	const chartType = form.getFieldValue(CHARTTYPE);
 
-	const {
-		data: chartResponse = INITIAL_CHART_RESPONSE,
-		isFetching,
-		isError,
-	} = useGetChartAnalyticsQuery({ groupBy: AnalyticsGroupByEnum.DATE, startTime, endTime, chartType }, { refetchOnMountOrArgChange: true });
+	const { data: chartResponse = INITIAL_CHART_RESPONSE, isError } = useGetChartAnalyticsQuery(
+		{ groupBy: AnalyticsGroupByEnum.DATE, startTime, endTime, chartType },
+		{ refetchOnMountOrArgChange: true }
+	);
 
 	if (isError) {
 		reportErrorMessage(null, "Unable to get analytics data");

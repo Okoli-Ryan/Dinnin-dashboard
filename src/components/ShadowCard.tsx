@@ -9,7 +9,7 @@ interface IShadowCard {
 export default function ShadowCard({ children, className, header }: IShadowCard) {
 	return (
 		<>
-			<div className={`${className} shadow-lg rounded-lg p-8 w-full`}>
+			<div className={`${className} shadow-lg rounded-lg p-4 py-8 md:px-8 w-full`}>
 				{header}
 				{children}
 			</div>

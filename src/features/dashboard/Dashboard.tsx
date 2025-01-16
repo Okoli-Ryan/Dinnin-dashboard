@@ -18,11 +18,11 @@ export default function Dashboard() {
 	return (
 		<>
 			<Layout style={{ minHeight: "100vh" }}>
-				<Sider style={{ height: "100vh", overflow: "auto" }}>
+				<Sider collapsedWidth={60} breakpoint="md" style={{ height: "100vh", overflow: "auto" }}>
 					<Menu theme="dark" mode="inline" items={dashboardMenuItems} selectedKeys={[currentPathName]} />
 				</Sider>
 				<Layout className="relative flex justify-end">
-					<Header className="absolute w-full top-0">
+					<Header className="absolute top-0 w-full">
 						<DashboardHeader />
 					</Header>
 					<div className="dashboard-layout">

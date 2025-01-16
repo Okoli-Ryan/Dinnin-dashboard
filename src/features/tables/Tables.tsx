@@ -7,9 +7,9 @@ import PageWrapper from '@/components/PageWrapper';
 import withErrorBoundaryHandler from '@/hoc/WithErrorBoundaryHandler';
 
 import TableListComponent from './components';
-import DeleteTableModal from "./modals/DeleteTableModal/DeleteTableModal";
+import DeleteTableModal from './modals/DeleteTableModal/DeleteTableModal';
 import TableModal from './modals/TableModal';
-import useSelectTable from "./useSelectTable";
+import useSelectTable from './useSelectTable';
 import useTables from './useTables';
 
 function Tables() {
@@ -22,7 +22,7 @@ function Tables() {
 		<PageWrapper title="Tables" subtitle="Generate QR codes for each table">
 			<TableModal onAddSuccess={onAddTable} onCloseModal={onCloseTableModal} onEditSuccess={onEditTable} selectedTable={selectedTable} />
 			<DeleteTableModal onClose={onCloseDeleteTableModal} onDelete={onDeleteTable} selectedTable={selectedDeleteTable} />
-			<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 w-max mb-4" onClick={() => onShowTableModal({})}>
+			<Button icon={<AiOutlinePlus />} className="flex items-center gap-4 px-4 mb-4 w-max" onClick={() => onShowTableModal({})}>
 				Add Table
 			</Button>
 			<TableListComponent data={tableList} onDeleteClick={onSelectDeleteTable} onEditClick={onShowTableModal} />

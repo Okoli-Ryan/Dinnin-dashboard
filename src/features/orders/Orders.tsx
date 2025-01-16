@@ -1,8 +1,6 @@
 import { Space, Table } from 'antd';
 import { format } from 'date-fns';
-import { BsThreeDots } from 'react-icons/bs';
 
-import LoadingComponent from '@/components/LoadingComponent';
 import { formatCurrency } from '@/core/Utils';
 import { IOrder } from '@/models/Order';
 
@@ -15,7 +13,7 @@ import useOrders from './useOrders';
 
 const { Column } = Table;
 export default function Orders() {
-	const { orderList, isLoading, expandedRowKey, onExpandedRowClick, onNewOrder, getActiveOrders } = useOrders();
+	const { orderList, isLoading, onNewOrder, getActiveOrders } = useOrders();
 	const { connectionState } = useLiveOrders({ onNewOrder, getActiveOrders });
 
 	return (
@@ -24,11 +22,9 @@ export default function Orders() {
 				loading={isLoading}
 				dataSource={orderList}
 				rowKey={(e: IOrder) => e.id}
-				onRow={(order) => ({ onClick: () => onExpandedRowClick(order.id) })}
 				expandable={{
 					expandedRowRender: ({ orderItems }: IOrder) => <OrderItemsTable orderItems={orderItems} />,
 					indentSize: 30,
-					expandedRowKeys: expandedRowKey,
 				}}>
 				<Column title="Table" key="tableName" render={(_, e: IOrder) => e.table.tableName} />
 				<Column title="Amount Paid" dataIndex="price" key="price" render={(e: number) => formatCurrency(e)} />

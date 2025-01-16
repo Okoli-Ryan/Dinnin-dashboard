@@ -48,3 +48,7 @@ body{
         text-transform: capitalize;
     }
   }
+
+  .ant-table {
+    overflow-x: auto;
+  }
